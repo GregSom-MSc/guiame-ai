@@ -1,4 +1,4 @@
-# Node modules (if you later add npm packages or bundlers)
+# Node modules (this will be used when I later add npm packages or bundlers)
 node_modules/
 
 # Dependency directories
