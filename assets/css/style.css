@@ -23,7 +23,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -32,15 +32,16 @@ nav a {
   text-decoration: none;
   margin: 0 15px;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #3b82f6;
+  color: #4db8ff; /* brighter for contrast */
 }
 
 /* ===== Container ===== */
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
 }
@@ -52,11 +53,12 @@ nav a:hover {
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-primary {
-  background-color: #1d4ed8;
+  background-color: #134074;
   color: white;
 }
 
@@ -65,14 +67,37 @@ nav a:hover {
 }
 
 .btn-outline {
-  border: 2px solid #1d4ed8;
-  color: #1d4ed8;
+  border: 2px solid #134074;
+  color: #134074;
   background: transparent;
 }
 
 .btn-outline:hover {
-  background-color: #1d4ed8;
+  background-color: #134074;
   color: white;
+}
+
+/* Image Button */
+.btn-image img {
+  max-width: 200px;   /* control default size */
+  height: auto;
+  border-radius: 0;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect, same as normal buttons */
+.btn-image img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .btn-image img {
+    max-width: 140px;  /* shrink on smaller screens */
+  }
 }
 
 /* ===== Footer ===== */
@@ -82,4 +107,78 @@ footer {
   color: white;
   text-align: center;
   padding: 20px;
+}
+
+/* ===== Landing Page ===== */
+body.landing {
+  height: 100vh;
+  background: url('../img/edinVict.png') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+}
+
+body.landing .overlay {
+  background-color: rgba(0, 30, 60, 0.6); /* blueish dark overlay */
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.landing .content {
+  text-align: center;
+  padding: 20px;
+  z-index: 1;
+}
+
+body.landing h1 {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+body.landing h1 span {
+  color: #4db8ff;
+}
+
+body.landing p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+body.landing .buttons {
+  display: flex;
+  flex-direction: column;  
+  align-items: center;    
+  gap: 20px;              
+}
+
+body.landing .btn {
+  padding: 12px 24px;
+  border-radius: 6px;
+  background: #134074;
+  color: white;
+  font-weight: bold;
+}
+
+body.landing .btn:hover {
+  background: #4db8ff;
+  color: #003355;
+  transform: translateY(-3px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  body.landing h1 {
+    font-size: 2rem;
+  }
+
+  body.landing p {
+    font-size: 1rem;
+  }
 }
