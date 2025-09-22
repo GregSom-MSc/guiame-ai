@@ -55,6 +55,7 @@ nav a:hover {
   font-weight: 600;
   transition: all 0.3s ease;
   cursor: pointer;
+  min-width: 240px
 }
 
 .btn-primary {
@@ -77,13 +78,22 @@ nav a:hover {
   color: white;
 }
 
+@media (max-width: 768px) {
+  .btn {
+    min-width: 180px;
+    max-width: 220px;  /* shrink on smaller screens */
+  }
+}
+
 /* Image Button */
 .btn-image img {
-  max-width: 200px;   /* control default size */
+  max-width: 240px;   /* control default size */
   height: auto;
   padding: 0px 0px;
-  border-radius: 0;
+  border-radius: 6px;
   border: none;
+  outline: none;
+  box-shadow: none;
   transition: all 0.3s ease;
 }
 
@@ -97,7 +107,7 @@ nav a:hover {
 /* Responsive */
 @media (max-width: 768px) {
   .btn-image img {
-    max-width: 140px;  /* shrink on smaller screens */
+    max-width: 180px;  /* shrink on smaller screens */
   }
 }
 
