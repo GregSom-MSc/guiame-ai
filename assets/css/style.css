@@ -81,7 +81,7 @@ nav a:hover {
 @media (max-width: 768px) {
   .btn {
     min-width: 180px;
-    max-width: 220px;  /* shrink on smaller screens */
+    max-width: 180px;  /* shrink on smaller screens */
   }
 }
 
@@ -191,5 +191,60 @@ body.landing .btn:hover {
 
   body.landing p {
     font-size: 1rem;
+  }
+}
+
+/* ===== Header underline ===== */
+.header-underline {
+  position: relative;
+  width: 100%;
+  min-width: 120px;
+  margin: 0 auto 24px auto;
+  height: 12px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.underline {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 6px;
+  width: 100%;
+  border-radius: 0px;
+  transform: translateX(100%);
+  opacity: 0;
+  animation-timing-function: ease;
+}
+
+.underline.white {
+  background: #fff;
+  z-index: 1;
+  animation: underline-slide-in 0.5s forwards;
+}
+
+.underline.blue {
+  background: #134074;
+  z-index: 2;
+  animation: underline-slide-in 0.5s 0.5s forwards;
+}
+
+@keyframes underline-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+/* Responsive thickness */
+@media (max-width: 768px) {
+  .header-underline,
+  .underline {
+    height: 6px;
+    border-radius: 0px;
   }
 }
