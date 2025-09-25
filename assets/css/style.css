@@ -1,5 +1,9 @@
 /* ===== General Reset ===== */
-* {
+html, body {
+  height: 100%;
+}
+* 
+{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -81,7 +85,7 @@ nav a:hover {
 @media (max-width: 768px) {
   .btn {
     min-width: 180px;
-    max-width: 180px;  /* shrink on smaller screens */
+    max-width: 220px;  /* shrink on smaller screens */
   }
 }
 
@@ -107,17 +111,28 @@ nav a:hover {
 /* Responsive */
 @media (max-width: 768px) {
   .btn-image img {
-    max-width: 180px;  /* shrink on smaller screens */
+    max-width: 220px;  /* shrink on smaller screens */
   }
 }
 
 /* ===== Footer ===== */
 footer {
   margin-top: 50px;
+  flex-shrink: 0;
   background-color: #134074;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 6px 0 6px 0;
+  width: 100%;
+}
+
+.footer-author {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 1px;   
+  margin-bottom: 0; 
+  padding: 0;       
+  line-height: .5; 
 }
 
 /* ===== Landing Page ===== */
@@ -125,16 +140,18 @@ body.landing {
   height: 100vh;
   background: url('../img/edinVict.png') no-repeat center center/cover;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   color: white;
   position: relative;
 }
 
+
 body.landing .overlay {
   background-color: rgba(0, 30, 60, 0.6); /* blueish dark overlay */
-  position: absolute;
+  position: 100;
   inset: 0;
+  flex: 1 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -153,7 +170,12 @@ body.landing h1 {
 }
 
 body.landing h1 span {
-  color: #4db8ff;
+  color: #1f9ef3;
+  font-size: 1.6em;    /* Makes Guiame.ai bigger */
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.1;
+  vertical-align: middle;
 }
 
 body.landing p {
@@ -246,5 +268,51 @@ body.landing .btn:hover {
   .underline {
     height: 6px;
     border-radius: 0px;
+  }
+}
+
+/* Hamburger button styles */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  margin-left: auto;
+  z-index: 20;
+}
+
+/* Hide menu on mobile by default */
+@media (max-width: 768px) {
+  nav {
+    position: relative;
+  }
+  .menu {
+    display: none;
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background: #134074;
+    flex-direction: column;
+    width: 180px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    border-radius: 0 0 8px 8px;
+    z-index: 10;
+  }
+  .menu.open {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+  }
+  .menu a {
+    padding: 16px;
+    border-bottom: 1px solid #1e293b22;
+    color: white;
+    text-align: right;
+  }
+  .menu a:last-child {
+    border-bottom: none;
   }
 }

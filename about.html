@@ -12,7 +12,10 @@
   <header>
     <nav>
       <div class="logo"><strong>Guíame.ai</strong></div>
-      <div class="menu">
+      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
+        &#9776;
+      </button>
+      <div class="menu" id="main-menu">
         <a href="index.html">Inicio</a>
         <a href="guide.html">Guía</a>
         <a href="contact.html">Contacto</a>
@@ -43,8 +46,15 @@
 
   <!-- ===== Footer ===== -->
   <footer>
-    <p>© 2025 Guíame.ai · Hecho con ❤️ en Edimburgo</p>
+    <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn btn-primary">Invítame un café ☕</a>
+    <p>© 2025 Guíame.ai · Hecho en Edinburgh</p>
   </footer>
+
+  <script>
+  document.getElementById('hamburger-btn').addEventListener('click', function() {
+    document.getElementById('main-menu').classList.toggle('open');
+  });
+  </script>
 
 </body>
 </html>
