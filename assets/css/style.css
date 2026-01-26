@@ -98,7 +98,7 @@ nav a:hover {
   border: none;
   outline: none;
   box-shadow: none;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
 }
 
@@ -154,7 +154,7 @@ footer {
 /* ===== Landing Page ===== */
 body.landing {
   min-height: 100vh;
-  height: 100vh;
+
   background: url('../img/edinVict.png') no-repeat center center/cover;
   display: flex;
   flex-direction: column;
@@ -344,4 +344,27 @@ body.landing .btn:hover {
   .menu a:last-child {
     border-bottom: none;
   }
+}
+
+.welcome-text {
+  max-width: 600px;
+  margin: 2rem auto;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.welcome-text p {
+  margin-bottom: 1.2rem;
+  color: #222;
+}
+
+.welcome-text .intro {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.welcome-text .cta {
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
 }

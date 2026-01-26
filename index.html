@@ -38,14 +38,14 @@
       
       <p>Tu guía para explorar el mundo.</p>
       <div class="buttons">
-        <span class="small-label"><b>Guiame.ai ⬇️ </b></span>
+        <span class="small-label"><b>Guiame Ahi ⬇️ </b></span>
         <a href="guide.html" class="btn-image" ><img src="assets/img/GuiaEdin.png" alt="Guía" /></a>
         <span class="small-label">Comenta y Reserva! ⬇️ </span>
         <a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" rel="noopener noreferrer" class="btn-image">
         <img src="assets/img/VPE_Reserva.png" alt="Reserva y Comenta" /></a>
-        <span class="small-label">Apoya mis proyectos ⬇️ </span>
+        <span class="small-label">Apoya y lee al Sam ⬇️ </span>
         <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn-image" target="_blank" rel="noopener noreferrer" > <img src="assets/img/Buy_Coffee.png" alt="Invita cafecito" /></a>
-        <span class="small-label">Mandame DM ⬇️ </span>
+        <span class="small-label">Manda un DM ⬇️ </span>
         <a href="contact.html" class="btn-image" ><img src="assets/img/wp.png" alt="whatsapp" /></a>
       </div>
     </div>
@@ -58,26 +58,30 @@
   </footer>
 
   <script>
-document.addEventListener('mousemove', function(e) {
-  const body = document.getElementById('landing-bg');
-  if (!body) return;
-  const x = e.clientX / window.innerWidth;
-  const y = e.clientY / window.innerHeight;
+    document.addEventListener('mousemove', function (e) {
+      const bg = document.getElementById('landing-bg');
+      if (!bg) return;
 
-  // Adjust the multiplier for more/less movement
-  const xOffset = (x - 0.2) * 40; // px
-  const yOffset = (y - 0.3) * 40; // px
-  body.style.backgroundPosition = `${50 + xOffset}% ${50 + yOffset}%`;
-  const bgSize = 100 + x * 20; // 100% to 130%
-  body.style.backgroundSize = `${bgSize}% auto`;
+      // Disable effect on touch devices
+      if (window.matchMedia('(hover: none)').matches) return;
 
-  // Brightness: closer to center = brighter
-  const dx = x - 0.6;
-  const dy = y - 0.6;
-  const dist = Math.sqrt(dx*dx + dy*dy); // 0 (center) to ~0.71 (corner)
-  const brightness = 1 - dist * 0.8; // 1.3 at center, ~0.8 at corners
-  body.style.filter = `brightness(${brightness})`;
-});
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+
+      // Subtle parallax (percent-based, safe)
+      const xOffset = (x - 0.5) * 10; // %
+      const yOffset = (y - 0.5) * 10; // %
+
+      bg.style.backgroundPosition = `${50 + xOffset}% ${50 + yOffset}%`;
+
+      // Brightness effect (clamped)
+      const dx = x - 0.5;
+      const dy = y - 0.5;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const brightness = Math.max(0.85, 1.05 - dist * 0.6);
+
+      bg.style.filter = `brightness(${brightness})`;
+    });
 </script>
 
 </body>
