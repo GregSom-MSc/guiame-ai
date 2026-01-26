@@ -118,6 +118,12 @@ nav a:hover {
   cursor: pointer;
 }
 
+/* Active / tap feedback (mobile) */
+.btn-image img:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .btn-image img {
