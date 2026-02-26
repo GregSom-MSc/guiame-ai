@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guía local de Edimburgo por Guíame.ai. Recomendaciones para comer, beber, caminar y descubrir la ciudad.">
   <title>Contacto | Guíame.ai</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -24,16 +25,30 @@
     </nav>
   </header>
 
+<main>
   <div class="container">
     <h1>Contacto</h1>
-    <p>¿Tienes dudas sobre tu viaje, una emergencia o necesitas algo adicional, como programar un nuevo tour? <br>
-        <b>Escríbeme al Whatsapp!</b></p><br>
+    <p>¿Tienes dudas sobre el viaje, programar un nuevo tour, o una emergencia?</p>
 
-    <!-- WhatsApp -->
-    <a href="https://wa.me/+5215513841895?text=¡Hola!%20Quiero%20ayuda%20sobre%20Edinburgh" 
-       class="btn btn-primary">Escríbeme en WhatsApp 📲</a>
+    <!-- Contact Form -->
+    <form id="contact-form" style="margin-top: 40px; max-width: 500px; margin-left: auto; margin-right: auto;">
+      <div style="margin-bottom: 15px;">
+        <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold;">Nombre:</label>
+        <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email:</label>
+        <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+      </div>
+    </form>
   </div> 
-    
+      <!-- WhatsApp -->
+    <center>
+      <a id="whatsapp-btn" href="https://wa.me/+5215513841895?text=¡Hola!%20Soy:%20" 
+      class="btn btn-primary">Escríbeme en WhatsApp 📲</a> <br>
+    </center>
+</main>
+
   <footer>
     <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn btn-primary">Invítame un café ☕</a>
     <p>© 2025 Guíame.ai · Hecho en Edinburgh</p>
@@ -43,6 +58,27 @@
   document.getElementById('hamburger-btn').addEventListener('click', function() {
     document.getElementById('main-menu').classList.toggle('open');
   });
+
+  // Update WhatsApp link with form data
+  function updateWhatsAppLink() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const whatsappBtn = document.getElementById('whatsapp-btn');
+    
+    let message = '¡Hola, Samuel!%20Soy:%20';
+    if (name || email) {
+      message += '%0A';
+      if (name) message += encodeURIComponent(name) + '%0A';
+      if (email) message += 'Mi%20Correo%20es:%20' + encodeURIComponent(email) + '%0A';
+    }
+    // add closing tagline after fields
+    message += '¡Guiame%20ahi!';
+    
+    whatsappBtn.href = 'https://wa.me/+5215513841895?text=' + message;
+  }
+
+  document.getElementById('name').addEventListener('input', updateWhatsAppLink);
+  document.getElementById('email').addEventListener('input', updateWhatsAppLink);
   </script>
 
 </body>
