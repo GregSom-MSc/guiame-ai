@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guía local de Edimburgo por Guíame.ai. Recomendaciones para comer, beber, caminar y descubrir la ciudad.">
+  <title>Guía Edinburgh | Guíame.ai</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="assets/img/e_f.ico">
+  <style>
+    /* ===== GUIDE PAGE STYLES ===== */
+
+    /* Guide Hero Section */
+    .guide-hero {
+      background: linear-gradient(135deg, #134074 0%, #0f2546 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .guide-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+      background-size: cover;
+      opacity: 0.5;
+    }
+
+    .guide-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Table of Contents */
+    .toc-section {
+      background-color: #f0f4f8;
+      padding: 60px 20px;
+    }
+
+    .toc-section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+      color: #134074;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .toc-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 25px 15px;
+      background: white;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #134074;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      gap: 10px;
+    }
+
+    .toc-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(19, 64, 116, 0.2);
+      background: #f9f3ff;
+    }
+
+    .toc-emoji {
+      font-size: 2.5rem;
+    }
+
+    /* Guide Sections */
+    .guide-section {
+      padding: 60px 20px;
+      background-color: white;
+    }
+
+    .guide-section.alternate {
+      background-color: #f9fafb;
+    }
+
+    .guide-section h2 {
+      font-size: 2.2rem;
+      color: #134074;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-intro {
+      text-align: center;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #555;
+      font-size: 1.05rem;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .content-card {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border-left: 4px solid #134074;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(19, 64, 116, 0.15);
+    }
+
+    .content-card h3 {
+      color: #134074;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .content-card p {
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .content-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .content-card li {
+      padding: 8px 0;
+      color: #555;
+      border-bottom: 1px solid #eee;
+    }
+
+    .content-card li:last-child {
+      border-bottom: none;
+    }
+
+    .content-card.featured {
+      background: linear-gradient(135deg, #134074 0%, #0f2546 100%);
+      color: white;
+      border-left: 0;
+    }
+
+    .content-card.featured h3 {
+      color: #4db8ff;
+    }
+
+    .content-card.featured p {
+      color: #e0e7ff;
+    }
+
+    .content-card.featured li {
+      color: #e0e7ff;
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
+
+    .content-card.featured .btn-secondary {
+      background: white;
+      color: #134074;
+    }
+
+    .content-card.featured .btn-secondary:hover {
+      background: #4db8ff;
+      color: white;
+    }
+
+    .info-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-left: 4px solid #4db8ff;
+    }
+
+    .info-card h3 {
+      color: #134074;
+      margin-bottom: 10px;
+    }
+
+    .info-card p {
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .info-card a {
+      color: #134074;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .info-card a:hover {
+      text-decoration: underline;
+    }
+
+    .recommendation {
+      color: #134074;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #134074 0%, #0f2546 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      color: white;
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background-color: white;
+      color: #134074;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background-color: #4db8ff;
+      color: white;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .guide-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .guide-section h2 {
+        font-size: 1.8rem;
+      }
+
+      .toc-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+      }
+
+      .toc-card {
+        padding: 20px 10px;
+      }
+
+      .toc-emoji {
+        font-size: 2rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .btn {
+        min-width: unset;
+        width: 100%;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header>
+    <nav>
+      <div class="logo"><strong>Guíame.ai</strong></div>
+      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
+        &#9776;
+      </button>
+      <div class="menu" id="main-menu">
+        <a href="index.html">Inicio</a>
+        <a href="guide.html">Guía Original</a>
+        <a href="guiaedin.html">Guía Edinburgh</a>
+        <a href="contact.html">Contacto</a>
+        <a href="https://buymeacoffee.com/samuelmex/e/415862">Apóyame</a>
+        <a href="about.html">Sobre mí</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== Page Content ===== -->
+  <main>
+    <!-- Hero Section -->
+    <section class="guide-hero">
+      <div class="hero-overlay">
+        <h1>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Pocket Guide to Edinburgh 🏴󠁧󠁢󠁳󠁣󠁴󠁿</h1>
+        <p class="hero-subtitle">Gracias por acompañarme en esta aventura</p>
+      </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="toc-section">
+      <div class="container">
+        <h2>Contenido de la Guía</h2>
+        <div class="toc-grid">
+          <a href="#alimento" class="toc-card">
+            <span class="toc-emoji">🍖</span>
+            <span>Alimento</span>
+          </a>
+          <a href="#festivals" class="toc-card">
+            <span class="toc-emoji">🎪</span>
+            <span>Festivals</span>
+          </a>
+          <a href="#shopping" class="toc-card">
+            <span class="toc-emoji">🛍️</span>
+            <span>Shopping</span>
+          </a>
+          <a href="#museos" class="toc-card">
+            <span class="toc-emoji">🎨</span>
+            <span>Museos</span>
+          </a>
+          <a href="#whisky" class="toc-card">
+            <span class="toc-emoji">🥃</span>
+            <span>Whisky & Gin</span>
+          </a>
+          <a href="#jardines" class="toc-card">
+            <span class="toc-emoji">🏰</span>
+            <span>Jardines</span>
+          </a>
+          <a href="#ceilidh" class="toc-card">
+            <span class="toc-emoji">💃</span>
+            <span>Ceilidh</span>
+          </a>
+          <a href="#camping" class="toc-card">
+            <span class="toc-emoji">🏕️</span>
+            <span>Camping</span>
+          </a>
+          <a href="#frases" class="toc-card">
+            <span class="toc-emoji">✍️</span>
+            <span>Frases & Música</span>
+          </a>
+          <a href="#divisas" class="toc-card">
+            <span class="toc-emoji">💷</span>
+            <span>Divisas</span>
+          </a>
+          <a href="#transporte" class="toc-card">
+            <span class="toc-emoji">🚌</span>
+            <span>Transporte</span>
+          </a>
+          <a href="#alojamiento" class="toc-card">
+            <span class="toc-emoji">🏨</span>
+            <span>Alojamiento</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alimento: Foodie Guide Section -->
+    <section id="alimento" class="guide-section">
+      <div class="container">
+        <h2>🍖 Alimento: Foodie Guide</h2>
+        <div class="section-intro">
+          <p>Descubre los mejores sabores de Edinburgh. Desde comida tradicional escocesa hasta cocina moderna.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Traditional Scottish Fare</h3>
+            <p>Prueba el haggis auténtico, fish & chips frescos y carne escocesa de primera.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Cafeterías Locales</h3>
+            <p>Brew Lab, artisan coffee shops y cafés con ambiente aconchegante para disfrutar.</p>
+            <a href="#" class="btn btn-secondary">Descubrir</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Fine Dining</h3>
+            <p>Restaurantes de alta cocina en Leith con vistas al agua y experiencias culinarias excepcionales.</p>
+            <a href="#" class="btn btn-secondary">Reservar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Pubs Tradicionales</h3>
+            <p>La verdadera experiencia escocesa: ambiente acogedor, real ale y conversaciones con locales.</p>
+            <a href="#" class="btn btn-secondary">Visitar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Edinburgh August Festivals Section -->
+    <section id="festivals" class="guide-section alternate">
+      <div class="container">
+        <h2>🎪 Edinburgh August Festivals</h2>
+        <div class="section-intro">
+          <p>August es el mes de los festivales. Música, teatro, danza y arte en cada esquina.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Edinburgh Fringe Festival</h3>
+            <p>El festival de artes escénicas más grande del mundo. Teatro, música y actuaciones callejeras.</p>
+            <a href="#" class="btn btn-secondary">Información</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Edinburgh International Festival</h3>
+            <p>Ópera, ballet, teatro y conciertos de clase mundial en los principales venues de la ciudad.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Military Tattoo</h3>
+            <p>Espectáculo impresionante con gaitas escocesas y ceremonias militares en el castillo.</p>
+            <a href="#" class="btn btn-secondary">Ver</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Festival Fringe Venues</h3>
+            <p>Explora los venues distribuidos por toda la ciudad, desde teatros hasta sótanos.</p>
+            <a href="#" class="btn btn-secondary">Descubrir</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shopping Section -->
+    <section id="shopping" class="guide-section">
+      <div class="container">
+        <h2>🛍️ Shopping!</h2>
+        <div class="section-intro">
+          <p>Desde tiendas de diseñador hasta mercados locales y antigüedades únicas.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Royal Mile</h3>
+            <p>Tiendas tradicionales escocesas con souvenirs, tartán, lana y productos locales auténticos.</p>
+            <a href="#" class="btn btn-secondary">Visitar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Princes Street</h3>
+            <p>La avenida principal con grandes marcas internacionales y tiendas de lujo.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">South Bridge & Victoria Street</h3>
+            <p>Tiendas independientes, vintage, arte local y galerías creativas de artistas escoceses.</p>
+            <a href="#" class="btn btn-secondary">Descubrir</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Sunday Markets</h3>
+            <p>Mercadillos de fin de semana con artesanías, comida local y productos únicos.</p>
+            <a href="#" class="btn btn-secondary">Encontrar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Museos Section -->
+    <section id="museos" class="guide-section alternate">
+      <div class="container">
+        <h2>🎨 Museos</h2>
+        <div class="section-intro">
+          <p>Edinburgh alberga museos de clase mundial que cuentan la historia de Escocia.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">National Museum of Scotland</h3>
+            <p>Museo principal con colecciones sobre la historia, arte y naturaleza de Escocia. Entrada gratuita en muchas galerías.</p>
+            <a href="#" class="btn btn-secondary">Visitar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Scottish National Gallery</h3>
+            <p>Obras maestras de arte escocés e internacional. Edificio histórico hermoso en el corazón de la ciudad.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Writer's Museum</h3>
+            <p>Dedicado a Robert Burns, Walter Scott y Robert Louis Stevenson. Perfecto para amantes de la literatura.</p>
+            <a href="#" class="btn btn-secondary">Descubrir</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Camera Obscura & World of Illusions</h3>
+            <p>Experiencia interactiva única con vistas a 360° de la ciudad desde la azotea.</p>
+            <a href="#" class="btn btn-secondary">Ver</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Whisky & Gin Experiences Section -->
+    <section id="whisky" class="guide-section">
+      <div class="container">
+        <h2>🥃 Whisky & Gin Experiences</h2>
+        <div class="section-intro">
+          <p>Degusta los mejores whiskies y gins escoceses en destilerías y bares especializados.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Scotch Whisky Experience</h3>
+            <p>Tour interactivo sobre la historia del whisky escocés con degustación incluida.</p>
+            <a href="#" class="btn btn-secondary">Reservar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">The Scotch Malt Whisky Society</h3>
+            <p>Club exclusivo con una colección extraordinaria de whiskies raros y eventos de degustación.</p>
+            <a href="#" class="btn btn-secondary">Visitar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Gin Distillery Tours</h3>
+            <p>Destilerías locales de gin artesanal con tours y catas de gins premium escoceses.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Whisky & Gin Bars</h3>
+            <p>Bares especializados con sommelier de whisky y selección premium de bebidas escocesas.</p>
+            <a href="#" class="btn btn-secondary">Descubrir</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jardines, Paseos y Castillos Section -->
+    <section id="jardines" class="guide-section alternate">
+      <div class="container">
+        <h2>🏰 Jardines, Paseos y Castillos</h2>
+        <div class="section-intro">
+          <p>Explora los paisajes históricos y naturales más hermosos de Edinburgh y alrededores.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Edinburgh Castle</h3>
+            <p>El símbolo de Edinburgh. Castillo histórico con vistas panorámicas de la ciudad.</p>
+            <a href="#" class="btn btn-secondary">Visitar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Princes Street Gardens</h3>
+            <p>Parque central hermoso con flores, vistas al castillo y espacios para relajarse.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Arthur's Seat</h3>
+            <p>Montaña en el parque Holyrood. Senderismo de 45 minutos con vistas espectaculares de la ciudad.</p>
+            <a href="#" class="btn btn-secondary">Caminar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Castillos Cercanos</h3>
+            <p>Excursiones a Stirling Castle, Blackness Castle y otros castillos históricos de Escocia.</p>
+            <a href="#" class="btn btn-secondary">Descubrir</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ceilidh Section -->
+    <section id="ceilidh" class="guide-section">
+      <div class="container">
+        <h2>💃 Ceilidh (Baile y Música)</h2>
+        <div class="section-intro">
+          <p>Experiencia auténtica escocesa: baila al ritmo de gaitas y música tradicional.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Ceilidh Halls</h3>
+            <p>Salones dedicados donde bailarines de todas las edades disfrutan de la música tradicional escocesa.</p>
+            <a href="#" class="btn btn-secondary">Ir a Bailar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Live Music Venues</h3>
+            <p>Bares y pubs con música en vivo: gaitas, violín y acordeón tradicional.</p>
+            <a href="#" class="btn btn-secondary">Escuchar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Traditional Sessions</h3>
+            <p>Sesiones espontáneas en pubs donde músicos locales tocan música tradicional escocesa.</p>
+            <a href="#" class="btn btn-secondary">Disfrutar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Bagpipe Performances</h3>
+            <p>Espectáculos de gaitas en calles principales y eventos especiales durante la temporada.</p>
+            <a href="#" class="btn btn-secondary">Ver</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Camping & Glamping Section -->
+    <section id="camping" class="guide-section alternate">
+      <div class="container">
+        <h2>🏕️ Camping & Glamping por Escocia</h2>
+        <div class="section-intro">
+          <p>Experimenta la naturaleza escocesa de forma única: desde camping tradicional hasta glamping de lujo.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Traditional Camping</h3>
+            <p>Campamentos en parques nacionales: Loch Lomond, Cairngorms. Naturaleza pura y tranquilidad.</p>
+            <a href="#" class="btn btn-secondary">Reservar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Glamping Experiences</h3>
+            <p>Tiendas de lujo, yurtas y cabañas boutique. Naturaleza con comodidad.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Caravan Parks</h3>
+            <p>Parques con caravanas y autocaravanas. Servicios completos y ubicaciones estratégicas.</p>
+            <a href="#" class="btn btn-secondary">Ver Opciones</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Coastal Camping</h3>
+            <p>Campamentos junto a playas escocesas. Wake up con vistas al mar.</p>
+            <a href="#" class="btn btn-secondary">Descubrir</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Frases, Música y Más Section -->
+    <section id="frases" class="guide-section">
+      <div class="container">
+        <h2>✍️ Frases, Música y Más!</h2>
+        <div class="section-intro">
+          <p>Sumérgete en la riqueza cultural escocesa: literatura, música y tradiciones.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Scottish Literature</h3>
+            <p>Robert Burns, Walter Scott, Robert Louis Stevenson. Librerías especializadas y museos dedicados.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Palabras & Acentos</h3>
+            <p>Aprende el verdadero acento escocés. Frases útiles y expresiones locales auténticas.</p>
+            <a href="#" class="btn btn-secondary">Aprender</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Música Tradicional</h3>
+            <p>Gaitas, violín, acordeón. Música celta y folk que define a Escocia.</p>
+            <a href="#" class="btn btn-secondary">Escuchar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Poetry & Book Clubs</h3>
+            <p>Eventos literarios, lecturas poéticas y clubes de libros en cafés y librerías locales.</p>
+            <a href="#" class="btn btn-secondary">Unirse</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cambio de Divisas Section -->
+    <section id="divisas" class="guide-section alternate">
+      <div class="container">
+        <h2>💷 Cambio de Divisas</h2>
+        <div class="section-intro">
+          <p>Post Offices son la mejor opción para cambiar moneda. Aquí tienes las ubicaciones principales:</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">📍 Centro Ciudad - Junto a Greyfriars</h3>
+            <p>Ubicación estratégica en el corazón histórico. Fácil de encontrar y buenas tasas.</p>
+            <a href="https://maps.app.goo.gl/cfhdvWiWY8Xucxxb6?g_st=ipc" target="_blank" class="btn btn-secondary">Ver en Mapa</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">📍 Estación Waverley</h3>
+            <p>Post Office en la estación principal. Ideal si llegas en tren. Horas extendidas.</p>
+            <a href="https://maps.app.goo.gl/jmewrmDKv9t2JjDv6?g_st=ipc" target="_blank" class="btn btn-secondary">Ver en Mapa</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">📍 East Side - Royal Mail</h3>
+            <p>Hacia el oriente de la ciudad, junto a Royal Mail. Buena alternativa.</p>
+            <a href="https://maps.app.goo.gl/uSZTLFx8T1VEsSSVA?g_st=ipc" target="_blank" class="btn btn-secondary">Ver en Mapa</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">💡 Cajeros Automáticos (ATMs)</h3>
+            <p>Búsca "Cash Point" o "ATM" por toda la ciudad. Cómodo y con buenas tasas. Bancos repartidos por la ciudad.</p>
+            <a href="#" class="btn btn-secondary">Encontrar ATM</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transporte Section -->
+    <section id="transporte" class="guide-section">
+      <div class="container">
+        <h2>🚌 Transporte</h2>
+        <div class="section-intro">
+          <p>Moverse por Edinburgh es sencillo y accesible. Aquí tienes todas tus opciones:</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Transporte Público</h3>
+            <p><strong>Autobuses:</strong> La mejor forma de moverse. Compra un Ridacard (día/semana) o paga por viaje.<br>
+            <strong>Tranvía:</strong> Conecta New Town con el aeropuerto. Moderno y puntual.</p>
+            <a href="#" class="btn btn-secondary">Información</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">A Pie</h3>
+            <p>Edinburgh es perfecta para caminar. El centro es compacto y las vistas son increíbles. Lleva zapatos cómodos.</p>
+            <a href="#" class="btn btn-secondary">Rutas</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Taxi & Ride Sharing</h3>
+            <p><strong>Taxi:</strong> Abundantes y fiables.<br>
+            <strong>Uber:</strong> Disponible en la ciudad (más caro que taxi local).</p>
+            <a href="#" class="btn btn-secondary">Reservar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Tours Guiados</h3>
+            <p>Ghost tours, bus tours históricos y walking tours. Perfectos para aprender la historia mientras explores.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alojamiento Section -->
+    <section id="alojamiento" class="guide-section alternate">
+      <div class="container">
+        <h2>🏨 Alojamiento</h2>
+        <div class="section-intro">
+          <p>Aquí encontrarás opciones cómodas y bien ubicadas para tu estancia en Edinburgh.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="content-card featured">
+            <h3 class="recommendation">Centro Histórico</h3>
+            <p>La mejor opción si quieres estar cerca de las principales atracciones. Royal Mile es el corazón de la ciudad.</p>
+            <a href="#" class="btn btn-secondary">Ver Opciones</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">South Side</h3>
+            <p>Zona universitaria con ambiente joven, bares y cafés. Buena conexión al centro.</p>
+            <a href="#" class="btn btn-secondary">Explorar</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">Leith</h3>
+            <p>Barrio portaño en desarrollo con excelentes restaurantes, galerías y vida nocturna.</p>
+            <a href="#" class="btn btn-secondary">Descubrir</a>
+          </div>
+          <div class="content-card featured">
+            <h3 class="recommendation">New Town</h3>
+            <p>Arquitectura georgiana elegante, tranquilo pero con acceso fácil al centro histórico.</p>
+            <a href="#" class="btn btn-secondary">Buscar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>❓ ¿Necesitas Ayuda?</h2>
+        <p>¿Preguntas, recomendaciones o necesitas un tour personalizado?</p>
+        <div class="cta-buttons">
+          <a href="contact.html" class="btn btn-primary">Envía un Mensaje</a>
+          <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn btn-secondary" target="_blank">Apóyame ☕</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>© 2025 Guíame.ai · Hecho en Edinburgh</p>
+  </footer>
+
+  <script>
+    document.getElementById('hamburger-btn').addEventListener('click', function() {
+      document.getElementById('main-menu').classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>
