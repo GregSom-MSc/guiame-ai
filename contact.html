@@ -1,36 +1,82 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Guía local de Edimburgo por Guíame.ai. Recomendaciones para comer, beber, caminar y descubrir la ciudad.">
-  <title>Contacto | Guíame.ai</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#081D3C">
+
+<meta name="description" content="Contacta con Guíame.ai por WhatsApp para recibir recomendaciones personalizadas y reservar experiencias en Edinburgh con un guía local.">
+<meta name="author" content="Samuel Moreno">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://gregsom-msc.github.io/guiame-ai/contact.html">
+
+<!-- Open Graph -->
+
+<meta property="og:title" content="Contacto | Guíame.ai">
+<meta property="og:description" content="Escríbeme por WhatsApp para recibir recomendaciones personalizadas y reservar experiencias en Edinburgh.">
+<meta property="og:image" content="https://gregsom-msc.github.io/guiame-ai/assets/img/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gregsom-msc.github.io/guiame-ai/contact.html">
+<meta property="og:locale" content="es_ES">
+
+<!-- Twitter -->
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contacto | Guíame.ai">
+<meta name="twitter:description" content="Escríbeme por WhatsApp para recibir recomendaciones personalizadas en Edinburgh.">
+<meta name="twitter:image" content="https://gregsom-msc.github.io/guiame-ai/assets/img/icon.png">
+
+<title>Contacto | Guíame.ai</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/x-icon" href="assets/img/icon.ico">
+
 </head>
+
 <body>
 
-  <header>
-    <nav>
-      <div class="logo"><strong>Guíame.ai</strong></div>
-      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
-        &#9776;
-      </button>
-      <div class="menu" id="main-menu">
-        <a href="index.html">Inicio</a>
-        <a href="guide.html">Guía</a>
-        <a href="contact.html">Contacto</a>
-        <a href="https://buymeacoffee.com/samuelmex/e/415862">Apóyame</a>
-        <a href="about.html">Sobre mí</a>
-      </div>
-    </nav>
-  </header>
+<header class="header">
+<div class="header-container">
 
-<main>
-  <div class="container">
-    <h1>Contacto</h1>
-    <p>¿Tienes dudas sobre el viaje, programar un nuevo tour, o una emergencia?</p>
+<div class="logo">
+<img src="assets/img/icon.png" alt="Guíame.ai Logo" class="logo-img">
+<span class="logo-text">By Samuel Moreno</span>
+</div>
 
-    <!-- Contact Form -->
+<nav class="nav">
+<ul class="nav-list">
+    <li><a href="index.html" class="nav-link">Inicio</a></li>
+    <li><a href="guide.html" class="nav-link">Guía</a></li>
+    <li><a href="https://buymeacoffee.com/samuelmex/posts" target="_blank" class="nav-link">Blog</a></li>
+    <li><a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" nav-link">Reserva y Comenta</a></li>
+    <li><a href="contact.html" class="nav-link">Contacto</a></li>
+</ul>
+</nav>
+
+<button class="nav-toggle" id="navToggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
+
+</div>
+</header>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1 class="hero-title">Contacta conmigo</h1>
+
+<p class="hero-subtitle">
+Si quieres recomendaciones personalizadas, reservar una experiencia o hacer cualquier pregunta sobre Edinburgh, puedes escribirme directamente por WhatsApp.
+</p>
+
+<div class="hero-buttons">
+
     <form id="contact-form" style="margin-top: 40px; max-width: 500px; margin-left: auto; margin-right: auto;">
       <div style="margin-bottom: 15px;">
         <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold;">Nombre:</label>
@@ -41,45 +87,66 @@
         <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
       </div>
     </form>
-  </div> 
+</div> 
       <!-- WhatsApp -->
     <center>
-      <a id="whatsapp-btn" href="https://wa.me/+5215513841895?text=¡Hola!%20Soy:%20" 
-      class="btn btn-primary">Escríbeme en WhatsApp 📲</a> <br>
+      <a id="whatsapp-btn" href="https://wa.me/+5215513841895?text=¡Hola!%20Soy:%20" target="_blank"
+      class="btn btn-secondary">Enviar WP</a> <br>
     </center>
-</main>
 
-  <footer>
-    <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn btn-primary">Invítame un café ☕</a>
-    <p>© 2025 Guíame.ai · Hecho en Edinburgh</p>
-  </footer>
 
-    <script>
-  document.getElementById('hamburger-btn').addEventListener('click', function() {
-    document.getElementById('main-menu').classList.toggle('open');
-  });
+</div>
 
-  // Update WhatsApp link with form data
-  function updateWhatsAppLink() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const whatsappBtn = document.getElementById('whatsapp-btn');
-    
-    let message = '¡Hola, Samuel!%20Soy:%20';
-    if (name || email) {
-      message += '%0A';
-      if (name) message += encodeURIComponent(name) + '%0A';
-      if (email) message += 'Mi%20Correo%20es:%20' + encodeURIComponent(email) + '%0A';
-    }
-    // add closing tagline after fields
-    message += '¡Guiame%20ahi!';
-    
-    whatsappBtn.href = 'https://wa.me/+5215513841895?text=' + message;
-  }
+<div class="hero-background3"></div>
 
-  document.getElementById('name').addEventListener('input', updateWhatsAppLink);
-  document.getElementById('email').addEventListener('input', updateWhatsAppLink);
-  </script>
+</section>
+
+<section class="features">
+
+<div class="container">
+
+<h2>¿Cómo puedo ayudarte?</h2>
+
+<p>
+Te ayudaré a descubrir lugares auténticos, planear rutas increíbles y conseguir experiencias únicas. 
+Si estás planeando tu viaje, puedo ayudarte con recomendaciones personalizadas según el tiempo, intereses y presupuesto.
+</p>
+
+<br>
+
+<div class="contact-features">
+
+<p>🍽 Restaurantes auténticos y económicos</p>
+
+<p>🍻 Pubs históricos</p>
+
+<p>🏰 Rutas para descubrir Edinburgh y otras ciudades a pie</p>
+
+<p>🌄 Excursiones por Escocia</p>
+
+<p>💍 Pedidas de mano y ceremonias especiales</p>
+
+<p>📍 Lugares secretos que pocos turistas conocen</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="footer">
+
+<div class="footer-container">
+
+<p><b>&copy; 2025 Guíame.ai · Hecho en Edinburgh</b></p>
+<p class="footer-author">by Samuel Moreno</p>
+
+</div>
+
+</footer>
+
+<script src="assets/js/main.js"></script>
 
 </body>
+
 </html>

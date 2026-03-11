@@ -23,3 +23,8 @@ out/
 # Environment variables
 .env
 .env.*
+
+# Styles
+STYLE_GUIDE/
+.DS_Store
+node_modules/

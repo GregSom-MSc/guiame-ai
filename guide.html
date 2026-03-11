@@ -1,89 +1,194 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Guía local de Edimburgo por Guíame.ai. Recomendaciones para comer, beber, caminar y descubrir la ciudad.">
-  <title>Guía | Guíame.ai</title>
+  <meta name="theme-color" content="#081D3C">
+
+  <meta name="description" content="Explora la guía de Guíame.ai con rutas recomendadas, restaurantes auténticos y consejos para descubrir Edinburgh como un local.">
+  <meta name="author" content="Samuel Moreno">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://gregsom-msc.github.io/guiame-ai/guide.html" />
+
+  <!-- Open Graph -->
+
+  <meta property="og:title" content="Guíame.ai - Guía de Edinburgh">
+  <meta property="og:description" content="Rutas secretas, restaurantes auténticos y consejos locales para explorar Edinburgh.">
+  <meta property="og:image" content="assets/img/icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gregsom-msc.github.io/guiame-ai/guide.html">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Card -->
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Guíame.ai - Guía de Edinburgh">
+  <meta name="twitter:description" content="Descubre rutas secretas y restaurantes auténticos en Edinburgh con Guíame.ai.">
+  <meta name="twitter:image" content="assets/img/icon.png">
+
+  <title>Guíame.ai | Guía de Edinburgh</title>
+
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" href="https://gregsom-msc.github.io/guiame-ai/assets/img/e_f.ico">
+  <link rel="icon" type="image/x-icon" href="assets/img/icon.ico">
+
+  <script type="application/ld+json">
+  {
+   "@context": "https://schema.org",
+   "@type": "TouristInformationCenter",
+   "name": "Guíame.ai",
+   "url": "https://gregsom-msc.github.io/guiame-ai/",
+   "description": "Guía local para explorar Edinburgh con rutas, recomendaciones de restaurantes y consejos de viaje.",
+   "areaServed": {
+     "@type": "City",
+     "name": "Edinburgh"
+   },
+   "address": {
+     "@type": "PostalAddress",
+     "addressLocality": "Edinburgh",
+     "addressCountry": "UK"
+   },
+   "author": {
+     "@type": "Person",
+     "name": "Samuel Moreno",
+     "sameAs": ["https://www.linkedin.com/in/samuelgmoreno"]
+   }
+  }
+  </script>
+
 </head>
+
 <body>
 
-  <!-- ===== Header / Navigation ===== -->
-  <header>
-    <nav>
-      <div class="logo"><strong>Guíame.ai</strong></div>
-      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
-        &#9776;
-      </button>
-      <div class="menu" id="main-menu">
-        <a href="index.html">Inicio</a>
-        <a href="guide.html">Guía</a>
-        <a href="contact.html">Contacto</a>
-        <a href="https://buymeacoffee.com/samuelmex/e/415862">Apóyame</a>
-        <a href="about.html">Sobre mí</a>
-      </div>
-    </nav>
-  </header>
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+      <img src="assets/img/icon.png" alt="Guíame.ai Logo" class="logo-img">
+      <span class="logo-text">By Samuel Moreno</span>
+    </div>
 
-  <!-- ===== Page Content ===== -->
-<main>
-  <div class="overlay">
-    <center>
-    <div class="content">
-       
+<nav class="nav">
+  <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="guide.html" class="nav-link">Guía</a></li>
+          <li><a href="https://buymeacoffee.com/samuelmex/posts" target="_blank" class="nav-link">Blog</a></li>
+          <li><a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" class="nav-link">Reserva y Comenta</a></li>
+          <li><a href="contact.html" class="nav-link">Contacto</a></li>
+  </ul>
+</nav>
 
-      <h1>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Bienvenido a <span>Edinburgh 🏴󠁧󠁢󠁳󠁣󠁴󠁿</span></h1>
-        <div class="welcome-text">
-        <p class="intro">
-          Gracias por acompañarme
+<button class="nav-toggle" id="navToggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+
+    ````````````````````````````````````````````````````````````
+    <h1 class="hero-title">Descubre lo mejor de Escocia</h1>
+
+    <p class="hero-subtitle">
+    Durante años he explorado esta ciudad y Escocia para encontrar los mejores lugares:
+    restaurantes auténticos, rutas increíbles y secretos geniales, para unos cuantos.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="#" class="btn btn-primary">
+            Edinburgh
+        </a>
+    </div>
+        <br>
+        <p class="hero-subtitle">
+            
+            Recorridos a pie para el Tour de Lago Ness:
         </p>
-        </div>
-      <p>
-        Estas son mis sugerencias sinceras para <strong>comer</strong>, <strong>beber</strong>,
-        <strong>pasear</strong> y <strong>vivir la historia</strong> al máximo. <br>
-        Espero que te gusten tanto como a mí.
-      </p>
-      <p class="intro">
-        <b>Presiona la imagen ⬇️ </b><br> </p>
-        <div class="buttons">
 
-        <a href="https://tinyurl.com/GuiameAhi" target="_blank" rel="noopener noreferrer" class="btn btn-image">
-        <img src="assets/img/imaginedin.jpg" alt="Guía Edinburgh" /></a>
+    <div class="hero-buttons">
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Fort+Augustus+Parking+Pay+and+Display+PH32+4DD&destination=Loch+Ness+Photo+Spot+Fort+Augustus+PH32+4DJ&waypoints=Fort+Augustus+Lighthouse+PH32+4DJ&travelmode=walking" target="_blank" class="btn btn-secondary">
+            Fort Augustus
+        </a>
 
-        </div>
-      <h2>🏴󠁧󠁢󠁳󠁣󠁴󠁿  Bienvenido 🏴󠁧󠁢󠁳󠁣󠁴󠁿 </h2>
-        <div class="welcome-text">
-          <p class="intro">
-            ¡Te deseo un excelente viaje!
-          </p>
-          <p class="cta">
-            No olvides comentar e invitarme un cafecito ☕
-          </p>
-        </div>
-      </center>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Inverness+Cathedral+IV3+5NN&destination=Inverness+Cathedral+IV3+5NN&waypoints=Inverness+Old+High+Churchyard+IV1+1BA%7CLeakeys+Bookshop+IV1+1EY%7CVictorian+Market+IV1+1JN%7CInverness+Castle+IV2+3EG&travelmode=walking" target="_blank" class="btn btn-secondary">
+            Inverness
+        </a>
+
+        <a href="https://www.google.com/maps/dir/?api=1&origin=56.703331,-3.737566&destination=56.703331,-3.737566&waypoints=56.7036266,-3.7376779%7C56.7038598,-3.7371879%7C56.7036811,-3.7342177%7C56.7039515,-3.736662%7C56.7041501,-3.7381988%7C56.7039421,-3.7378843&travelmode=walking" target="_blank" class="btn btn-secondary">
+            Pitlochry
+        </a>
+
+    </div>
+
+       <p class="hero-subtitle">
+<br>
+        Finalmente, escribo secretos y recomendaciones de todo tipo en mis publicaciones de Buy me a Coffee, no olvides seguirme y apoyarme desde alli para descubrirlos. 
+
+</p> 
+     <a href="https://www.buymeacoffee.com/samuelmoreno" target="_blank" class="btn btn-secondary">Buy me a Coffee</a>
+
+</div>
+
+  <div class="hero-background2"></div>
+
+</section>
+
+<section class="features">
+
+  <div class="container">
+
+````````````````````````````````````````````````````````````
+<h2>Qué encontrarás en la guía</h2>
+
+<p>
+  En ella, reúno lo mejor de mis lugares favoritos en Edinburgh y Escocia.
+  No es una lista genérica de internet. Son lugares que he probado,
+  explorado o recomendado a miles de viajeros. No existe un lugar a donde no haya ido y dicho: "¡Esto es genial, lo recomiendo!".
+</p>
+
+<br>
+
+<ul>
+    <center><b>Algunos ejemplos de lo que encontrarás:</b>
+<div class="contact-features">
+
+<p>🍽 Restaurantes auténticos y económicos</p>
+
+<p>🍻 Pubs históricos</p>
+
+<p>🏰 Rutas para descubrir Edinburgh y otras ciudades a pie</p>
+
+<p>🌄 Excursiones por Escocia</p>
+
+<p>💍 Pedidas de mano y ceremonias especiales</p>
+
+<p>📍 Lugares secretos que pocos turistas conocen</p>
+
+</div>
+    </center>
+</ul>
+
   </div>
+
+</section>
+
+<footer class="footer">
+
+  <div class="footer-container">
+
+<p><b>&copy; 2025 Guíame.ai · Hecho en Edinburgh</b></p>
+<p class="footer-author">by Samuel Moreno</p>
+
   </div>
-  </main>
 
+</footer>
 
-
-  <!-- ===== Footer ===== -->
-  <footer>
-    <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn btn-primary">Invítame un café ☕</a>
-
-    <p>© 2025 Guíame.ai · Hecho en Edinburgh</p>
-  </footer>
-
-    <script>
-  document.getElementById('hamburger-btn').addEventListener('click', function() {
-    document.getElementById('main-menu').classList.toggle('open');
-  });
-  </script>
+<script src="assets/js/main.js"></script>
 
 </body>
 </html>
-
-
-

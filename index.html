@@ -3,27 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Guíame.ai es una guía local para explorar Edinburgh y Escocia. Encuentra rutas recomendadas, restaurantes con descuento, lugares secretos y consejos de un guía local.">  <meta name="author" content="Samuel Moreno">
+  <meta name="theme-color" content="#081D3C">
+  <meta name="description" content="Guíame.ai - Tu guía local para explorar Edinburgh como nunca antes. Descubre rutas secretas, restaurantes auténticos y consejos de un guía experimentado.">
+  <meta name="author" content="Samuel Moreno">
   <link rel="canonical" href="https://gregsom-msc.github.io/guiame-ai/" />
   <meta name="robots" content="index, follow">
-  <!-- Open Graph for social sharing -->
+  
+  <!-- Open Graph -->
   <meta property="og:title" content="Guíame.ai - Rutas, Restaurantes y Consejos Locales en Edinburgh">
-  <meta property="og:description" content="Descubre Edinburgh y más con Guíame.ai. Descubre la ciudad y otros lugares de Escocia con rutas recomendadas, restaurantes con descuento, lugares secretos y consejos de un guía local.">
-  <meta property="og:image" content="https://gregsom-msc.github.io/guiame-ai/assets/img/CastleE.png"><!-- logo -->
+  <meta property="og:description" content="Descubre Edinburgh como un local. Rutas recomendadas, restaurantes con descuento, lugares secretos y consejos de un guía experimentado.">
+  <meta property="og:image" content="assets/img/icon.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gregsom-msc.github.io/guiame-ai/">
   <meta property="og:locale" content="es_ES">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Guíame.ai - Tu Guía de Viaje en Edinburgh">
-  <meta name="twitter:description" content="Descubre Edinburgh y más con Guíame.ai. Explora la ciudad y otros lugares de Escocia con rutas recomendadas, restaurantes con descuento, lugares secretos y consejos de un guía local.">
-  <meta name="twitter:image" content="https://gregsom-msc.github.io/guiame-ai/assets/img/CastleE.png"><!-- logo  -->
+  <meta name="twitter:title" content="Guíame.ai - Tu Guía en Edinburgh">
+  <meta name="twitter:description" content="Descubre Edinburgh como un local con rutas secretas, restaurantes auténticos y consejos de viaje.">
+  <meta name="twitter:image" content="assets/img/icon.png">
 
-  <title>Guíame.ai - Guía de Viaje en Edinburgh | Rutas, Restaurants, Paseos y Consejos Locales</title>
+  <title>Guíame.ai - Tu Guía Local en Edinburgh</title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/x-icon" href="https://gregsom-msc.github.io/guiame-ai/assets/img/EC_ico.ico"><!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/icon.ico">
+  
   <script type="application/ld+json">
   {
    "@context": "https://schema.org",
@@ -32,9 +35,9 @@
    "url": "https://gregsom-msc.github.io/guiame-ai/",
    "description": "Guía local para explorar Edinburgh con rutas, recomendaciones de restaurantes y consejos de viaje.",
    "areaServed": {
-   "@type": "City",
-   "name": "Edinburgh"
-  },
+     "@type": "City",
+     "name": "Edinburgh"
+   },
    "address": {
      "@type": "PostalAddress",
      "addressLocality": "Edinburgh",
@@ -48,67 +51,120 @@
    }
   }
   </script>
-
 </head>
-<body class="landing" id="landing-bg">
+<body>
 
-  <div class="overlay">
-    <div class="content">
-      <h1>Bienvenido a <span>Guiame.ai</span></h1>
-      
-      <div class="header-underline">
-      <div class="underline white"></div>
-      <div class="underline blue"></div>
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="assets/img/icon.png" alt="Guíame.ai Logo" class="logo-img">
+        <span class="logo-text">By Samuel Moreno</span>
       </div>
-      
-      <p>Tu guía para explorar el mundo.</p>
-      <div class="buttons">
-        <span class="small-label"><b>Guiame Ahi ⬇️ </b></span>
-        <a href="guide.html" class="btn-image" ><img src="assets/img/GuiaEdin.png" alt="Guía" /></a>
-        <span class="small-label">Comenta y Reserva! ⬇️ </span>
-        <a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" rel="noopener noreferrer" class="btn-image">
-        <img src="assets/img/VPE_Reserva.png" alt="Reserva y Comenta" /></a>
-        <span class="small-label">Gracias por Apoyarme ⬇️ </span>
-        <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn-image" target="_blank" rel="noopener noreferrer" > <img src="assets/img/Buy_Coffee.png" alt="Invita cafecito" /></a>
-        <span class="small-label">Manda un DM ⬇️ </span>
-        <a href="contact.html" class="btn-image" ><img src="assets/img/wp.png" alt="whatsapp" /></a>
-        <span class="small-label">Pregunta por descuentos, tours, paseos escondidos o lo que necesites. </span>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="guide.html" class="nav-link">Guía</a></li>
+          <li><a href="https://buymeacoffee.com/samuelmex/posts" target="_blank" class="nav-link">Blog</a></li>
+          <li><a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" class="nav-link">Reserva y Comenta</a></li>
+          <li><a href="contact.html" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Bienvenido a</h1>
+      <img src="assets/img/fulllogo.png" alt="Guíame.ai FullLogo">
+      <p class="hero-subtitle">Encuentra las mejores joyas escondidas, explora rutas secretas, visita restaurantes auténticos y escríbeme para recibir consejos personalizados de un auténtico guía local.</p>
+      <div class="hero-buttons">
+        <a href="guide.html" class="btn btn-primary">Explorar Guía</a>
+        <a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" class="btn btn-primary">Reserva y Comenta</a>
+        <a href="https://www.buymeacoffee.com/samuelmoreno" target="_blank" class="btn btn-primary">Apóyame</a>
+        <a href="contact.html" class="btn btn-primary">Mandame Mensaje</a>
       </div>
     </div>
+    <div class="hero-background"></div>
+  </section>
+
+  <!-- Features Section (Placeholder) -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Seguimos creciendo</h2>
+      <p>Muchas gracias por tu confianza y sonrisa.</p>
+    </div>
+  </section>
+
+  <section class="social-proof">
+  <div class="container social-proof-grid">
+
+    <div class="stat">
+      <span class="counter stat-number" data-target="7700">0</span>
+      <p><b>Viajeros guiados</b></p>
+    </div>
+
+    <div class="stat">
+      <span class="counter stat-number" data-target="30">0</span>
+      <p><b>Rutas exploradas por Escocia</b></p>
+    </div>
+
+    <div class="stat">
+      <span class="counter stat-number" data-target="4">0</span>
+      <p><b>Años de experiencia en este país</b></p>
+    </div>
+
   </div>
+</section>
 
-
-  <footer>
-    <p>© 2025 Guíame.ai · Hecho en Edinburgh</p>
-    <p class="footer-author">by Samuel Moreno</p>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p><b>&copy; 2025 Guíame.ai · Hecho en Edinburgh</b></p>
+      <p class="footer-author">by Samuel Moreno</p>
+    </div>
   </footer>
 
+  <script src="assets/js/main.js"></script>
+
   <script>
-    document.addEventListener('mousemove', function (e) {
-      const bg = document.getElementById('landing-bg');
-      if (!bg) return;
+  const counters = document.querySelectorAll('.counter');
 
-      // Disable effect on touch devices
-      if (window.matchMedia('(hover: none)').matches) return;
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
 
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
+        const counter = entry.target;
+        const target = +counter.getAttribute('data-target');
+        let count = 0;
 
-      // Subtle parallax (percent-based, safe)
-      const xOffset = (x - 0.5) * 10; // %
-      const yOffset = (y - 0.5) * 10; // %
+        const updateCounter = () => {
+          const increment = target / 100;
 
-      bg.style.backgroundPosition = `${50 + xOffset}% ${50 + yOffset}%`;
+          if (count < target) {
+            count += increment;
+            counter.innerText = Math.floor(count).toLocaleString();
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.innerText = target.toLocaleString();
+          }
+        };
 
-      // Brightness effect (clamped)
-      const dx = x - 0.5;
-      const dy = y - 0.5;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const brightness = Math.max(0.85, 1.05 - dist * 0.6);
-
-      bg.style.filter = `brightness(${brightness})`;
+        updateCounter();
+        observer.unobserve(counter);
+      }
     });
+  }, { threshold: 0.5 });
+
+  counters.forEach(counter => observer.observe(counter));
 </script>
 
 </body>
 </html>
+
