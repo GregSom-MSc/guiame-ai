@@ -16,7 +16,7 @@
 <!-- Open Graph -->
 
 <meta property="og:title" content="Contacto | Guíame.ai">
-<meta property="og:description" content="Escríbeme por WhatsApp para recibir recomendaciones personalizadas y reservar experiencias en Edinburgh.">
+<meta property="og:description" content="Escríbeme por WhatsApp para recibir recomendaciones personalizadas y reservar experiencias en Edinburgh y Escocia.">
 <meta property="og:image" content="https://gregsom-msc.github.io/guiame-ai/assets/img/iconOG.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gregsom-msc.github.io/guiame-ai/contact.html">
@@ -26,7 +26,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contacto | Guíame.ai">
-<meta name="twitter:description" content="Escríbeme por WhatsApp para recibir recomendaciones personalizadas en Edinburgh.">
+<meta name="twitter:description" content="Escríbeme por WhatsApp para recibir recomendaciones personalizadas en Edinburgh y Escocia.">
 <meta name="twitter:image" content="https://gregsom-msc.github.io/guiame-ai/assets/img/iconOG.png">
 
 <title>Contacto | Guíame.ai</title>
@@ -37,14 +37,22 @@
 <script type="application/ld+json">
   {
    "@context": "https://schema.org",
-   "@type": "TouristInformationCenter",
+   "@type": ["TouristInformationCenter", "LocalBusiness"],
    "name": "Guíame.ai",
    "url": "https://gregsom-msc.github.io/guiame-ai/",
-   "description": "Guía local para explorar Edinburgh con rutas, recomendaciones de restaurantes y consejos de viaje.",
-   "areaServed": {
+   "description": "Guía local para explorar Edinburgh y Escocia con rutas, recomendaciones de restaurantes y consejos de viaje.",
+   "priceRange": "€€",
+   "inLanguage": ["es","en"],
+   "areaServed": [
+   {
      "@type": "City",
      "name": "Edinburgh"
    },
+  {
+    "@type": "AdministrativeArea",
+    "name": "Scotland"
+  }
+  ],
    "address": {
      "@type": "PostalAddress",
      "addressLocality": "Edinburgh",
@@ -53,6 +61,7 @@
    "author": {
      "@type": "Person",
      "name": "Samuel Moreno",
+     "alternateName": ["Samuel Moreno Santoyo", "Samuel Gregorio Moreno Santoyo", "Samuel G. Moreno", "Samuel G. Moreno Santoyo"],
      "sameAs": ["https://www.linkedin.com/in/samuelgmoreno"]
    }
   }

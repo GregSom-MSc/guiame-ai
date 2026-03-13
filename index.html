@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#081D3C">
-  <meta name="description" content="Guíame.ai - Tu guía local para explorar Edinburgh como nunca antes. Descubre rutas secretas, restaurantes auténticos y consejos de un guía experimentado.">
+  <meta name="description" content="Guíame.ai - Tu guía local para explorar Edinburgh y Escocia como nunca antes. Descubre rutas secretas, restaurantes auténticos y consejos de un guía experimentado.">
   <meta name="author" content="Samuel Moreno">
   <link rel="canonical" href="https://gregsom-msc.github.io/guiame-ai/" />
   <meta name="robots" content="index, follow">
   <meta name="google-site-verification" content="SdNjEdVrv6LM3Gzo48jo53dSpU46Mp6u-1dIV8P66Aw" />
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Guíame.ai - Rutas, Restaurantes y Consejos Locales en Edinburgh">
-  <meta property="og:description" content="Descubre Edinburgh como un local. Rutas recomendadas, restaurantes con descuento, lugares secretos y consejos de un guía experimentado.">
+  <meta property="og:title" content="Guíame.ai - Rutas, Restaurantes y Consejos Locales en Edinburgh y Escocia ">
+  <meta property="og:description" content="Descubre Edinburgh y Escocia como un local. Rutas recomendadas, restaurantes con descuento, lugares secretos y consejos de un guía experimentado.">
   <meta property="og:image" content="https://gregsom-msc.github.io/guiame-ai/assets/img/iconOG.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gregsom-msc.github.io/guiame-ai/">
@@ -31,14 +31,22 @@
   <script type="application/ld+json">
   {
    "@context": "https://schema.org",
-   "@type": "TouristInformationCenter",
+   "@type": ["TouristInformationCenter", "LocalBusiness"],
    "name": "Guíame.ai",
    "url": "https://gregsom-msc.github.io/guiame-ai/",
-   "description": "Guía local para explorar Edinburgh con rutas, recomendaciones de restaurantes y consejos de viaje.",
-   "areaServed": {
+   "description": "Guía local para explorar Edinburgh y Escocia con rutas, recomendaciones de restaurantes y consejos de viaje.",
+   "priceRange": "€€",
+   "inLanguage": ["es","en"],
+   "areaServed": [
+   {
      "@type": "City",
      "name": "Edinburgh"
    },
+  {
+    "@type": "AdministrativeArea",
+    "name": "Scotland"
+  }
+  ],
    "address": {
      "@type": "PostalAddress",
      "addressLocality": "Edinburgh",
