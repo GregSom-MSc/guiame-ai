@@ -165,6 +165,29 @@ p {
   transition: all 0.3s ease;
 }
 
+.nav-link2 {
+  font-weight: 500;
+  font-size: 1.25rem;
+  position: relative;
+}
+
+.nav-link2::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #FF9500;
+  transition: width 0.3s ease;
+}
+
+.nav-link2:hover::after {
+  width: 100%;
+}
+
+
+
 /* Mobile Navigation */
 @media (max-width: 768px) {
   .nav {
