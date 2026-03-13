@@ -116,17 +116,17 @@
   <div class="container social-proof-grid">
 
     <div class="stat">
-      <span class="counter stat-number" data-target="7846">0</span>
+      <span class="counter stat-number" data-target="7846">7846</span>
       <p><b>Viajeros guiados</b></p>
     </div>
 
     <div class="stat">
-      <span class="counter stat-number" data-target="30">0</span>
+      <span class="counter stat-number" data-target="30">30</span>
       <p><b>Rutas exploradas por Escocia</b></p>
     </div>
 
     <div class="stat">
-      <span class="counter stat-number" data-target="4">0</span>
+      <span class="counter stat-number" data-target="4">4</span>
       <p><b>Años de experiencia en este país</b></p>
     </div>
 
@@ -155,8 +155,8 @@
         let count = 0;
 
         const updateCounter = () => {
-          const increment = target / 100;
-
+          const increment = Math.ceil((target - count) / 10);
+          
           if (count < target) {
             count += increment;
             counter.innerText = Math.floor(count).toLocaleString();
