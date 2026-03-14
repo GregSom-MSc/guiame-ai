@@ -483,3 +483,158 @@ p {
     font-size: 0.9rem;
   }
 }
+
+/* ============================================
+   HOW IT WORKS - CHEVRON STEPS
+   ============================================ */
+.how-it-works {
+  padding: 4rem 2rem;
+  background-color: #F8F9FA;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  margin-bottom: 2rem;
+  color: #081D3C;
+}
+
+.flow-wrap {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.flow-boxes {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.flow-boxes .step-box {
+  display: inline-block;
+  position: relative;
+  min-width: 180px;
+  padding: 1rem 2.5rem 1rem 2rem;
+  background: #f0f4f8;
+  border: 1.5px solid #c0cad6;
+  color: #081D3C;
+  text-align: center;
+  margin-right: 2px;
+  z-index: 1;
+}
+
+.flow-boxes .step-box:first-child {
+  padding-left: 1.5rem;
+  border-radius: 8px 0 0 8px;
+}
+
+.flow-boxes .step-box:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.flow-boxes .step-box.right::after {
+  content: '';
+  border-top: 1.5px solid #c0cad6;
+  border-right: 1.5px solid #c0cad6;
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  background: inherit;
+  z-index: 150;
+  transform: translate(15px, -50%) rotate(45deg);
+}
+
+.flow-boxes .step-box.left::before {
+  content: '';
+  border-top: 1.5px solid #c0cad6;
+  border-right: 1.5px solid #c0cad6;
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  background: inherit;
+  z-index: 50;
+  transform: translate(-15px, -50%) rotate(45deg);
+}
+
+.flow-boxes .step-box.active {
+  background: #081D3C;
+  border-color: #081D3C;
+  color: #fff;
+  z-index: 2;
+}
+
+.flow-boxes .step-box.active::after {
+  background: #081D3C;
+  border-color: #081D3C;
+}
+
+.flow-boxes .step-box.active .step-num {
+  background: #FF9500;
+  color: #fff;
+}
+
+.step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #c0cad6;
+  color: #081D3C;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.4rem;
+}
+
+.step-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.step-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: inherit;
+  margin-bottom: 0.25rem;
+}
+
+.step-desc {
+  font-size: 0.8rem;
+  color: inherit;
+  opacity: 0.75;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Mobile — stack vertically */
+@media (max-width: 768px) {
+  .flow-boxes {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .flow-boxes .step-box {
+    min-width: unset;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 2px;
+    padding: 1rem 1.5rem;
+  }
+
+  .flow-boxes .step-box:first-child {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .flow-boxes .step-box:last-child {
+    border-radius: 0 0 8px 8px;
+  }
+
+  .flow-boxes .step-box.right::after,
+  .flow-boxes .step-box.left::before {
+    display: none;
+  }
+}
