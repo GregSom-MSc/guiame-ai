@@ -362,6 +362,15 @@ p {
   opacity: 0.7;
 }
 
+@media (max-width: 768px) {
+  .hero-icon img {
+    width: 100px;                    /* smaller on phones */
+  }
+  .hero-icon.scrolled img {
+    width: 50px;
+  }
+}
+
 /* ============================================
    5. BUTTONS
    ============================================ */
