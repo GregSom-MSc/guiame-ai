@@ -112,7 +112,6 @@ p {
 }
 
 .logo-img {
-  width: 45px;
   height: 45px;
 }
 
@@ -320,6 +319,47 @@ p {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.hero-icon {
+  display: flex;
+  flex-direction: column;          /* stack icon + text vertically */
+  align-items: center;
+  gap: 0.5rem;                     /* space between icon and "By Samuel Moreno" */
+  margin-bottom: 1.5rem;           /* breathing room before h1 */
+  opacity: 0.95;
+}
+
+.hero-icon img {
+  width: 120px;                    /* ← starting size – adjust to taste: 100–140px */
+  height: auto;                    /* preserves aspect ratio (important since not square) */
+  max-width: 100%;                 /* safe on small screens */
+  transition: all 0.4s ease;       /* smooth shrink if you keep scroll effect */
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));  /* subtle lift */
+}
+
+.hero-icon img:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
+}
+
+.hero-icon .logo-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #e0e0e0;                  /* light gray for contrast on dark bg */
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+.hero-icon.scrolled img {
+  width: 60px;                     /* smaller size on scroll – feels like header integration */
+  opacity: 0.85;
+  transform: translateY(-4px);
+}
+
+.hero-icon.scrolled .logo-text {
+  font-size: 0.95rem;
+  opacity: 0.7;
 }
 
 /* ============================================
@@ -637,4 +677,79 @@ p {
   .flow-boxes .step-box.left::before {
     display: none;
   }
+}
+
+/* Mobile — stack vertically */
+
+/* Modern Professional WhatsApp FAB */
+.whatsapp-floating {
+  /* Positioning */
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 900;
+
+  /* Size & shape */
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+
+  /* Color & background */
+  background: linear-gradient(145deg, #25D366 0%, #20b058 100%);
+  color: white;
+
+  /* Shadow – subtle but present */
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+
+  /* Center icon perfectly */
+  display: grid;
+  place-items: center;
+
+  /* Smooth transitions */
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+
+  /* Prevent text selection & improve touch */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover / active states */
+.whatsapp-floating:hover {
+  transform: translateY(-4px) scale(1.09);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.18),
+    0 16px 48px rgba(0, 0, 0, 0.10);
+}
+
+.whatsapp-floating:active {
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.14s ease;
+}
+
+/* Optional: subtle ring / pulse on load (very restrained) */
+@keyframes gentle-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.22); }
+  70%      { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-floating {
+  animation: gentle-pulse 2.2s ease-out 1.2s 1;
+}
+
+/* Inside the button – icon styling */
+.whatsapp-floating svg,
+.whatsapp-floating i {
+  font-size: 32px;           /* or width/height 32px if svg */
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-floating:hover svg,
+.whatsapp-floating:hover i {
+  transform: scale(1.12) rotate(8deg);
 }

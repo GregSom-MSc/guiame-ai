@@ -115,3 +115,20 @@ function updateWhatsAppLink() {
 // Listeners
 document.getElementById('name')?.addEventListener('input', updateWhatsAppLink);
 document.getElementById('email')?.addEventListener('input', updateWhatsAppLink);
+
+// Logo shrink on scroll (only if the element exists)
+// Hero icon shrink on scroll
+const heroIcon = document.querySelector('.hero-icon');
+
+if (heroIcon) {
+  const handleScroll = () => {
+    if (window.scrollY > 80) {          // trigger a bit later (80px)
+      heroIcon.classList.add('scrolled');
+    } else {
+      heroIcon.classList.remove('scrolled');
+    }
+  };
+
+  handleScroll();                       // run immediately on load
+  window.addEventListener('scroll', handleScroll, { passive: true });
+}
