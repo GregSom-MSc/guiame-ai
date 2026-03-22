@@ -907,7 +907,7 @@ CONTACT PAGE SPECIFIC STYLES
   opacity: 0;
   font-size: 14px;
   line-height: 1.4;
-  transform: translateX(-50%,10px);
+  transform: translate(-50%,10px);
   transition: all 0.5s ease, transform 0.5s ease;
   display: flex;
   flex-direction: column;    /* stack everything */
@@ -917,7 +917,7 @@ CONTACT PAGE SPECIFIC STYLES
 
 #bmc-floating.show {
   opacity: 1;
-  transform: translate(10px);  /* simpler than previous translate */
+  transform: translate(-50%,0);  /* simpler than previous translate */
 }
 
 /* Make it centered on mobile instead of bottom-right glued */
@@ -926,10 +926,10 @@ CONTACT PAGE SPECIFIC STYLES
     right: auto;
     left: 50%;
     bottom: 100px;            /* give more space from bottom nav bars */
-    transform: translateX(-50%);  /* true center */
+    transform: translate(-50%,0);  /* true center */
     width: 85vw;
     max-width: 320px;
-    margin: 0
+    margin: 0;
     padding: 16px;           /* consistent padding */
     padding-bottom: calc(16px + env(safe-area-inset-bottom)); /* account for iOS home indicator */
     padding-right: calc(16px + env(safe-area-inset-bottom)); /* account for iOS home indicator */
