@@ -890,8 +890,8 @@ p {
 /* BMC widget */
 #bmc-floating {
   position: fixed;
-  bottom: 100px;
-  right: 5px;
+  bottom: 110px;
+  right: 2px;
   left: auto;
   transform: translateY(5px);
 
