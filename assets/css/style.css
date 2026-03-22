@@ -801,8 +801,8 @@ p {
 }
 
 /* ============================================
-   CONTACT PAGE SPECIFIC STYLES
-   ============================================ */
+CONTACT PAGE SPECIFIC STYLES
+============================================ */
 
 /* Contact form styling */
 .contact-form {
@@ -887,60 +887,86 @@ p {
   }
 }
 
-/* BMC widget */
+/* BMC widget - base styles */
 #bmc-floating {
   position: fixed;
   bottom: 110px;
-  right: 2px;
+  right: 16px;               /* increased from 2px for better breathing room on mobile */
   left: auto;
-  transform: translateY(5px);
-
+  width: 280px;              /* fixed width so it doesn't stretch full-width or look tiny */
+  max-width: 90vw;           /* won't overflow on very small screens */
   background: rgba(60, 60, 60, 0.85);
   color: #fff;
-  padding: 12px 14px;
-  border-radius: 8px;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  font-size: 14px;
-
-  backdrop-filter: blur(8px);
+  padding: 16px;             /* more padding for comfort */
+  border-radius: 8px;       /* slightly softer */
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);  /* crucial for iOS Firefox/Safari compatibility */
   z-index: 9999;
-
   opacity: 0;
-  transition: all 0.5s ease;
+  font-size: 14px;
+  line-height: 1.4;
+  transform: translateX(-50%,10px);
+  transition: all 0.5s ease, transform 0.5s ease;
+  display: flex;
+  flex-direction: column;    /* stack everything */
+  align-items: flex-start;
+  gap: 12px;
 }
 
 #bmc-floating.show {
   opacity: 1;
-  transform: translate(-3%, 0);
+  transform: translate(10px);  /* simpler than previous translate */
 }
 
-.bmc-icon {
-  font-size: 20px;
+/* Make it centered on mobile instead of bottom-right glued */
+@media (max-width: 600px) {   /* or max-width: 768px if you prefer tablets too */
+  #bmc-floating {
+    right: auto;
+    left: 50%;
+    bottom: 100px;            /* give more space from bottom nav bars */
+    transform: translateX(-50%);  /* true center */
+    width: 85vw;
+    max-width: 320px;
+  }
 }
 
+/* Close button to top-right */
+#bmc-close {
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 16px;           /* bit bigger for touch */
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+/* Icon + link row - center them */
+.bmc-support-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Text styling */
 .bmc-text {
   opacity: 0.95;
+  text-align: center;        /* center the main message */
+  width: 100%;
+  padding: 15px;
 }
 
+/* Link */
 .bmc-link {
   color: #ffd900;
   font-weight: bold;
   text-decoration: none;
 }
 
-.bmc-link:hover {
-  text-decoration: underline;
-}
-
-#bmc-close {
-  background: transparent;
-  border: none;
-  color: #ccc;
-  font-size: 14px;
-  cursor: pointer;
-}
+.bmc-link:hover { text-decoration: underline; }
