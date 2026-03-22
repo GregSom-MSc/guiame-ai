@@ -917,7 +917,7 @@ CONTACT PAGE SPECIFIC STYLES
 
 #bmc-floating.show {
   opacity: 1;
-  transform: translate(-50%,0);  /* simpler than previous translate */
+  transform: translate(-50%,0);  /* animation */
 }
 
 /* Make it centered on mobile instead of bottom-right glued */
@@ -926,7 +926,7 @@ CONTACT PAGE SPECIFIC STYLES
     right: auto;
     left: 50%;
     bottom: 100px;            /* give more space from bottom nav bars */
-    transform: translate(-50%,0);  /* true center */
+    transform: translate(-50%,10px);  /* true center */
     width: 85vw;
     max-width: 320px;
     margin: 0;
