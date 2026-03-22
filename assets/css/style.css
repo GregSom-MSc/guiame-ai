@@ -916,7 +916,7 @@ p {
 
 #bmc-floating.show {
   opacity: 1;
-  transform: translate(-7%, 0);
+  transform: translate(-5%, 0);
 }
 
 .bmc-icon {
