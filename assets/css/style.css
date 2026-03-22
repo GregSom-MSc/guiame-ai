@@ -893,7 +893,7 @@ p {
   bottom: 100px;
   right: 20px;
   left: auto;
-  transform: translateY(10px);
+  transform: translateY(5px);
 
   background: rgba(60, 60, 60, 0.85);
   color: #fff;
@@ -916,7 +916,7 @@ p {
 
 #bmc-floating.show {
   opacity: 1;
-  transform: translate(-10%, 0);
+  transform: translate(-7%, 0);
 }
 
 .bmc-icon {
