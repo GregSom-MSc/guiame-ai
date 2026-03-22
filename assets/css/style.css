@@ -930,9 +930,10 @@ CONTACT PAGE SPECIFIC STYLES
     width: 85vw;
     max-width: 320px;
     margin: 0
-    padding-bottom: calc(16px+ env(safe-area-inset-bottom)); /* account for iOS home indicator */
-    padding-right: calc(16px+ env(safe-area-inset-bottom)); /* account for iOS home indicator */
-    padding-left: calc(16px+ env(safe-area-inset-bottom)); /* account for iOS home indicator */
+    padding: 16px;           /* consistent padding */
+    padding-bottom: calc(16px + env(safe-area-inset-bottom)); /* account for iOS home indicator */
+    padding-right: calc(16px + env(safe-area-inset-bottom)); /* account for iOS home indicator */
+    padding-left: calc(16px + env(safe-area-inset-bottom)); /* account for iOS home indicator */
   }
 }
 
