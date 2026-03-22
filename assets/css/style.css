@@ -894,7 +894,8 @@ CONTACT PAGE SPECIFIC STYLES
   right: 16px;               /* increased from 2px for better breathing room on mobile */
   left: auto;
   width: 280px;              /* fixed width so it doesn't stretch full-width or look tiny */
-  max-width: 90vw;           /* won't overflow on very small screens */
+  max-width: calc(100vw - 32px);     
+  box-sizing: border-box;      /* won't overflow on very small screens */
   background: rgba(60, 60, 60, 0.85);
   color: #fff;
   padding: 16px;             /* more padding for comfort */
@@ -928,6 +929,10 @@ CONTACT PAGE SPECIFIC STYLES
     transform: translateX(-50%);  /* true center */
     width: 85vw;
     max-width: 320px;
+    margin: 0
+    padding-bottom: calc(16px+ env(safe-area-inset-bottom)); /* account for iOS home indicator */
+    padding-right: calc(16px+ env(safe-area-inset-bottom)); /* account for iOS home indicator */
+    padding-left: calc(16px+ env(safe-area-inset-bottom)); /* account for iOS home indicator */
   }
 }
 
