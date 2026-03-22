@@ -886,3 +886,61 @@ p {
     margin-bottom: 0.5rem;
   }
 }
+
+/* BMC widget */
+#bmc-floating {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  left: auto;
+  transform: translateY(10px);
+
+  background: rgba(60, 60, 60, 0.85);
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 14px;
+
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  z-index: 9999;
+
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+#bmc-floating.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.bmc-icon {
+  font-size: 20px;
+}
+
+.bmc-text {
+  opacity: 0.95;
+}
+
+.bmc-link {
+  color: #ffd900;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.bmc-link:hover {
+  text-decoration: underline;
+}
+
+#bmc-close {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+}

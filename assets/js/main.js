@@ -132,3 +132,21 @@ if (heroIcon) {
   handleScroll();                       // run immediately on load
   window.addEventListener('scroll', handleScroll, { passive: true });
 }
+
+// Buy Me a Coffee floating button
+document.addEventListener("DOMContentLoaded", function () {
+  const bmc = document.getElementById('bmc-floating');
+  const closeBtn = document.getElementById('bmc-close');
+
+  if (!bmc || !closeBtn) return;
+
+  // Show after slight delay (elegant)
+  setTimeout(() => {
+    bmc.classList.add('show');
+  }, 2000);
+
+  // Close button
+  closeBtn.addEventListener('click', () => {
+    bmc.style.display = 'none';
+  });
+});
