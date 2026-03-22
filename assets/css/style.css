@@ -762,3 +762,127 @@ p {
 .whatsapp-floating:hover i {
   transform: scale(1.12) rotate(8deg);
 }
+
+/* Examples grid – clean centered list */
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.example-item {
+  background: #f8f9fa;
+  padding: 1.25rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #e0e7ff;
+  transition: all 0.25s ease;
+}
+
+.example-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(8, 29, 60, 0.1);
+  border-color: #c0d0ff;
+}
+
+.example-item a.nav-link2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #081D3C;
+  display: block;
+}
+
+.example-item a.nav-link2:hover {
+  color: #FF9500;
+}
+
+/* ============================================
+   CONTACT PAGE SPECIFIC STYLES
+   ============================================ */
+
+/* Contact form styling */
+.contact-form {
+  max-width: 520px;
+  margin: 2.5rem auto 1.5rem;
+  padding: 0 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.4rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #fff;                    /* white on dark hero bg */
+  font-size: 1.05rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.98);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #FF9500;
+  box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.15);
+}
+
+/* Small subtitle variant */
+.hero-subtitle.small {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-top: 1rem;
+}
+
+/* Enhance examples-grid items on contact page (with icons) */
+.examples-grid .example-item {
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.3rem 1.5rem;
+  text-align: left;               /* better readability with icons */
+}
+
+.example-icon {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.examples-grid .example-item .example-text {
+  font-size: 1.05rem;
+  color: #081D3C;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .contact-form {
+    max-width: 100%;
+    padding: 0 1.5rem;
+  }
+
+  .examples-grid .example-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+    min-height: auto;
+  }
+
+  .example-icon {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+  }
+}
