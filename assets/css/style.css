@@ -891,7 +891,7 @@ p {
 #bmc-floating {
   position: fixed;
   bottom: 100px;
-  right: 10px;
+  right: 5px;
   left: auto;
   transform: translateY(5px);
 
