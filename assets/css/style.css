@@ -898,7 +898,7 @@ CONTACT PAGE SPECIFIC STYLES
   box-sizing: border-box;      /* won't overflow on very small screens */
   background: rgba(60, 60, 60, 0.85);
   color: #fff;
-  padding: 16px;             /* more padding for comfort */
+  padding: 26px;             /* more padding for comfort */
   border-radius: 8px;       /* slightly softer */
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
   backdrop-filter: blur(8px);
@@ -931,7 +931,7 @@ CONTACT PAGE SPECIFIC STYLES
     max-width: 320px;
     margin: 0;
     padding-top: 45px;
-    padding: 16px;           /* consistent padding */
+    padding: 26px;           /* consistent padding */
     padding-bottom: calc(16px + env(safe-area-inset-bottom)); /* account for iOS home indicator */
     padding-right: calc(16px + env(safe-area-inset-right)); /* account for iOS home indicator */
     padding-left: calc(16px + env(safe-area-inset-left)); /* account for iOS home indicator */
@@ -948,7 +948,7 @@ CONTACT PAGE SPECIFIC STYLES
   color: #ccc;
   font-size: 16px;           /* bit bigger for touch */
   cursor: pointer;
-  padding: 4px;
+  padding: 2px;
   line-height: 1;
 }
 
