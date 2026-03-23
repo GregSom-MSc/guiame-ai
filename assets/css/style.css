@@ -388,27 +388,31 @@ p {
 
 .btn-primary {
   background: linear-gradient(135deg, #081D3C 0%, #0c2b5a 100%);
-  color: #fff;
+  color: #f9fafb;
   border: 1px solid #081D3C;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.15);
 }
 
 .btn-primary:hover {
   background: linear-gradient(135deg, #0c2b5a 0%, #051122 100%);
   border-color: #0c2b5a;
+  color: #f9fafb;
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(8, 29, 60, 0.3);
+  text-shadow: 0 1px 1px rgba(0,0,0,0.15);
 }
 
 .btn-secondary {
   background: linear-gradient(135deg, #ffb366 0%, #FF9500 100%);
-  color: #fff;
+  color: #f9fafb;
   border: 1px solid #081D3C;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2)
 }
 
 .btn-secondary:hover {
   background: linear-gradient(135deg, #ffb366 0%, #FF9500 100%);
   border-color: #FF9500;
-  color: #fff;
+  color: #f9fafb;
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(8, 29, 60, 0.3);
 }
