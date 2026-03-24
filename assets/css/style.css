@@ -981,3 +981,114 @@ CONTACT PAGE SPECIFIC STYLES
 }
 
 .bmc-link:hover { text-decoration: underline; }
+
+/* PASSWORD GATE */
+
+#password-gate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #081D3C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  opacity: 0;
+  backdrop-filter: blur(0px);
+  animation: gateBlurIn 0.5s ease forwards;
+  
+}
+
+.gate-box {
+  background: rgba(255,255,255,0.05);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.gate-box h2 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.gate-box p {
+  color: #e0e0e0;
+  margin-bottom: 1.5rem;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: cardReveal 0.7s ease forwards;
+  animation-delay: 0.2s;
+}
+
+#password-input {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: elementFade 0.5s ease forwards;
+  animation-delay: 0.2s;
+}
+
+#password-btn {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: elementFade 0.5s ease forwards;
+  animation-delay: 0.5s;
+}
+
+#error-msg {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: none;
+}
+
+@keyframes gateFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cardReveal {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes elementFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes gateBlurIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(6px);
+  }
+}

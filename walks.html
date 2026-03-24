@@ -36,7 +36,22 @@
 </script> 
 -->
 
-<!-- HEADER (same as your other pages) -->
+<!-- Second option script) 
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const PASSWORD = "24s26vacapeluda";
+
+    const userInput = prompt("🔒 Introduce la contraseña para acceder a los recorridos:");
+
+    if (userInput !== PASSWORD) {
+      alert("Contraseña incorrecta");
+      window.location.href = "guide.html";
+    }
+  });
+</script> 
+-->
+
 <header class="header">
   <div class="header-container">
     <div class="logo">
@@ -156,4 +171,20 @@
 <script src="assets/js/main.js"></script>
 
 </body>
+
+<div id="password-gate">
+  <div class="gate-box">
+    <h2>Acceso a Recorridos</h2>
+    <p>Introduce la contraseña para desbloquear estas rutas exclusivas</p>
+
+    <input type="password" id="password-input" placeholder="Contraseña" />
+
+    <button id="password-btn" class="btn btn-secondary">
+      Acceder
+    </button>
+
+    <p id="error-msg">Contraseña incorrecta</p>
+  </div>
+</div>
+
 </html>

@@ -150,3 +150,33 @@ document.addEventListener("DOMContentLoaded", function () {
     bmc.style.display = 'none';
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const PASSWORD = "24s26vacapeluda";
+
+  const gate = document.getElementById("password-gate");
+  const input = document.getElementById("password-input");
+  const button = document.getElementById("password-btn");
+  const error = document.getElementById("error-msg");
+
+  if (!gate) return; // only runs on walks page
+
+  button.addEventListener("click", checkPassword);
+  input.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") checkPassword();
+  });
+
+  function checkPassword() {
+    if (input.value === PASSWORD) {
+      gate.style.transition = "opacity 0.4s ease";
+      gate.style.opacity = "0";
+      setTimeout(() => {
+        gate.style.display = "none";
+      }, 400);
+    } else {
+      error.style.display = "block";
+      input.style.animation = "shake 0.3s";
+      input.value = "";
+    }
+  }
+});
