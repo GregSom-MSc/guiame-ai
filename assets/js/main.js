@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.key === "Enter") checkPassword();
   });
 
+
   function checkPassword() {
     if (input.value === PASSWORD) {
       gate.style.transition = "opacity 0.4s ease";
@@ -180,3 +181,49 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+// WhatsApp tooltip after 4 seconds
+document.addEventListener("DOMContentLoaded", function () {
+
+  let tooltipShown = false;
+
+  function showTooltip() {
+    const tooltip = document.getElementById("waTooltip");
+    if (tooltip && !tooltipShown && !localStorage.getItem("waShown")) {
+      tooltip.classList.add("show");
+      tooltipShown = true;
+      localStorage.setItem("waShown", "true");
+    }
+  }
+
+function hideTooltip() {
+    const tooltip = document.getElementById("waTooltip");
+
+    if (tooltip) {
+      setTimeout(() => {
+        tooltip.classList.remove("show");
+      }, 300);
+    }
+  }
+
+  // ⏱ Wait 4 seconds, then enable scroll trigger
+  setTimeout(() => {
+
+    window.addEventListener("scroll", function onScroll() {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+
+      if (scrollPosition >= pageHeight * 0.5) {
+        showTooltip();
+        window.removeEventListener("scroll", onScroll); // ✅ prevent re-trigger
+      }
+    });
+
+  }, 4000);
+
+  // ❌ Hide on interaction
+  window.addEventListener("click", hideTooltip);
+  window.addEventListener("touchstart", hideTooltip);
+
+});
+

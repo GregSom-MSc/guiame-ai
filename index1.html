@@ -25,13 +25,11 @@
   <meta name="twitter:image" content="https://gregsom-msc.github.io/guiame-ai/assets/img/iconOG.png">
 
   <title>Guíame.ai - Tu Guía Local en Edinburgh y Escocia</title>
-
-
-
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" type="image/x-icon" href="assets/img/icon.ico">
   
-  <script type="application/ld+json">
+  <!-- ★ Schema.org: AggregateRating populated dynamically by survey.js -->
+  <script type="application/ld+json" id="schema-jsonld">
   {
    "@context": "https://schema.org",
    "@type": ["TouristInformationCenter", "LocalBusiness"],
@@ -41,15 +39,9 @@
    "priceRange": "€€",
    "inLanguage": ["es","en"],
    "areaServed": [
-   {
-     "@type": "City",
-     "name": "Edinburgh"
-   },
-  {
-    "@type": "AdministrativeArea",
-    "name": "Scotland"
-  }
-  ],
+     { "@type": "City", "name": "Edinburgh" },
+     { "@type": "AdministrativeArea", "name": "Scotland" }
+   ],
    "address": {
      "@type": "PostalAddress",
      "addressLocality": "Edinburgh",
@@ -60,6 +52,13 @@
      "name": "Samuel Moreno",
      "alternateName": ["Samuel Moreno Santoyo", "Samuel Gregorio Moreno Santoyo", "Samuel G. Moreno", "Samuel G. Moreno Santoyo"],
      "sameAs": ["https://www.linkedin.com/in/samuelgmoreno"]
+   },
+   "aggregateRating": {
+     "@type": "AggregateRating",
+     "ratingValue": "5",
+     "reviewCount": "1",
+     "bestRating": "5",
+     "worstRating": "1"
    }
   }
   </script>
@@ -104,7 +103,6 @@
   <div class="hero-content">
     <div class="hero-icon">
       <img src="assets/img/icon.png" alt="Guía turístico en Edimburgo - Guíame.ai">
-      
     </div>
 
     <h1 class="hero-title">
@@ -122,34 +120,33 @@
   </div>
 
   <div class="hero-background"></div>
-
   </section>
 
-  <!-- Features Section (Placeholder) -->
+  <!-- Features Section -->
   <section class="features" id="features">
     <div class="container">
       <h2>Gracias por confiar en mí</h2>
-      <p> Quiero ayudarte a descubrir lo más bonito de Escocia.</p>
+      <p>Quiero ayudarte a descubrir lo más bonito de Escocia.</p>
     </div>
   </section>
 
-<!-- Social Proof Stats -->
+  <!-- Social Proof Stats -->
   <section class="social-proof">
-  <div class="container social-proof-grid">
-    <div class="stat">
-      <span class="counter stat-number" data-target="8074">8074</span>
-      <p><b>Viajeros atendidos</b></p>
+    <div class="container social-proof-grid">
+      <div class="stat">
+        <span class="counter stat-number" data-target="8074">8074</span>
+        <p><b>Viajeros atendidos</b></p>
+      </div>
+      <div class="stat">
+        <span class="counter stat-number" data-target="30">30</span>
+        <p><b>Rutas exploradas por Escocia</b></p>
+      </div>
+      <div class="stat">
+        <span class="counter stat-number" data-target="4">4</span>
+        <p><b>Años de experiencia en este país</b></p>
+      </div>
     </div>
-    <div class="stat">
-      <span class="counter stat-number" data-target="30">30</span>
-      <p><b>Rutas exploradas por Escocia</b></p>
-    </div>
-    <div class="stat">
-      <span class="counter stat-number" data-target="4">4</span>
-      <p><b>Años de experiencia en este país</b></p>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- ============================================================
        SURVEY SECTION — "¿Qué tal te fue en el tour?"
@@ -223,11 +220,11 @@
   <footer class="footer">
     <div class="footer-container">
       <nav>
-      <a href="index.html">Inicio</a>  · 
-      <a href="guide.html">Guía</a>  · 
-      <a href="contact.html">Contacto</a>  · 
-      <a href="https://buymeacoffee.com/samuelmex/posts" target="_blank">Blog</a>  · 
-      <a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank">Reserva</a>
+        <a href="index.html">Inicio</a>  · 
+        <a href="guide.html">Guía</a>  · 
+        <a href="contact.html">Contacto</a>  · 
+        <a href="https://buymeacoffee.com/samuelmex/posts" target="_blank">Blog</a>  · 
+        <a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank">Reserva</a>
       </nav>
       <p><b>&copy; 2025 Guíame.ai · Hecho en Edinburgh</b></p>
       <p class="footer-author">by Samuel Moreno</p>
@@ -243,13 +240,12 @@
     </div>
   </footer>
 
-    <!-- Counter animation -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/survey.js"></script>
 
+  <!-- Counter animation (unchanged) -->
   <script>
   const counters = document.querySelectorAll('.counter');
-
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -258,7 +254,6 @@
         let count = 0;
         const updateCounter = () => {
           const increment = Math.ceil((target - count) / 10);
-          
           if (count < target) {
             count += increment;
             counter.innerText = Math.floor(count).toLocaleString();
@@ -273,8 +268,7 @@
     });
   }, { threshold: 0.5 });
   counters.forEach(counter => observer.observe(counter));
-</script>
+  </script>
 
 </body>
 </html>
-
