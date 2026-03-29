@@ -840,6 +840,27 @@ p {
   color: #FF9500;
 }
 
+/* Examples for 2 day tour */
+
+.examples {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #fff;
+}
+
+.examples h2 {
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.examples p {
+  max-width: 600px;
+  font-size: 1.05rem;
+  color: #666;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
 /* ============================================
 CONTACT PAGE SPECIFIC STYLES
 ============================================ */
