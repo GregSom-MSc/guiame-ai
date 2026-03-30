@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const PASSWORD = "24s26vacapeluda";
+  const PASSWORD = "2926shcoo";
 
   const gate = document.getElementById("password-gate");
   const input = document.getElementById("password-input");
