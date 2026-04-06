@@ -429,6 +429,22 @@ p {
   transform: scale(0.98);
 }
 
+.btn-tertiary {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.7);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.btn-tertiary:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px) scale(1.02);
+  border-color: #fff;
+}
+
 .btn-img {
   transition: all 0.25s ease;
   animation: gentle-bounce 2.5s ease-in-out infinite;
@@ -442,6 +458,8 @@ p {
 .btn-img:active {
   transform: scale(0.98);
 }
+
+
 
 /* ============================================
    6. FEATURES SECTION (Placeholder)
