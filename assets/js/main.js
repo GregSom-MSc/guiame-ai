@@ -133,23 +133,7 @@ if (heroIcon) {
   window.addEventListener('scroll', handleScroll, { passive: true });
 }
 
-// Buy Me a Coffee floating button
-document.addEventListener("DOMContentLoaded", function () {
-  const bmc = document.getElementById('bmc-floating');
-  const closeBtn = document.getElementById('bmc-close');
 
-  if (!bmc || !closeBtn) return;
-
-  // Show after slight delay (elegant)
-  setTimeout(() => {
-    bmc.classList.add('show');
-  }, 1000);
-
-  // Close button
-  closeBtn.addEventListener('click', () => {
-    bmc.style.display = 'none';
-  });
-});
 
 document.addEventListener("DOMContentLoaded", function () {
   const PASSWORD = "2926shcoo";
@@ -227,3 +211,20 @@ function hideTooltip() {
 
 });
 
+// Buy Me a Coffee floating button
+document.addEventListener("DOMContentLoaded", function () {
+  const bmc = document.getElementById('bmc-floating');
+  const closeBtn = document.getElementById('bmc-close');
+
+  if (!bmc || !closeBtn) return;
+
+  // Show after slight delay (elegant)
+  setTimeout(() => {
+    bmc.classList.add('show');
+  }, 1000);
+
+  // Close button
+  closeBtn.addEventListener('click', () => {
+    bmc.style.display = 'none';
+  });
+});

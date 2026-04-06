@@ -429,6 +429,20 @@ p {
   transform: scale(0.98);
 }
 
+.btn-img {
+  transition: all 0.25s ease;
+  animation: gentle-bounce 2.5s ease-in-out infinite;
+}
+
+.btn-img:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(8, 29, 60, 0.3);
+}
+
+.btn-img:active {
+  transform: scale(0.98);
+}
+
 /* ============================================
    6. FEATURES SECTION (Placeholder)
    ============================================ */
@@ -1420,3 +1434,4 @@ CONTACT PAGE SPECIFIC STYLES
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.45);
 }
+
