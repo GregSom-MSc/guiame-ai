@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Show after slight delay (elegant)
   setTimeout(() => {
     bmc.classList.add('show');
-  }, 1000);
+  }, 11000);
 
   // Close button
   closeBtn.addEventListener('click', () => {
