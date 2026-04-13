@@ -645,17 +645,17 @@
         alt="Castillo de Edinburgh visto desde Grassmarket, imponente sobre la roca volcánica"
         class="stop-img"
         loading="lazy"
-        onerror="this.parentElement.querySelector('.stop-img-placeholder') && this.style.display='none'"
+        onerror="if(this.parentElement.querySelector('.stop-img-placeholder')){this.style.display='none';}"
       >
-      <!-- Suggested photo: castle from Grassmarket angle, dramatic sky -->
+      <!-- photo: castle from Grassmarket angle, dramatic sky -->
       <div class="stop-body">
         <p class="stop-tag">📍 Parada 1 · Mañana</p>
         <h3>Castillo de Edinburgh</h3>
         <p>
-          No es solo un castillo — es una ciudad fortificada con más de 1.400 años de historia,
+          No es sólo un castillo — es una ciudad fortificada con más de 1.400 años de historia,
           varios museos, el edificio más antiguo de Edinburgh y hasta un cementerio de perros.
-          Tienes dos opciones: entrar y perderte adentro (al menos 2–3 horas), o recorrerlo
-          desde fuera y aprovechar para explorar Grassmarket, Greyfriars y el Museo Nacional.
+          Tienes dos opciones: entrar y perderte en su interior (al menos 2–3 horas), o recorrerlo
+          desde fuera y aprovecha el tiempo para explorar Grassmarket, Greyfriars y el Museo Nacional.
         </p>
         <div class="tip-box">
           <strong>⚠️ Consejo clave:</strong> Los boletos se agotan. Reserva con al menos 24 horas de anticipación
@@ -967,7 +967,10 @@
         <p>
           Al fondo encontrarás <strong>Dean Village</strong>: una aldea victoriana
           prácticamente escondida bajo el nivel de la ciudad, junto al río Water of Leith.
-          Muy pocos turistas llegan hasta aquí. Si te pierdes, el marcador está en mi guía
+          Muy pocos turistas llegan hasta aquí. Si te pierdes, el marcador está en
+          <a href="https://gregsom-msc.github.io/guiame-ai/guide.html" class="nav-linkblue" target="_blank" rel="noopener noreferrer" class="inline-link">
+          mi guía
+          </a>
           bajo el nombre "Dean Village".
         </p>
       </div>

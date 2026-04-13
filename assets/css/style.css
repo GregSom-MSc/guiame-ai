@@ -148,6 +148,29 @@ p {
   width: 100%;
 }
 
+
+.nav-linkblue {
+  color: #081D3C;
+  font-weight: 700;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.nav-linkblue::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #FF9500;
+  transition: width 0.3s ease;
+}
+
+.nav-linkblue:hover::after {
+  width: 100%;
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
