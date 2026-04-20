@@ -249,6 +249,8 @@
   </div>
 </section>
 
+
+
 </main>
 
 <footer class="footer">
@@ -262,10 +264,20 @@
     </nav>
     <p><b>© 2026 Guíame.ai · Hecho en Edinburgh</b></p>
     <p class="footer-author">by Samuel Moreno</p>
+
+    <!-- ★ Quality badge — score loaded live from Supabase -->
+      <div class="quality-badge" id="qualityBadge" aria-label="Valoración media de los viajeros">
+        <span class="qb-dot" title="Actualizado en tiempo real"></span>
+        <span class="qb-stars" id="qbStars" aria-hidden="true"></span>
+        <span class="qb-score" id="qbScore">Cargando...</span>
+        <span class="qb-count" id="qbCount"></span>
+      </div>
+
   </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/survey.js"></script>
 
 <a href="https://wa.me/5215513841895"
    target="_blank"
