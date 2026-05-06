@@ -34,39 +34,49 @@
   <link rel="icon" type="image/x-icon" href="assets/img/icon.png">
   
   <script type="application/ld+json">
-  {
-   "@context": "https://schema.org",
-   "@type": ["Organization","TouristInformationCenter"],
-   "name": "Guíame.ai",
-   "url": "https://gregsom-msc.github.io/guiame-ai/",
-   "logo": "https://gregsom-msc.github.io/guiame-ai/assets/img/icon.png",
-   "image": "https://gregsom-msc.github.io/guiame-ai/assets/img/icon.png",
-   "description": "Guía local para explorar Edinburgh y Escocia con rutas, recomendaciones de restaurantes y consejos de viaje.",
-   "@id": "https://gregsom-msc.github.io/guiame-ai/#organization",
-   "priceRange": "€€",
-   "inLanguage": ["es","en"],
-   "areaServed": [
-   {
-     "@type": "City",
-     "name": "Edinburgh"
-   },
-  {
-    "@type": "AdministrativeArea",
-    "name": "Scotland"
-  }
-  ],
-   "address": {
-     "@type": "PostalAddress",
-     "addressLocality": "Edinburgh",
-     "addressCountry": "UK"
-   },
-   "author": {
-     "@type": "Person",
-     "name": "Samuel Moreno",
-     "alternateName": ["Samuel Moreno Santoyo", "Samuel Gregorio Moreno Santoyo", "Samuel G. Moreno", "Samuel G. Moreno Santoyo"],
-     "sameAs": ["https://www.linkedin.com/in/samuelgmoreno","https://www.buymeacoffee.com/samuelmex"]
-   }
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://guiame.ai/#website",
+      "url": "https://guiame.ai/",
+      "name": "Guíame.ai",
+      "publisher": {
+        "@id": "https://guiame.ai/#organization"
+      }
+    },
+    {
+      "@type": ["Organization", "TouristInformationCenter"],
+      "@id": "https://guiame.ai/#organization",
+      "name": "Guíame.ai",
+      "url": "https://guiame.ai/",
+      "logo": "https://guiame.ai/assets/img/icon.png",
+      "image": "https://guiame.ai/assets/img/icon.png",
+      "description": "Guía local para explorar Edinburgh y Escocia con rutas, recomendaciones de restaurantes y consejos de viaje.",
+      "priceRange": "€€",
+      "inLanguage": ["es", "en"],
+      "areaServed": [
+        { "@type": "City", "name": "Edinburgh" },
+        { "@type": "AdministrativeArea", "name": "Scotland" }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Edinburgh",
+        "addressCountry": "UK"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Samuel Moreno",
+        "alternateName": ["Samuel Moreno Santoyo", "Samuel Gregorio Moreno Santoyo", "Samuel G. Moreno", "Samuel G. Moreno Santoyo"],
+        "sameAs": [
+          "https://www.linkedin.com/in/samuelgmoreno",
+          "https://www.buymeacoffee.com/samuelmex"
+        ]
+      }
+    }
+  ]
+}
   </script>
 
   <script type="application/ld+json">
