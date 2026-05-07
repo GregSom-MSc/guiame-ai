@@ -225,14 +225,14 @@
     }
 
     function updateProgress() {
-      const total = 15;
+      const total = 16;
       const percent = Math.round((discovered.size / total) * 100);
       document.getElementById('progress-fill').style.width = percent + '%';
       document.getElementById('progress-text').textContent = `${discovered.size} / ${total}`;
     }
 
     function checkCompletion() {
-      if (discovered.size === 15) {
+      if (discovered.size === 16) {
         if (navigator.vibrate) navigator.vibrate([150, 80, 150, 80, 300]);
         setTimeout(() => {
           document.getElementById('congrats-modal').style.display = 'flex';
