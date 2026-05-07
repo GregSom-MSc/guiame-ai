@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Visita a Rosslyn Chapel - Marca tus descubrimientos">
+  <title>Caza del Tesoro | Rosslyn Chapel | Guíame.ai</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="https://guiame.ai/assets/img/e_f.ico">
+
+  <!-- PWA -->
+  <link rel="manifest" href="rosslyn-manifest.json">
+  <meta name="theme-color" content="#134074">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <style>
+    /* Hero con imagen de fondo */
+    .rosslyn-hero {
+      background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), 
+                  url('assets/img/rosslyn.png') center/cover no-repeat;
+      color: white;
+      padding: 90px 20px 70px;
+      text-align: center;
+      position: relative;
+    }
+
+    .rosslyn-hero h1 {
+      font-size: 2.6rem;
+      margin-bottom: 12px;
+      color: white !important;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.7);
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+
+    /* Progress Bar Fija */
+    .progress-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #f0f4f8;
+      padding: 12px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-bottom: 1px solid #ddd;
+    }
+
+    .discover-btn {
+      background: white;
+      border: 3px solid #134074;
+      border-radius: 12px;
+      padding: 22px 18px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #134074;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      min-height: 140px;
+      justify-content: center;
+    }
+    .discover-btn:hover { 
+      transform: translateY(-6px); 
+      box-shadow: 0 12px 25px rgba(19, 64, 116, 0.2); 
+    }
+    .discover-btn.completed {
+      background: linear-gradient(135deg, #134074, #0f2546);
+      color: white;
+      border-color: #4db8ff;
+      position: relative;
+    }
+    .discover-btn.completed::after {
+      content: "✓ Descubierto";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #4db8ff;
+      color: #134074;
+      font-size: 0.8rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    .emoji { font-size: 2.4rem; }
+    .progress-bar { height: 14px; background: #eee; border-radius: 9999px; overflow: hidden; margin: 8px 0; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #134074, #4db8ff); width: 0%; transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+    .congrats { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; }
+    .congrats-modal { background: white; max-width: 420px; border-radius: 20px; padding: 40px 30px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  </style>
+</head>
+<body>
+  
+  <!-- ===== HEADER OFICIAL (igual que en las otras páginas) ===== -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="assets/img/icon.png" alt="Guíame.ai Logo" class="logo-img">
+        <span class="logo-text">By Samuel Moreno</span>
+      </div>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="guide.html" class="nav-link">Guía</a></li>
+          <li><a href="https://buymeacoffee.com/samuelmex/posts" target="_blank" rel="noopener noreferrer" class="nav-link">Blog</a></li>
+          <li><a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" rel="noopener noreferrer" class="nav-link">Reserva y Comenta</a></li>
+          <li><a href="contact.html" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Barra de progreso fija -->
+  <div class="progress-header">
+    <div style="max-width:600px;margin:0 auto;text-align:center;">
+      <p style="margin:0 0 6px 0;"><strong>Progreso de la Caza:</strong> <span id="progress-text">0 / 15</span></p>
+      <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <main>
+    <section class="rosslyn-hero">
+      <h1>Tesoros escondidos en Rosslyn Chapel</h1>
+      <p class="hero-subtitle">Explora los misterios de la capilla más famosa de Escocia</p>
+    </section>
+
+    <section class="section" id="inside">
+      <div class="container">
+        <h2>🔍 Dentro de la Capilla</h2>
+        <div class="discover-grid" id="inside-grid"></div>
+      </div>
+    </section>
+
+    <section class="section alternate" id="outside">
+      <div class="container">
+        <h2>🌳 Fuera de la Capilla</h2>
+        <div class="discover-grid" id="outside-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Congratulations Modal -->
+  <div class="congrats" id="congrats-modal">
+    <div class="congrats-modal">
+      <h2>¡Enhorabuena, Explorador! 🎉</h2>
+      <p style="font-size:1.25rem;">Has descubierto <strong>todos los tesoros</strong> de Rosslyn Chapel.</p>
+      <button onclick="resetHunt()" class="btn btn-secondary" style="margin-top:25px;">Jugar de nuevo</button>
+    </div>
+  </div>
+
+  <script>
+    const insideItems = [
+      { id: "greenmen", name: "Green Men", emoji: "🌿" },
+      { id: "angeles", name: "Ángeles músicos", emoji: "🎶" },
+      { id: "dragones", name: "Dragones", emoji: "🐉" },
+      { id: "columna", name: "La Columna del Aprendiz", emoji: "🏛️" },
+      { id: "estrellas", name: "Estrellas de ocho puntas", emoji: "⭐" },
+      { id: "cubos", name: "Cubos musicales tallados", emoji: "🎵" },
+      { id: "demonios", name: "Demonios encadenados", emoji: "⛓️" },
+      { id: "caballeros", name: "Caballeros armados", emoji: "🛡️" },
+      { id: "vides", name: "Vides y plantas simbólicas", emoji: "🌱" },
+      { id: "muerte", name: "Representaciones de muerte y juicio final", emoji: "☠️" }
+    ];
+
+    const outsideItems = [
+      { id: "foxgoose", name: "Zorro robando un ganso", emoji: "🦊" },
+      { id: "rostros", name: "Rostros tallados en arcos", emoji: "🗿" },
+      { id: "animales", name: "Animales en arcos (ciervo, carnero)", emoji: "🦌" },
+      { id: "entrada", name: "Portada ornamentada", emoji: "🚪" },
+      { id: "evangelistas", name: "Estatuas de los Evangelistas", emoji: "📖" }
+    ];
+
+    let discovered = new Set();
+
+    function playSuccessSound() {
+      try {
+        const audio = new AudioContext();
+        const osc = audio.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(750, audio.currentTime);
+        const gain = audio.createGain();
+        gain.gain.value = 0.25;
+        osc.connect(gain).connect(audio.destination);
+        osc.start();
+        setTimeout(() => osc.stop(), 100);
+      } catch(e) {}
+    }
+
+    function createButton(item, section) {
+      const btn = document.createElement('div');
+      btn.className = 'discover-btn';
+      btn.innerHTML = `<span class="emoji">${item.emoji}</span><span>${item.name}</span>`;
+      btn.dataset.id = item.id;
+
+      btn.addEventListener('click', () => {
+        if (discovered.has(item.id)) {
+          discovered.delete(item.id);
+          btn.classList.remove('completed');
+        } else {
+          discovered.add(item.id);
+          btn.classList.add('completed');
+          playSuccessSound();
+          if (navigator.vibrate) navigator.vibrate(50);
+        }
+
+        saveProgress();
+        updateProgress();
+        checkCompletion();
+      });
+
+      document.getElementById(section + '-grid').appendChild(btn);
+    }
+
+    function updateProgress() {
+      const total = 15;
+      const percent = Math.round((discovered.size / total) * 100);
+      document.getElementById('progress-fill').style.width = percent + '%';
+      document.getElementById('progress-text').textContent = `${discovered.size} / ${total}`;
+    }
+
+    function checkCompletion() {
+      if (discovered.size === 15) {
+        if (navigator.vibrate) navigator.vibrate([150, 80, 150, 80, 300]);
+        setTimeout(() => {
+          document.getElementById('congrats-modal').style.display = 'flex';
+        }, 500);
+      } else {
+        document.getElementById('congrats-modal').style.display = 'none';
+      }
+    }
+
+    function saveProgress() {
+      localStorage.setItem('rosslynDiscovered', JSON.stringify(Array.from(discovered)));
+    }
+
+    function loadProgress() {
+      const saved = localStorage.getItem('rosslynDiscovered');
+      if (saved) {
+        discovered = new Set(JSON.parse(saved));
+        document.querySelectorAll('.discover-btn').forEach(btn => {
+          if (discovered.has(btn.dataset.id)) btn.classList.add('completed');
+        });
+      }
+    }
+
+    function resetHunt() {
+      discovered.clear();
+      localStorage.removeItem('rosslynDiscovered');
+      document.querySelectorAll('.discover-btn').forEach(btn => btn.classList.remove('completed'));
+      updateProgress();
+      document.getElementById('congrats-modal').style.display = 'none';
+    }
+
+    // Initialize
+    window.onload = () => {
+      insideItems.forEach(item => createButton(item, 'inside'));
+      outsideItems.forEach(item => createButton(item, 'outside'));
+      loadProgress();
+      updateProgress();
+
+      // Hamburger menu (necesario para el header)
+      const navToggle = document.getElementById('navToggle');
+      if (navToggle) {
+        navToggle.addEventListener('click', () => {
+          document.querySelector('.nav').classList.toggle('active');
+        });
+      }
+    };
+
+    // Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(() => console.log('Service Worker registrado'))
+          .catch(err => console.log('SW Error:', err));
+      });
+    }
+  </script>
+</body>
+</html>
