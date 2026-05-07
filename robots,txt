@@ -1,3 +1,17 @@
+# robots.txt for Guiame.ai
+
+# <https://guiame.ai>
+
 User-agent: *
 Allow: /
-Sitemap: <https://gregsom-msc.github.io/guiame-ai/sitemap.xml>
+
+# Sitemap location
+
+Sitemap: <https://guiame.ai/sitemap.xml>
+
+# Optional: Block unnecessary paths (GitHub Pages specific)
+
+Disallow: /assets/
+Disallow: /.github/
+Disallow: /README.md
+Disallow: /LICENSE
