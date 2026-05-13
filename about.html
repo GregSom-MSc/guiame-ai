@@ -3,61 +3,349 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Guía local de Edimburgo por Guíame.ai. Recomendaciones para comer, beber, caminar y descubrir la ciudad.">
+  <meta name="theme-color" content="#081D3C">
+
   <title>Sobre mí | Guíame.ai</title>
+
+  <meta name="description" content="Aprende más sobre Samuel, el creador de Guíame.ai y tu guía en Edinburgh y Escocia.">
+  <meta name="author" content="Samuel Moreno">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://guiame.ai/about.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sobre mí | Guíame.ai">
+  <meta property="og:description" content="Aprende más sobre Samuel, el creador de Guíame.ai y tu guía en Edinburgh y Escocia.">
+  <meta property="og:image" content="https://guiame.ai/assets/img/iconOG.png">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://guiame.ai/about.html">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sobre mí | Guíame.ai">
+  <meta name="twitter:description" content="Conoce a Samuel, guía local en Edinburgh y creador de Guíame.ai.">
+  <meta name="twitter:image" content="https://guiame.ai/assets/img/iconOG.png">
+
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": "https://guiame.ai/about.html",
+    "url": "https://guiame.ai/about.html",
+    "name": "Sobre mí | Guíame.ai",
+    "description": "Aprende más sobre Samuel Moreno, el creador de Guíame.ai y guía local en Edinburgh y Escocia.",
+    "inLanguage": ["es", "en"],
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Samuel Moreno",
+      "alternateName": ["Samuel Moreno Santoyo", "Samuel Gregorio Moreno Santoyo", "Samuel G. Moreno"],
+      "jobTitle": "Guía turístico en Escocia",
+      "description": "Guía local en Edinburgh y Escocia, creador de Guíame.ai.",
+      "sameAs": [
+        "https://www.linkedin.com/in/samuelgmoreno",
+        "https://www.buymeacoffee.com/samuelmex"
+      ]
+    },
+    "publisher": {
+      "@id": "https://guiame.ai/#organization"
+    },
+    "isPartOf": {
+      "@id": "https://guiame.ai/#website"
+    }
+  }
+  </script>
+
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vudv3j54i7");
+  </script>
+
+  <style>
+    /* ── About page specific styles ── */
+    .about-hero {
+      position: relative;
+      background: linear-gradient(135deg, rgba(8,29,60,0.92) 0%, rgba(12,43,90,0.92) 100%), url('assets/img/CastleE.png');
+      background-size: cover;
+      background-position: center;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .about-avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #081D3C;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      margin: 0 auto 1.5rem;
+      display: block;
+    }
+
+    .about-hero h1 {
+      color: #fff;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 0.5rem;
+    }
+
+    .about-hero .role-badge {
+      display: inline-block;
+      background: rgba(255,149,0,0.2);
+      border: 1px solid rgba(255,149,0,0.5);
+      color: #FF9500;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 30px;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-hero p {
+      color: #e0e0e0;
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Story section ── */
+    .about-story {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+    }
+
+    .about-story h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: #081D3C;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-story p {
+      font-size: 1.05rem;
+      color: #444;
+      line-height: 1.85;
+      margin-bottom: 1.4rem;
+    }
+
+    /* ── Stats strip ── */
+    .about-stats {
+      background: #F8F9FA;
+      border-top: 1px solid #e8ecf0;
+      border-bottom: 1px solid #e8ecf0;
+      padding: 2.5rem 2rem;
+    }
+
+    .about-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-stat-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #FF9500;
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .about-stat-label {
+      font-size: 0.9rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    /* ── CTA section ── */
+    .about-cta {
+      text-align: center;
+      padding: 3.5rem 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .about-cta h2 {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      color: #081D3C;
+      margin-bottom: 0.75rem;
+    }
+
+    .about-cta p {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .about-cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 480px) {
+      .about-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      .about-cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+
 </head>
+
 <body>
 
-  <!-- ===== Header / Navigation ===== -->
-  <header>
-    <nav>
-      <div class="logo"><strong>Guíame.ai</strong></div>
-      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
-        &#9776;
-      </button>
-      <div class="menu" id="main-menu">
-        <a href="index.html">Inicio</a>
-        <a href="guide.html">Guía</a>
-        <a href="contact.html">Contacto</a>
-        <a href="https://buymeacoffee.com/samuelmex/e/415862">Apóyame</a>
-        <a href="about.html">Sobre mí</a>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="assets/img/icon.png" alt="Guíame.ai Logo" class="logo-img">
+        <span class="logo-text">By Samuel Moreno</span>
       </div>
-    </nav>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="guide.html" class="nav-link">Guía</a></li>
+          <li><a href="https://buymeacoffee.com/samuelmex/posts" target="_blank" rel="noopener noreferrer" class="nav-link">Blog</a></li>
+          <li><a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" rel="noopener noreferrer" class="nav-link">Reserva y Comenta</a></li>
+          <li><a href="contact.html" class="nav-link">Escríbeme</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </header>
 
-
-
-  <!-- ===== Page Content ===== -->
   <main>
-  <div class="container">
-    <h1>Sobre mí</h1>
-    <br>
-    <p>Mucho gusto! Soy Samuel, guía en Edinburgh y creador de Guíame.ai. <br>
-       Mi misión es compartir los secretos locales y ayudarte 
-       a disfrutar tu viaje con información clara, práctica y de calidad.
-       </p><br>
 
-    <p>Si te gusta la guía, compártela con tus amigos y ayúdame a 
-       seguir creando más contenidos para viajeros.</p><br>
+    <!-- Block 1: Hero intro -->
+    <section class="about-hero">
+      <img src="assets/img/Som.png" alt="Samuel Moreno, guía en Edinburgh y Escocia" class="about-avatar">
+      <div class="role-badge">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Guía local · Edinburgh &amp; Escocia</div>
+      <h1>Hola, soy Samuel</h1>
+      <p>Llegué a Escocia hace más de 4 años y desde entonces me dedico a ayudar a viajeros como tú a descubrir este país de una forma auténtica, sin trampas de turista.</p>
+    </section>
 
-    <small-label>¿Quieres apoyarme? ⬇️ </small-label><br>
-    <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn btn-primary">Invítame un café ☕</a>
-  </div>
+    <!-- Block 2: Stats strip -->
+    <section class="about-stats">
+      <div class="about-stats-grid">
+        <div>
+          <span class="about-stat-number">8.255</span>
+          <span class="about-stat-label">Viajeros atendidos</span>
+        </div>
+        <div>
+          <span class="about-stat-number">4+</span>
+          <span class="about-stat-label">Años en Escocia</span>
+        </div>
+        <div>
+          <span class="about-stat-number">30</span>
+          <span class="about-stat-label">Rutas exploradas</span>
+        </div>
+      </div>
+    </section>
 
+    <!-- Block 3: Story -->
+    <section class="about-story">
+      <h2>¿Por qué confiar en mí?</h2>
+      <p>
+        Mi pasión por la historia, la naturaleza y los secretos de Escocia me llevó a explorar cada rincón de este país.
+        No recomiendo ningún lugar que no haya visitado personalmente y del que no pueda decir con convicción: <em>"¡Esto es genial, tienes que ir!"</em>
+      </p>
+      <p>
+        Construí Guíame.ai para poner a tu alcance las mejores experiencias de forma práctica y personalizada.
+        Mi misión es sencilla: ayudarte a disfrutar tu viaje con información clara, honesta y de calidad,
+        igual que se la daría a un amigo.
+      </p>
+      <p>
+        Si la guía, el blog o el tour te ayudaron, si te gusto la musica que te recomiendo, si llamaste a Bluidy MacKenzie en su mausoleo... la mejor forma de apoyarme es compartir mi contacto con otros viajeros
+        y, si te apetece, invitarme a un café. ☕
+      </p>
+    </section>
 
-</main>
-  <!-- ===== Footer ===== -->
-  <footer>
-    <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn btn-primary">Invítame un café ☕</a>
-    <p>© 2025 Guíame.ai · Hecho en Edinburgh</p>
+    <!-- Block 4: CTA -->
+    <section class="about-cta">
+      <h2>¿Hablamos?</h2>
+      <p>Tanto si tienes dudas sobre tu viaje, si quieres mandarme un saludo o algo, estoy aquí.</p>
+      <div class="about-cta-buttons">
+        <a href="https://wa.me/5215513841895"
+           target="_blank"
+           rel="noopener noreferrer"
+           onclick="if(window.clarity){clarity('event','about_whatsapp');}"
+           class="btn btn-primary">
+          💬 Escríbeme por WhatsApp
+        </a>
+        <a href="https://www.buymeacoffee.com/samuelmex"
+           target="_blank"
+           rel="noopener noreferrer"
+           onclick="if(window.clarity){clarity('event','about_bmc');}"
+           class="btn btn-secondary">
+          ☕ Invítame un café
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <nav>
+        <a href="index.html">Inicio</a> ·
+        <a href="guide.html">Guía</a> ·
+        <a href="contact.html">Contacto</a> ·
+        <a href="https://buymeacoffee.com/samuelmex/posts" target="_blank" rel="noopener noreferrer">Blog</a> ·
+        <a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" rel="noopener noreferrer">Reserva</a>
+      </nav>
+      <p><b>&copy; 2026 Guíame.ai · Hecho en Edinburgh</b></p>
+      <p class="footer-author">by Samuel Moreno</p>
+
+      <div class="quality-badge" id="qualityBadge" aria-label="Valoración media de los viajeros">
+        <span class="qb-dot" title="Actualizado en tiempo real"></span>
+        <span class="qb-stars" id="qbStars" aria-hidden="true"></span>
+        <span class="qb-score" id="qbScore">Cargando...</span>
+        <span class="qb-count" id="qbCount"></span>
+      </div>
+    </div>
   </footer>
 
-  <script>
-  document.getElementById('hamburger-btn').addEventListener('click', function() {
-    document.getElementById('main-menu').classList.toggle('open');
-  });
-  </script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- WhatsApp floating button -->
+  <a href="https://wa.me/5215513841895"
+     target="_blank"
+     class="whatsapp-floating"
+     rel="noopener noreferrer"
+     aria-label="Escríbeme por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 2.14.71 4.11 1.9 5.69L2 22l4.31-1.9A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.78 14.38c-.25.7-.73 1.27-1.4 1.41-.67.14-1.4.07-2.38-.38-.98-.45-2.03-1.36-2.95-2.78-.92-1.42-1.5-3.06-1.68-4.5-.18-1.44.14-2.84.92-3.78.34-.41.85-.65 1.4-.65h.2c.24 0 .47.1.64.28.17.18.26.42.24.67l-.3 2.03c-.02.25-.13.48-.32.65l-.96.94c-.1.1-.13.24-.07.37.3.65.84 1.25 1.6 1.8.76.55 1.6.9 2.45 1.03.2.03.42-.05.55-.22l.94-.96c.17-.19.4-.3.65-.32l2.03-.3c.25-.02.49.07.67.24.18.17.28.4.28.64v.2c0 .55-.24 1.06-.65 1.4z"/>
+    </svg>
+  </a>
+
+  <div class="whatsapp-tooltip" id="waTooltip">
+    ¡Aquí Estoy para ayudarte!
+  </div>
 
 </body>
 </html>
