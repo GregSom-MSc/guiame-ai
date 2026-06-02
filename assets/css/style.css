@@ -1101,6 +1101,11 @@ CONTACT PAGE SPECIFIC STYLES
 
 .bmc-link:hover { text-decoration: underline; }
 
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+
 /* PASSWORD GATE */
 
 #password-gate {
@@ -1517,6 +1522,9 @@ CONTACT PAGE SPECIFIC STYLES
   gap: 1.2rem;
   margin: 2rem auto;
   max-width: 900px;
+  padding: 0 1rem;        /* mobile breathing room */
+  position: relative;     
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
