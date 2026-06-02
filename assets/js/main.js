@@ -136,7 +136,7 @@ if (heroIcon) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const PASSWORD = "C5726";
+  const PASSWORD = "181626";
 
   const gate = document.getElementById("password-gate");
   const input = document.getElementById("password-input");

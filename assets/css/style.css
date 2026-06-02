@@ -1510,3 +1510,42 @@ CONTACT PAGE SPECIFIC STYLES
   border-top: 1px solid #081D3C;
   margin: 1rem auto;
 }
+
+.stop-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+}
+
+@media (max-width: 768px) {
+  .stop-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stop-card {
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  border-radius: 16px;
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.stop-card h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.stop-card p {
+  color: #ccd6e8;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}
