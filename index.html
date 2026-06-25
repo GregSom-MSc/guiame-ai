@@ -1,330 +1,444 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <!-- HTML Meta Tags -->
-  <meta charset="UTF-8">
+  <head>
+    <!-- HTML Meta Tags -->
+    <meta charset="UTF-8" />
 
-  <title>Guíame.ai | Guía Local en Edinburgh y Escocia con Rutas y Consejos Locales</title>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#081D3C">
-  <meta name="description" content="Descubre Edinburgh y Escocia como un local. Rutas optimizadas, restaurantes auténticos y consejos reales. Empieza tu viaje ahora.">
-  <meta name="author" content="Samuel Moreno">
-  <link rel="canonical" href="https://guiame.ai/" />
-  <meta name="robots" content="index, follow">
-  <meta name="google-site-verification" content="SdNjEdVrv6LM3Gzo48jo53dSpU46Mp6u-1dIV8P66Aw" />
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Guíame.ai - Rutas, Restaurantes y Consejos Locales en Edinburgh y Escocia ">
-  <meta property="og:description" content="Descubre Edinburgh y Escocia como un local. Rutas recomendadas, restaurantes con descuento, lugares secretos y consejos de un guía experimentado.">
-  <meta property="og:image" content="https://guiame.ai/assets/img/iconOG.png">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://guiame.ai/">
-  <meta property="og:locale" content="es_ES">
+    <title>
+      Guíame.ai | Guía Local en Edinburgh y Escocia con Rutas y Consejos Locales
+    </title>
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Guíame.ai | Tu Guía en Edinburgh">
-  <meta name="twitter:description" content="Descubre Edinburgh como un local con rutas secretas, restaurantes auténticos y consejos de viaje.">
-  <meta name="twitter:image" content="https://guiame.ai/assets/img/iconOG.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#081D3C" />
+    <meta
+      name="description"
+      content="Descubre Edinburgh y Escocia como un local. Rutas optimizadas, restaurantes auténticos y consejos reales. Empieza tu viaje ahora."
+    />
+    <meta name="author" content="Samuel Moreno" />
+    <link rel="canonical" href="https://guiame.ai/" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="google-site-verification"
+      content="SdNjEdVrv6LM3Gzo48jo53dSpU46Mp6u-1dIV8P66Aw"
+    />
 
-  <meta itemprop="image" content="https://guiame.ai/assets/img/iconOG.png">
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Guíame.ai - Rutas, Restaurantes y Consejos Locales en Edinburgh y Escocia "
+    />
+    <meta
+      property="og:description"
+      content="Descubre Edinburgh y Escocia como un local. Rutas recomendadas, restaurantes con descuento, lugares secretos y consejos de un guía experimentado."
+    />
+    <meta
+      property="og:image"
+      content="https://guiame.ai/assets/img/iconOG.png"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://guiame.ai/" />
+    <meta property="og:locale" content="es_ES" />
 
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/x-icon" href="assets/img/icon.png">
-  
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://guiame.ai/#website",
-      "url": "https://guiame.ai/",
-      "name": "Guíame.ai",
-      "inLanguage": ["es","en"],
-      "publisher": {
-        "@id": "https://guiame.ai/#organization"
-      }
-    },
-    {
-      "@type": ["Organization", "TouristInformationCenter"],
-      "@id": "https://guiame.ai/#organization",
-      "name": "Guíame.ai",
-      "url": "https://guiame.ai/",
-      "logo": "https://guiame.ai/assets/img/icon.png",
-      "image": "https://guiame.ai/assets/img/icon.png",
-      "description": "Guía local para explorar Edinburgh y Escocia con rutas, recomendaciones de restaurantes y consejos de viaje.",
-      "priceRange": "€€",
-      "inLanguage": ["es", "en"],
-      "areaServed": [
-        { "@type": "City", "name": "Edinburgh" },
-        { "@type": "AdministrativeArea", "name": "Scotland" }
-      ],
-       "sameAs": [
-          "https://www.linkedin.com/in/samuelgmoreno",
-          "https://www.buymeacoffee.com/samuelmex"
-        ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Edinburgh",
-        "addressCountry": "GB"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Samuel Moreno",
-        "sameAs": [
-          "https://www.linkedin.com/in/samuelgmoreno",
-          "https://www.buymeacoffee.com/samuelmex"
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Guíame.ai | Tu Guía en Edinburgh" />
+    <meta
+      name="twitter:description"
+      content="Descubre Edinburgh como un local con rutas secretas, restaurantes auténticos y consejos de viaje."
+    />
+    <meta
+      name="twitter:image"
+      content="https://guiame.ai/assets/img/iconOG.png"
+    />
+
+    <meta itemprop="image" content="https://guiame.ai/assets/img/iconOG.png" />
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="assets/img/icon.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://guiame.ai/#website",
+            "url": "https://guiame.ai/",
+            "name": "Guíame.ai",
+            "inLanguage": ["es", "en"],
+            "publisher": {
+              "@id": "https://guiame.ai/#organization"
+            }
+          },
+          {
+            "@type": ["Organization", "TouristInformationCenter"],
+            "@id": "https://guiame.ai/#organization",
+            "name": "Guíame.ai",
+            "url": "https://guiame.ai/",
+            "logo": "https://guiame.ai/assets/img/icon.png",
+            "image": "https://guiame.ai/assets/img/icon.png",
+            "description": "Guía local para explorar Edinburgh y Escocia con rutas, recomendaciones de restaurantes y consejos de viaje.",
+            "priceRange": "€€",
+            "inLanguage": ["es", "en"],
+            "areaServed": [
+              { "@type": "City", "name": "Edinburgh" },
+              { "@type": "AdministrativeArea", "name": "Scotland" }
+            ],
+            "sameAs": [
+              "https://www.linkedin.com/in/samuelgmoreno",
+              "https://www.buymeacoffee.com/samuelmex"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Edinburgh",
+              "addressCountry": "GB"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Samuel Moreno",
+              "sameAs": [
+                "https://www.linkedin.com/in/samuelgmoreno",
+                "https://www.buymeacoffee.com/samuelmex"
+              ]
+            }
+          }
         ]
       }
-    }
-  ]
-}
-</script>
+    </script>
 
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vudv3j54i7");
-  </script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "vudv3j54i7");
+    </script>
+  </head>
 
-</head>
-
-<body>
-
-
-  <!-- Header / Navigation -->
-  <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <img src="assets/img/fulllogo.png" alt="Guíame.ai Logo Oficial" class="logo-img">
+  <body>
+    <!-- Header / Navigation -->
+    <header class="header">
+      <div class="header-container">
+        <div class="logo">
+          <img
+            src="assets/img/fulllogo.png"
+            alt="Guíame.ai Logo Oficial"
+            class="logo-img"
+          />
+        </div>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">Inicio</a></li>
+            <li><a href="guide.html" class="nav-link">Guía</a></li>
+            <li>
+              <a
+                href="https://buymeacoffee.com/samuelmex/posts"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="nav-link"
+                >Blog</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="nav-link"
+                >Reserva y Comenta</a
+              >
+            </li>
+            <li><a href="contact.html" class="nav-link">Contacto</a></li>
+          </ul>
+        </nav>
+        <button class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
-      <nav class="nav">
-        <ul class="nav-list">
-          <li><a href="index.html" class="nav-link">Inicio</a></li>
-          <li><a href="guide.html" class="nav-link">Guía</a></li>
-          <li><a href="https://buymeacoffee.com/samuelmex/posts" target="_blank" rel="noopener noreferrer" class="nav-link">Blog</a></li>
-          <li><a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank" rel="noopener noreferrer" class="nav-link">Reserva y Comenta</a></li>
-          <li><a href="contact.html" class="nav-link">Contacto</a></li>
-        </ul>
-      </nav>
-      <button class="nav-toggle" id="navToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-  <div class="hero-content">
-    <div class="hero-icon">
-      <img src="assets/img/icon.png" alt="Guía turístico en Edimburgo - Guíame.ai">
-      
-    </div>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <div class="hero-icon">
+          <img
+            src="assets/img/icon.png"
+            alt="Guía turístico en Edimburgo - Guíame.ai"
+          />
+        </div>
 
-    <h1 class="hero-title">
-      Guiame.ai<br>
-      <span class="highlight"></span>
-      <span class="logo-text">By Samuel Moreno</span>
-    </h1>
+        <h1 class="hero-title">
+          Guiame.ai<br />
+          <span class="highlight"></span>
+          <span class="logo-text">By Samuel Moreno</span>
+        </h1>
 
-    <p class="hero-subtitle">Descubre lo mejor de Escocia: <br> Rutas originales, restaurantes auténticos, lugares mágicos, justo lo que necesitas. <br> </p>
-    <div class="hero-buttons">
-      <a href="guide.html" class="btn btn-primary">Guía</a>
-      <a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" onclick="if(window.clarity){clarity('event','open_vpe');}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Comenta y Reserva</a>
-      <a href="contact.html" onclick="if(window.clarity){clarity('event','open_escribeme');}" class="btn btn-primary">Envíame mensaje</a>
-    </div>
-  </div>
+        <p class="hero-subtitle">
+          Descubre lo mejor de Escocia: <br />
+          Rutas originales, restaurantes auténticos, lugares mágicos, justo lo
+          que necesitas. <br />
+        </p>
+        <div class="hero-buttons">
+          <a href="guide.html" class="btn btn-primary">Guía</a>
+          <a
+            href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85"
+            onclick="
+              if (window.clarity) {
+                clarity('event', 'open_vpe');
+              }
+            "
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-secondary"
+            >Comenta y Reserva</a
+          >
+          <a
+            href="contact.html"
+            onclick="
+              if (window.clarity) {
+                clarity('event', 'open_escribeme');
+              }
+            "
+            class="btn btn-primary"
+            >Envíame mensaje</a
+          >
+        </div>
+      </div>
 
-  <div class="hero-background"></div>
+      <div class="hero-background"></div>
+    </section>
 
-  </section>
+    <!-- Features Section (Placeholder) -->
+    <section class="features" id="features">
+      <div class="container">
+        <h2>Gracias por confiar en mí</h2>
+        <p>Quiero ayudarte a descubrir lo más bonito de Escocia.</p>
+      </div>
+    </section>
+    <!-- Social Proof Stats -->
+    <section class="social-proof">
+      <div class="container social-proof-grid">
+        <div class="stat">
+          <span class="counter stat-number" data-target="9583">9583</span>
+          <p><b>Viajeros atendidos</b></p>
+        </div>
+        <div class="stat">
+          <span class="counter stat-number" data-target="30">30</span>
+          <p><b>Rutas garantizadas por Escocia</b></p>
+        </div>
+        <div class="stat">
+          <span class="counter stat-number" data-target="4">4</span>
+          <p><b>Años de experiencia en Escocia</b></p>
+        </div>
+        <div class="stat">
+          <span class="counter stat-number" data-target="163">163</span>
+          <p><b>Rutas y Experiencias Personalizadas</b></p>
+        </div>
+      </div>
 
-  <!-- Features Section (Placeholder) -->
-  <section class="features" id="features">
-    <div class="container">
-      <h2>Gracias por confiar en mí</h2>
-      <p> Quiero ayudarte a descubrir lo más bonito de Escocia.</p>
-    </div>
-      
+      <div class="container">
+        <p>
+          Ayudo a escribir historias reales. Una sonrisa, un viaje que valió la
+          pena.
+        </p>
+        <p style="font-weight: bold">Escríbeme y lo planeamos juntos</p>
+      </div>
+    </section>
 
-  </section>
-<!-- Social Proof Stats -->
-  <section class="social-proof">
-  <div class="container social-proof-grid">
-    <div class="stat">
-      <span class="counter stat-number" data-target="9355">9355</span>
-      <p><b>Viajeros atendidos</b></p>
-    </div>
-    <div class="stat">
-      <span class="counter stat-number" data-target="30">30</span>
-      <p><b>Rutas garantizadas por Escocia</b></p>
-    </div>
-    <div class="stat">
-      <span class="counter stat-number" data-target="4">4</span>
-      <p><b>Años de experiencia en Escocia</b></p>
-    </div>
-    <div class="stat">
-      <span class="counter stat-number" data-target="163">163</span>
-      <p><b>Rutas y Experiencias Personalizadas</b></p>
-    </div>
-    </div>
+    <div class="divider"></div>
 
-
-
-    <div class="container">
-      
-      <p>Ayudo a escribir historias reales. Una sonrisa, un viaje que valió la pena.</p>
-      <p style="font-weight: bold;">Escríbeme y lo planeamos juntos</p>
-    </div>
-
-</section>
-
-<div class="divider"></div>
-
-  <!-- ============================================================
+    <!-- ============================================================
        SURVEY SECTION — "¿Qué tal te fue en el tour?"
        Writes to Supabase · badge in footer reads the same table
        ============================================================ -->
-  <section class="survey-section" id="survey">
-    <div class="container">
+    <section class="survey-section" id="survey">
+      <div class="container">
+        <div class="survey-inner">
+          <!-- Left: heading + context -->
+          <div class="survey-text">
+            <p class="survey-eyebrow">Solo 2 segundos</p>
+            <h2 class="survey-heading">¿Qué tal te fue<br />en el tour?</h2>
+            <p class="survey-sub">
+              Tu valoración me ayuda a mejorar y ayuda a otros viajeros a
+              decidir. Gracias 🏴󠁧󠁢󠁳󠁣󠁴󠁿
+            </p>
+          </div>
 
-      <div class="survey-inner">
+          <!-- Right: star widget -->
+          <div class="survey-widget" id="surveyWidget">
+            <!-- Stars -->
+            <div
+              class="survey-stars"
+              id="surveyStars"
+              role="group"
+              aria-label="Valoración de 1 a 5 estrellas"
+            >
+              <button class="s-star" data-val="1" aria-label="1 estrella">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </button>
+              <button class="s-star" data-val="2" aria-label="2 estrellas">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </button>
+              <button class="s-star" data-val="3" aria-label="3 estrellas">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </button>
+              <button class="s-star" data-val="4" aria-label="4 estrellas">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </button>
+              <button class="s-star" data-val="5" aria-label="5 estrellas">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </button>
+            </div>
 
-        <!-- Left: heading + context -->
-        <div class="survey-text">
-          <p class="survey-eyebrow">Solo 2 segundos</p>
-          <h2 class="survey-heading">¿Qué tal te fue<br>en el tour?</h2>
-          <p class="survey-sub">Tu valoración me ayuda a mejorar y ayuda a otros viajeros a decidir. Gracias 🏴󠁧󠁢󠁳󠁣󠁴󠁿</p>
+            <!-- Feedback label under stars -->
+            <p class="survey-hint" id="surveyHint">
+              Toca una estrella para valorar
+            </p>
+
+            <!-- Submit -->
+            <button
+              class="btn btn-secondary survey-submit"
+              id="surveySubmit"
+              disabled
+              onclick="submitRating()"
+            >
+              Enviar valoración
+            </button>
+
+            <!-- Thank you state (hidden until submitted) -->
+            <div class="survey-thanks" id="surveyThanks" aria-live="polite">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+              ¡Gracias! Tu valoración fue registrada.
+            </div>
+          </div>
+          <!-- /survey-widget -->
         </div>
-
-        <!-- Right: star widget -->
-        <div class="survey-widget" id="surveyWidget">
-
-          <!-- Stars -->
-          <div class="survey-stars" id="surveyStars" role="group" aria-label="Valoración de 1 a 5 estrellas">
-            <button class="s-star" data-val="1" aria-label="1 estrella">
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </button>
-            <button class="s-star" data-val="2" aria-label="2 estrellas">
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </button>
-            <button class="s-star" data-val="3" aria-label="3 estrellas">
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </button>
-            <button class="s-star" data-val="4" aria-label="4 estrellas">
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </button>
-            <button class="s-star" data-val="5" aria-label="5 estrellas">
-              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </button>
-          </div>
-
-          <!-- Feedback label under stars -->
-          <p class="survey-hint" id="surveyHint">Toca una estrella para valorar</p>
-
-          <!-- Submit -->
-          <button class="btn btn-secondary survey-submit" id="surveySubmit" disabled onclick="submitRating()">
-            Enviar valoración
-          </button>
-
-          <!-- Thank you state (hidden until submitted) -->
-          <div class="survey-thanks" id="surveyThanks" aria-live="polite">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M20 6L9 17l-5-5"/>
-            </svg>
-            ¡Gracias! Tu valoración fue registrada.
-          </div>
-
-        </div><!-- /survey-widget -->
-      </div><!-- /survey-inner -->
-    </div>
-  </section>
-  <!-- /SURVEY SECTION -->
-
-  <div class="divider"></div>
-  <!-- Closing features -->
-
-
-  <section class="examples">
-  <div class="container">
-    <h2>Rutas listas para tu viaje</h2>
-    <p>Empieza con planes optimizados según tu tiempo en Edinburgh.</p>
-
-    <div class="examples-grid">
-      
-      <div class="example-item">
-        <a href="2-dias-edinburgh.html" class="nav-link2">
-          📍 Qué ver en Edinburgh en 2 días
-        </a>
+        <!-- /survey-inner -->
       </div>
+    </section>
+    <!-- /SURVEY SECTION -->
 
-    </div>
-  </div>
-</section>
+    <div class="divider"></div>
+    <!-- Closing features -->
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <nav>
-      <a href="index.html">Inicio</a>  · 
-      <a href="guide.html">Guía</a>  · 
-      <a href="contact.html">Contacto</a>  · 
-      <a href="about.html">Sobre mí</a> ·
-      <a href="https://buymeacoffee.com/samuelmex/posts" target="_blank">Blog</a>  · 
-      <a href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85" target="_blank">Reserva</a>
-      </nav>
-      <p><b>&copy; 2026 Guíame.ai · Hecho en Edinburgh</b></p>
-      <p class="footer-author">by Samuel Moreno</p>
+    <section class="examples">
+      <div class="container">
+        <h2>Rutas listas para tu viaje</h2>
+        <p>Empieza con planes optimizados según tu tiempo en Edinburgh.</p>
 
-      <!-- ★ Quality badge — score loaded live from Supabase -->
-      <div class="quality-badge" id="qualityBadge" aria-label="Valoración media de los viajeros">
-        <span class="qb-dot" title="Actualizado en tiempo real"></span>
-        <span class="qb-stars" id="qbStars" aria-hidden="true"></span>
-        <span class="qb-score" id="qbScore">Cargando...</span>
-        <span class="qb-count" id="qbCount"></span>
+        <div class="examples-grid">
+          <div class="example-item">
+            <a href="2-dias-edinburgh.html" class="nav-link2">
+              📍 Qué ver en Edinburgh en 2 días
+            </a>
+          </div>
+        </div>
       </div>
+    </section>
 
-    </div>
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <nav>
+          <a href="index.html">Inicio</a> · <a href="guide.html">Guía</a> ·
+          <a href="contact.html">Contacto</a> ·
+          <a href="about.html">Sobre mí</a> ·
+          <a href="https://buymeacoffee.com/samuelmex/posts" target="_blank"
+            >Blog</a
+          >
+          ·
+          <a
+            href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85"
+            target="_blank"
+            >Reserva</a
+          >
+        </nav>
+        <p><b>&copy; 2026 Guíame.ai · Hecho en Edinburgh</b></p>
+        <p class="footer-author">by Samuel Moreno</p>
+
+        <!-- ★ Quality badge — score loaded live from Supabase -->
+        <div
+          class="quality-badge"
+          id="qualityBadge"
+          aria-label="Valoración media de los viajeros"
+        >
+          <span class="qb-dot" title="Actualizado en tiempo real"></span>
+          <span class="qb-stars" id="qbStars" aria-hidden="true"></span>
+          <span class="qb-score" id="qbScore">Cargando...</span>
+          <span class="qb-count" id="qbCount"></span>
+        </div>
+      </div>
+    </footer>
 
     <!-- Counter animation -->
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/survey.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/survey.js"></script>
 
-  <script>
-  const counters = document.querySelectorAll('.counter');
+    <script>
+      const counters = document.querySelectorAll(".counter");
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const counter = entry.target;
-        const target = +counter.getAttribute('data-target');
-        let count = 0;
-        const updateCounter = () => {
-          const increment = Math.ceil((target - count) / 10);
-          
-          if (count < target) {
-            count += increment;
-            counter.innerText = Math.floor(count).toLocaleString();
-            requestAnimationFrame(updateCounter);
-          } else {
-            counter.innerText = target.toLocaleString();
-          }
-        };
-        updateCounter();
-        observer.unobserve(counter);
-      }
-    });
-  }, { threshold: 0.5 });
-  counters.forEach(counter => observer.observe(counter));
-</script>
+      const observer = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const counter = entry.target;
+              const target = +counter.getAttribute("data-target");
+              let count = 0;
+              const updateCounter = () => {
+                const increment = Math.ceil((target - count) / 10);
 
-</body>
+                if (count < target) {
+                  count += increment;
+                  counter.innerText = Math.floor(count).toLocaleString();
+                  requestAnimationFrame(updateCounter);
+                } else {
+                  counter.innerText = target.toLocaleString();
+                }
+              };
+              updateCounter();
+              observer.unobserve(counter);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+      counters.forEach((counter) => observer.observe(counter));
+    </script>
+  </body>
 </html>
-
