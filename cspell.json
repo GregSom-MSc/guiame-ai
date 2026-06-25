@@ -1,0 +1,53 @@
+{
+  "version": "0.2",
+  "language": "en,es",
+  "words": [
+    "Bruntsfield",
+    "buymeacoffee",
+    "cairn",
+    "Cairngorms",
+    "Callander",
+    "Canongate",
+    "ceilidh",
+    "Cockburn",
+    "Contacto",
+    "COOLDOWN",
+    "Edimburgo",
+    "Grassmarket",
+    "Greyfriars",
+    "guiame",
+    "Guiame",
+    "Guíame",
+    "haggis",
+    "Holyrood",
+    "Kirkyard",
+    "Kyloe",
+    "Leakeys",
+    "OINK",
+    "Pitlochry",
+    "Queensferry",
+    "Rosslyn",
+    "samuelgmoreno",
+    "samuelmex",
+    "supabase",
+    "Supabase",
+    "Uilebheist",
+    "viajarporescocia",
+    "vudv",
+    "Wahaca",
+    "WhatsApp"
+  ],
+  "ignoreRegExpList": [
+    "https?://[^\\s\"'<>]+"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "assets/img/**",
+    "sitemap.xml",
+    "robots,txt",
+    "CNAME",
+    "LICENSE",
+    ".git/**",
+    "rosslyn-manifest.json"
+  ]
+}
