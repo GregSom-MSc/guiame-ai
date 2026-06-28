@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: #333;
   background-color: #fff;
@@ -45,7 +45,7 @@ img {
   display: block;
 }
 
-.contact-features p{
+.contact-features p {
   font-size: 1.1rem;
   margin: 10px 0;
 }
@@ -59,10 +59,12 @@ img {
   padding: 0 20px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 700;
   line-height: 1.2;
-  color: #081D3C;
+  color: #081d3c;
 }
 
 h1 {
@@ -84,7 +86,7 @@ p {
    3. HEADER & NAVIGATION
    ============================================ */
 .header {
-  background-color: #081D3C;
+  background-color: #081d3c;
   color: #fff;
   padding: 1rem 0;
   position: sticky;
@@ -134,13 +136,13 @@ p {
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -5px;
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #FF9500;
+  background-color: #ff9500;
   transition: width 0.3s ease;
 }
 
@@ -148,22 +150,21 @@ p {
   width: 100%;
 }
 
-
 .nav-linkblue {
-  color: #081D3C;
+  color: #081d3c;
   font-weight: 700;
   font-size: 0.95rem;
   position: relative;
 }
 
 .nav-linkblue::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -5px;
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #FF9500;
+  background-color: #ff9500;
   transition: width 0.3s ease;
 }
 
@@ -194,13 +195,13 @@ p {
 }
 
 .nav-link2::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -5px;
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #FF9500;
+  background-color: #ff9500;
   transition: width 0.3s ease;
 }
 
@@ -208,15 +209,13 @@ p {
   width: 100%;
 }
 
-
-
 /* Mobile Navigation */
 @media (max-width: 768px) {
   .nav {
     position: absolute;
     top: 70px;
     right: 0;
-    background-color: #081D3C;
+    background-color: #081d3c;
     width: 100%;
     padding: 2rem;
     display: none;
@@ -266,7 +265,13 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(8, 29, 60, 0.8) 0%, rgba(12, 43, 90, 0.8) 100%), url('../img/imaginedin.jpg');
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8, 29, 60, 0.8) 0%,
+      rgba(12, 43, 90, 0.8) 100%
+    ),
+    url("../img/imaginedin.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -279,7 +284,13 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(8, 29, 60, 0.8) 0%, rgba(12, 43, 90, 0.8) 100%), url('../img/CastleE.png');
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8, 29, 60, 0.8) 0%,
+      rgba(12, 43, 90, 0.8) 100%
+    ),
+    url("../img/CastleE.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -292,7 +303,13 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(8, 29, 60, 0.8) 0%, rgba(12, 43, 90, 0.8) 100%), url('../img/edinVict.png');
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8, 29, 60, 0.8) 0%,
+      rgba(12, 43, 90, 0.8) 100%
+    ),
+    url("../img/edinVict.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -305,7 +322,13 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(8, 29, 60, 0.8) 0%, rgba(12, 43, 90, 0.8) 100%), url('../img/EdinView.png');
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8, 29, 60, 0.8) 0%,
+      rgba(12, 43, 90, 0.8) 100%
+    ),
+    url("../img/EdinView.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -346,19 +369,19 @@ p {
 
 .hero-icon {
   display: flex;
-  flex-direction: column;          /* stack icon + text vertically */
+  flex-direction: column; /* stack icon + text vertically */
   align-items: center;
-  gap: 0.5rem;                     /* space between icon and "By Samuel Moreno" */
-  margin-bottom: 1.5rem;           /* breathing room before h1 */
+  gap: 0.5rem; /* space between icon and "By Samuel Moreno" */
+  margin-bottom: 1.5rem; /* breathing room before h1 */
   opacity: 0.95;
 }
 
 .hero-icon img {
-  width: 120px;                    /* ← starting size – adjust to taste: 100–140px */
-  height: auto;                    /* preserves aspect ratio (important since not square) */
-  max-width: 100%;                 /* safe on small screens */
-  transition: all 0.4s ease;       /* smooth shrink if you keep scroll effect */
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));  /* subtle lift */
+  width: 120px; /* ← starting size – adjust to taste: 100–140px */
+  height: auto; /* preserves aspect ratio (important since not square) */
+  max-width: 100%; /* safe on small screens */
+  transition: all 0.4s ease; /* smooth shrink if you keep scroll effect */
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25)); /* subtle lift */
 }
 
 .hero-icon img:hover {
@@ -369,13 +392,13 @@ p {
 .hero-icon .logo-text {
   font-size: 1.1rem;
   font-weight: 500;
-  color: #e0e0e0;                  /* light gray for contrast on dark bg */
+  color: #e0e0e0; /* light gray for contrast on dark bg */
   letter-spacing: 1px;
   opacity: 0.85;
 }
 
 .hero-icon.scrolled img {
-  width: 60px;                     /* smaller size on scroll – feels like header integration */
+  width: 60px; /* smaller size on scroll – feels like header integration */
   opacity: 0.85;
   transform: translateY(-4px);
 }
@@ -387,7 +410,7 @@ p {
 
 @media (max-width: 768px) {
   .hero-icon img {
-    width: 100px;                    /* smaller on phones */
+    width: 100px; /* smaller on phones */
   }
   .hero-icon.scrolled img {
     width: 50px;
@@ -410,10 +433,10 @@ p {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #081D3C 0%, #0c2b5a 100%);
+  background: linear-gradient(135deg, #081d3c 0%, #0c2b5a 100%);
   color: #f9fafb;
-  border: 1px solid #081D3C;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+  border: 1px solid #081d3c;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   transition: all 0.25s ease;
 }
@@ -424,7 +447,7 @@ p {
   color: #f9fafb;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 16px rgba(8, 29, 60, 0.3);
-  text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary:active {
@@ -432,17 +455,17 @@ p {
 }
 
 .btn-secondary {
-  background: linear-gradient(135deg, #ffb366 0%, #FF9500 100%);
+  background: linear-gradient(135deg, #ffb366 0%, #ff9500 100%);
   color: #f9fafb;
-  border: 1px solid #081D3C;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  border: 1px solid #081d3c;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .btn-secondary:hover {
-  background: linear-gradient(135deg, #ffb366 0%, #FF9500 100%);
-  border-color: #FF9500;
+  background: linear-gradient(135deg, #ffb366 0%, #ff9500 100%);
+  border-color: #ff9500;
   color: #f9fafb;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 16px rgba(8, 29, 60, 0.3);
@@ -454,7 +477,7 @@ p {
 
 .btn-tertiary {
   background: transparent;
-  border: 2px solid rgba(255,255,255,0.7);
+  border: 2px solid rgba(255, 255, 255, 0.7);
   color: #fff;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -463,7 +486,7 @@ p {
 }
 
 .btn-tertiary:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px) scale(1.02);
   border-color: #fff;
 }
@@ -482,7 +505,38 @@ p {
   transform: scale(0.98);
 }
 
+/* Guide page — hero primary CTA (enlarged + subtle glow) */
+.btn-hero-cta {
+  font-size: 1.2rem;
+  padding: 1rem 2.5rem;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
 
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 4px 14px rgba(255, 149, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 6px 24px rgba(255, 149, 0, 0.55);
+  }
+}
+
+/* Guide page — eyebrow label above primary CTA */
+.guide-eyebrow {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+}
+
+/* Guide page — repeated CTA block inside features section */
+.guide-features-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+}
 
 /* ============================================
    6. FEATURES SECTION (Placeholder)
@@ -490,19 +544,16 @@ p {
 .features {
   padding: 2rem 2rem;
   text-align: center;
-  position: relative; 
-  overflow: hidden;   
+  position: relative;
+  overflow: hidden;
 }
 
 .features-background4 {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-      135deg,
-      rgba(8, 29, 60, 0.85),
-      rgba(12, 43, 90, 0.85)
-    ),
-    url('../img/EdinSunset.png');
+  background:
+    linear-gradient(135deg, rgba(8, 29, 60, 0.85), rgba(12, 43, 90, 0.85)),
+    url("../img/EdinSunset.png");
 
   background-size: cover;
   background-position: center;
@@ -522,7 +573,7 @@ p {
    ============================================ */
 
 .social-proof {
-  padding: .2rem 2rem;
+  padding: 0.2rem 2rem;
   background: #ffffff;
   text-align: center;
 }
@@ -536,7 +587,7 @@ p {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #FF9500;
+  color: #ff9500;
   display: block;
 }
 
@@ -550,7 +601,7 @@ p {
    7. FOOTER
    ============================================ */
 .footer {
-  background-color: #081D3C;
+  background-color: #081d3c;
   color: #fff;
   padding: 2rem;
   text-align: center;
@@ -564,7 +615,7 @@ p {
 
 .footer-author {
   font-size: 0.9rem;
-  color: #FF9500;
+  color: #ff9500;
   margin-top: 0.5rem;
 }
 
@@ -633,13 +684,13 @@ p {
    ============================================ */
 .how-it-works {
   padding: 4rem 2rem;
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
   text-align: center;
 }
 
 .how-it-works h2 {
   margin-bottom: 2rem;
-  color: #081D3C;
+  color: #081d3c;
 }
 
 .flow-wrap {
@@ -659,7 +710,7 @@ p {
   padding: 1rem 2.5rem 1rem 2rem;
   background: #f0f4f8;
   border: 1.5px solid #c0cad6;
-  color: #081D3C;
+  color: #081d3c;
   text-align: center;
   margin-right: 2px;
   z-index: 1;
@@ -675,7 +726,7 @@ p {
 }
 
 .flow-boxes .step-box.right::after {
-  content: '';
+  content: "";
   border-top: 1.5px solid #c0cad6;
   border-right: 1.5px solid #c0cad6;
   width: 28px;
@@ -689,7 +740,7 @@ p {
 }
 
 .flow-boxes .step-box.left::before {
-  content: '';
+  content: "";
   border-top: 1.5px solid #c0cad6;
   border-right: 1.5px solid #c0cad6;
   width: 28px;
@@ -703,19 +754,19 @@ p {
 }
 
 .flow-boxes .step-box.active {
-  background: #081D3C;
-  border-color: #081D3C;
+  background: #081d3c;
+  border-color: #081d3c;
   color: #fff;
   z-index: 2;
 }
 
 .flow-boxes .step-box.active::after {
-  background: #081D3C;
-  border-color: #081D3C;
+  background: #081d3c;
+  border-color: #081d3c;
 }
 
 .flow-boxes .step-box.active .step-num {
-  background: #FF9500;
+  background: #ff9500;
   color: #fff;
 }
 
@@ -724,7 +775,7 @@ p {
   height: 24px;
   border-radius: 50%;
   background: #c0cad6;
-  color: #081D3C;
+  color: #081d3c;
   font-size: 11px;
   font-weight: 500;
   display: flex;
@@ -799,11 +850,11 @@ p {
   border-radius: 50%;
 
   /* Color & background */
-  background: linear-gradient(145deg, #25D366 0%, #20b058 100%);
+  background: linear-gradient(145deg, #25d366 0%, #20b058 100%);
   color: white;
 
   /* Shadow – subtle but present */
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.12),
     0 8px 24px rgba(0, 0, 0, 0.08),
     0 1px 3px rgba(0, 0, 0, 0.1);
@@ -824,9 +875,9 @@ p {
 /* Hover / active states */
 .whatsapp-floating:hover {
   transform: translateY(-4px) scale(1.09);
-  box-shadow: 
+  box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.18),
-    0 16px 48px rgba(0, 0, 0, 0.10);
+    0 16px 48px rgba(0, 0, 0, 0.1);
 }
 
 .whatsapp-floating:active {
@@ -836,8 +887,13 @@ p {
 
 /* Optional: subtle ring / pulse on load (very restrained) */
 @keyframes gentle-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.22); }
-  70%      { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.22);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+  }
 }
 
 .whatsapp-floating {
@@ -847,7 +903,7 @@ p {
 /* Inside the button – icon styling */
 .whatsapp-floating svg,
 .whatsapp-floating i {
-  font-size: 32px;           /* or width/height 32px if svg */
+  font-size: 32px; /* or width/height 32px if svg */
   width: 32px;
   height: 32px;
   transition: transform 0.3s ease;
@@ -887,12 +943,12 @@ p {
 .example-item a.nav-link2 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #081D3C;
+  color: #081d3c;
   display: block;
 }
 
 .example-item a.nav-link2:hover {
-  color: #FF9500;
+  color: #ff9500;
 }
 
 /* Examples for 2 day tour */
@@ -942,7 +998,7 @@ CONTACT PAGE SPECIFIC STYLES
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #fff;                    /* white on dark hero bg */
+  color: #fff; /* white on dark hero bg */
   font-size: 1.05rem;
 }
 
@@ -953,12 +1009,14 @@ CONTACT PAGE SPECIFIC STYLES
   border-radius: 8px;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.98);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #FF9500;
+  border-color: #ff9500;
   box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.15);
 }
 
@@ -976,7 +1034,7 @@ CONTACT PAGE SPECIFIC STYLES
   align-items: center;
   gap: 1.2rem;
   padding: 1.3rem 1.5rem;
-  text-align: left;               /* better readability with icons */
+  text-align: left; /* better readability with icons */
 }
 
 .example-icon {
@@ -987,7 +1045,7 @@ CONTACT PAGE SPECIFIC STYLES
 
 .examples-grid .example-item .example-text {
   font-size: 1.05rem;
-  color: #081D3C;
+  color: #081d3c;
 }
 
 /* Mobile adjustments */
@@ -1014,50 +1072,61 @@ CONTACT PAGE SPECIFIC STYLES
 #bmc-floating {
   position: fixed;
   bottom: 110px;
-  right: 16px;               /* increased from 2px for better breathing room on mobile */
+  right: 16px; /* increased from 2px for better breathing room on mobile */
   left: auto;
-  width: 280px;              /* fixed width so it doesn't stretch full-width or look tiny */
-  max-width: calc(100vw - 32px);     
-  box-sizing: border-box;      /* won't overflow on very small screens */
+  width: 280px; /* fixed width so it doesn't stretch full-width or look tiny */
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box; /* won't overflow on very small screens */
   background: rgba(60, 60, 60, 0.85);
   color: #fff;
-  padding: 26px;             /* more padding for comfort */
-  border-radius: 8px;       /* slightly softer */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  padding: 26px; /* more padding for comfort */
+  border-radius: 8px; /* slightly softer */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);  /* crucial for iOS Firefox/Safari compatibility */
+  -webkit-backdrop-filter: blur(
+    8px
+  ); /* crucial for iOS Firefox/Safari compatibility */
   z-index: 9999;
   opacity: 0;
   font-size: 14px;
   line-height: 1.4;
-  transform: translate(-50%,10px);
-  transition: all 0.5s ease, transform 0.5s ease;
+  transform: translate(-50%, 10px);
+  transition:
+    all 0.5s ease,
+    transform 0.5s ease;
   display: flex;
-  flex-direction: column;    /* stack everything */
+  flex-direction: column; /* stack everything */
   align-items: flex-start;
   gap: 12px;
 }
 
 #bmc-floating.show {
   opacity: 1;
-  transform: translate(-50%,0);  /* animation */
+  transform: translate(-50%, 0); /* animation */
 }
 
 /* Make it centered on mobile instead of bottom-right glued */
-@media (max-width: 600px) {   /* or max-width: 768px if you prefer tablets too */
+@media (max-width: 600px) {
+  /* or max-width: 768px if you prefer tablets too */
   #bmc-floating {
     right: auto;
     left: 50%;
-    bottom: 100px;            /* give more space from bottom nav bars */
-    transform: translate(-50%,10px);  /* true center */
+    bottom: 100px; /* give more space from bottom nav bars */
+    transform: translate(-50%, 10px); /* true center */
     width: 85vw;
     max-width: 320px;
     margin: 0;
     padding-top: 45px;
-    padding: 26px;           /* consistent padding */
-    padding-bottom: calc(16px + env(safe-area-inset-bottom)); /* account for iOS home indicator */
-    padding-right: calc(16px + env(safe-area-inset-right)); /* account for iOS home indicator */
-    padding-left: calc(16px + env(safe-area-inset-left)); /* account for iOS home indicator */
+    padding: 26px; /* consistent padding */
+    padding-bottom: calc(
+      16px + env(safe-area-inset-bottom)
+    ); /* account for iOS home indicator */
+    padding-right: calc(
+      16px + env(safe-area-inset-right)
+    ); /* account for iOS home indicator */
+    padding-left: calc(
+      16px + env(safe-area-inset-left)
+    ); /* account for iOS home indicator */
   }
 }
 
@@ -1069,7 +1138,7 @@ CONTACT PAGE SPECIFIC STYLES
   background: transparent;
   border: none;
   color: #ccc;
-  font-size: 16px;           /* bit bigger for touch */
+  font-size: 16px; /* bit bigger for touch */
   cursor: pointer;
   padding: 2px;
   line-height: 1;
@@ -1087,7 +1156,7 @@ CONTACT PAGE SPECIFIC STYLES
 /* Text styling */
 .bmc-text {
   opacity: 0.95;
-  text-align: center;        /* center the main message */
+  text-align: center; /* center the main message */
   width: 100%;
   padding: 15px;
 }
@@ -1099,11 +1168,18 @@ CONTACT PAGE SPECIFIC STYLES
   text-decoration: none;
 }
 
-.bmc-link:hover { text-decoration: underline; }
+.bmc-link:hover {
+  text-decoration: underline;
+}
 
 @keyframes gentle-bounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-5px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 /* PASSWORD GATE */
@@ -1114,7 +1190,7 @@ CONTACT PAGE SPECIFIC STYLES
   left: 0;
   width: 100%;
   height: 100%;
-  background: #081D3C;
+  background: #081d3c;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1122,18 +1198,17 @@ CONTACT PAGE SPECIFIC STYLES
   opacity: 0;
   backdrop-filter: blur(0px);
   animation: gateBlurIn 0.5s ease forwards;
-  
 }
 
 .gate-box {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   padding: 2.5rem 2rem;
   border-radius: 16px;
   text-align: center;
   backdrop-filter: blur(10px);
   max-width: 400px;
   width: 90%;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .gate-box h2 {
@@ -1180,8 +1255,12 @@ CONTACT PAGE SPECIFIC STYLES
 }
 
 @keyframes gateFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes cardReveal {
@@ -1199,11 +1278,21 @@ CONTACT PAGE SPECIFIC STYLES
 }
 
 @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  50% { transform: translateX(4px); }
-  75% { transform: translateX(-3px); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 @keyframes gateBlurIn {
@@ -1221,12 +1310,12 @@ CONTACT PAGE SPECIFIC STYLES
   position: fixed;
   bottom: 90px;
   right: 20px;
-  background: #081D3C;
+  background: #081d3c;
   color: #fff;
   padding: 0.6rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transform: translateY(10px);
   transition: all 0.4s ease;
@@ -1245,7 +1334,7 @@ CONTACT PAGE SPECIFIC STYLES
 /* ── Section shell ── */
 .survey-section {
   padding: 3.5rem 2rem;
-  background: #F8F9FA;
+  background: #f8f9fa;
   border-top: 1px solid #e8ecf0;
   border-bottom: 1px solid #e8ecf0;
 }
@@ -1269,14 +1358,14 @@ CONTACT PAGE SPECIFIC STYLES
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #FF9500;
+  color: #ff9500;
   margin-bottom: 0.5rem;
   text-shadow: 0 0 20px rgba(255, 149, 0, 0.3);
 }
 
 .survey-heading {
   font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-  color: #081D3C;
+  color: #081d3c;
   margin-bottom: 0.75rem;
   line-height: 1.2;
 }
@@ -1332,16 +1421,18 @@ CONTACT PAGE SPECIFIC STYLES
   width: 40px;
   height: 40px;
   fill: #d1dae3;
-  transition: fill 0.15s ease, transform 0.15s ease;
+  transition:
+    fill 0.15s ease,
+    transform 0.15s ease;
   display: block;
 }
 
 .s-star--filled svg {
-  fill: #FF9500;
+  fill: #ff9500;
 }
 
 .s-star--selected svg {
-  fill: #FF9500;
+  fill: #ff9500;
   filter: drop-shadow(0 2px 6px rgba(255, 149, 0, 0.4));
 }
 
@@ -1360,7 +1451,9 @@ CONTACT PAGE SPECIFIC STYLES
   width: 100%;
   max-width: 220px;
   opacity: 0.45;
-  transition: opacity 0.3s ease, transform 0.2s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.2s ease;
   pointer-events: none;
 }
 
@@ -1421,7 +1514,7 @@ CONTACT PAGE SPECIFIC STYLES
   }
 
   .s-star svg {
-    width: 44px;   /* slightly bigger tap target on mobile */
+    width: 44px; /* slightly bigger tap target on mobile */
     height: 44px;
   }
 }
@@ -1451,14 +1544,21 @@ CONTACT PAGE SPECIFIC STYLES
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: #4caf50;
   flex-shrink: 0;
   animation: qb-pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes qb-pulse {
-  0%, 100% { opacity: 1;   transform: scale(1);    }
-  50%       { opacity: 0.3; transform: scale(0.85); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
 }
 
 /* Star icons row inside badge */
@@ -1490,8 +1590,8 @@ CONTACT PAGE SPECIFIC STYLES
 
 /* Walks CTA card — stands out from hero */
 .walks-card {
-  background: rgba(255,255,255,0.07);
-  border: 1.5px solid rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
   padding: 1.5rem 2rem;
   margin: 2rem auto 0;
@@ -1512,7 +1612,7 @@ CONTACT PAGE SPECIFIC STYLES
 .divider {
   width: 100%;
   max-width: 400px;
-  border-top: 1px solid #081D3C;
+  border-top: 1px solid #081d3c;
   margin: 1rem auto;
 }
 
@@ -1522,8 +1622,8 @@ CONTACT PAGE SPECIFIC STYLES
   gap: 1.2rem;
   margin: 2rem auto;
   max-width: 900px;
-  padding: 0 1rem;        /* mobile breathing room */
-  position: relative;     
+  padding: 0 1rem; /* mobile breathing room */
+  position: relative;
   z-index: 1;
 }
 
@@ -1534,8 +1634,8 @@ CONTACT PAGE SPECIFIC STYLES
 }
 
 .stop-card {
-  background: rgba(255,255,255,0.07);
-  border: 1.5px solid rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
   padding: 1.5rem 1.2rem;
   text-align: center;
