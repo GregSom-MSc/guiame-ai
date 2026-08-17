@@ -2,10 +2,21 @@
    GUIAME.AI - MODERN LANDING PAGE
    Color Palette:
    - Navy Blue: #081D3C
-   - Orange/Gold: #FF9500
+   - Mustard/Gold: #C9A227
    - White: #FFFFFF
    - Light Gray: #F8F9FA
    ============================================ */
+
+:root {
+  /* Mustard accent — buttons, badges, backgrounds, borders, large display numbers */
+  --color-accent: #c9a227;
+  /* Pale mustard — gradient highlight only */
+  --color-accent-light: #dcc373;
+  /* Dark mustard — text/icons on light backgrounds (keeps real contrast) */
+  --color-accent-text: #8a6a14;
+  /* Raw triplet for rgba() glows/shadows */
+  --color-accent-rgb: 201, 162, 39;
+}
 
 /* ============================================
    1. RESET & BASE STYLES
@@ -142,7 +153,7 @@ p {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #ff9500;
+  background-color: var(--color-accent);
   transition: width 0.3s ease;
 }
 
@@ -164,7 +175,7 @@ p {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #ff9500;
+  background-color: var(--color-accent);
   transition: width 0.3s ease;
 }
 
@@ -201,7 +212,7 @@ p {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #ff9500;
+  background-color: var(--color-accent);
   transition: width 0.3s ease;
 }
 
@@ -455,7 +466,11 @@ p {
 }
 
 .btn-secondary {
-  background: linear-gradient(135deg, #ffb366 0%, #ff9500 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 100%
+  );
   color: #081d3c;
   border: 1px solid #081d3c;
   cursor: pointer;
@@ -463,8 +478,12 @@ p {
 }
 
 .btn-secondary:hover {
-  background: linear-gradient(135deg, #ffb366 0%, #ff9500 100%);
-  border-color: #ff9500;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-light) 0%,
+    var(--color-accent) 100%
+  );
+  border-color: var(--color-accent);
   color: #081d3c;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 16px rgba(8, 29, 60, 0.3);
@@ -514,10 +533,10 @@ p {
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 4px 14px rgba(255, 149, 0, 0.25);
+    box-shadow: 0 4px 14px rgba(var(--color-accent-rgb), 0.25);
   }
   50% {
-    box-shadow: 0 6px 24px rgba(255, 149, 0, 0.55);
+    box-shadow: 0 6px 24px rgba(var(--color-accent-rgb), 0.55);
   }
 }
 
@@ -596,7 +615,7 @@ p {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #ff9500;
+  color: var(--color-accent);
   display: block;
 }
 
@@ -624,7 +643,7 @@ p {
 
 .footer-author {
   font-size: 0.9rem;
-  color: #ff9500;
+  color: var(--color-accent);
   margin-top: 0.5rem;
 }
 
@@ -775,7 +794,7 @@ p {
 }
 
 .flow-boxes .step-box.active .step-num {
-  background: #ff9500;
+  background: var(--color-accent);
   color: #fff;
 }
 
@@ -957,7 +976,7 @@ p {
 }
 
 .example-item a.nav-link2:hover {
-  color: #ff9500;
+  color: var(--color-accent-text);
 }
 
 /* Examples for 2 day tour */
@@ -1025,8 +1044,8 @@ CONTACT PAGE SPECIFIC STYLES
 
 .form-group input:focus {
   outline: none;
-  border-color: #ff9500;
-  box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.15);
+  border-color: var(--color-accent-text);
+  box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.15);
 }
 
 /* Small subtitle variant */
@@ -1367,9 +1386,9 @@ CONTACT PAGE SPECIFIC STYLES
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #ff9500;
+  color: var(--color-accent-text);
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 20px rgba(255, 149, 0, 0.3);
+  text-shadow: 0 0 20px rgba(var(--color-accent-rgb), 0.3);
 }
 
 .survey-heading {
@@ -1437,12 +1456,12 @@ CONTACT PAGE SPECIFIC STYLES
 }
 
 .s-star--filled svg {
-  fill: #ff9500;
+  fill: var(--color-accent);
 }
 
 .s-star--selected svg {
-  fill: #ff9500;
-  filter: drop-shadow(0 2px 6px rgba(255, 149, 0, 0.4));
+  fill: var(--color-accent);
+  filter: drop-shadow(0 2px 6px rgba(var(--color-accent-rgb), 0.4));
 }
 
 /* ── Hint text ── */
@@ -1668,6 +1687,71 @@ CONTACT PAGE SPECIFIC STYLES
 }
 
 /* ============================================
+   DAY BANNER
+   Shared by 2-dias-edinburgh.html and 3-dias-london.html
+   so both itinerary guides stay visually in sync.
+   ============================================ */
+.day-banner {
+  background: #081d3c;
+  color: #fff;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.day-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 29, 60, 0.92),
+    rgba(30, 104, 171, 0.85)
+  );
+  z-index: 0;
+}
+
+/* Thin mustard accent strip along the top edge, replaces the old filled pill */
+.day-banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--color-accent);
+  z-index: 2;
+}
+
+.day-banner-content {
+  position: relative;
+  z-index: 1;
+}
+
+.day-label {
+  display: inline-block;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.day-banner h2 {
+  color: #fff;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 0.5rem;
+}
+
+.day-banner p {
+  color: #ccd6e8;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ============================================
    PDF GUIDE PROMO CARD
    Reused on index.html, 2-dias-edinburgh.html
    and walks.html to sell the Buy Me a Coffee PDF.
@@ -1705,7 +1789,7 @@ CONTACT PAGE SPECIFIC STYLES
   position: absolute;
   top: -10px;
   right: -14px;
-  background: #ff9500;
+  background: var(--color-accent);
   color: #081d3c;
   font-size: 0.68rem;
   font-weight: 800;
@@ -1726,7 +1810,7 @@ CONTACT PAGE SPECIFIC STYLES
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #ff9500;
+  color: var(--color-accent-text);
   margin-bottom: 0.4rem;
 }
 
@@ -1756,7 +1840,7 @@ CONTACT PAGE SPECIFIC STYLES
   content: "✓";
   position: absolute;
   left: 0;
-  color: #ff9500;
+  color: var(--color-accent-text);
   font-weight: 800;
 }
 

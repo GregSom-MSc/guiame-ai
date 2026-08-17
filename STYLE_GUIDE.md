@@ -2,13 +2,19 @@
 
 ## Color Palette
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| Navy Blue | #081D3C | Primary: Headers, backgrounds, text |
-| Orange/Gold | #FF9500 | Accent: Buttons, highlights, hover effects |
-| White | #FFFFFF | Text on dark backgrounds, clean spaces |
-| Light Gray | #F8F9FA | Section backgrounds, light areas |
-| Dark Gray | #555 | Body text |
+| Color | Hex | Usage | CSS variable |
+|-------|-----|-------|--------------|
+| Navy Blue | #081D3C | Primary: Headers, backgrounds, text | — |
+| Mustard/Gold | #C9A227 | Accent: buttons, badges, backgrounds, borders, large display numbers | `--color-accent` |
+| Pale Mustard | #DCC373 | Gradient highlight only (paired with #C9A227) | `--color-accent-light` |
+| Dark Mustard | #8A6A14 | Accent used as text/icon color on light backgrounds (keeps real contrast) | `--color-accent-text` |
+| White | #FFFFFF | Text on dark backgrounds, clean spaces | — |
+| Light Gray | #F8F9FA | Section backgrounds, light areas | — |
+| Dark Gray | #555 | Body text | — |
+
+All accent tokens are defined once in `assets/css/style.css` under `:root` and referenced everywhere via `var(--color-accent)` etc. — including inside the local `<style>` blocks on `2-dias-edinburgh.html` and `3-dias-london.html`, since custom properties on `:root` apply document-wide. To change the accent color again, edit the four values in that one `:root` block.
+
+Rule of thumb for future additions: use `--color-accent` for backgrounds/borders/badges/large display numbers (always pairs with navy or white, high contrast). Use `--color-accent-text` anywhere the accent is the color of small text or an icon sitting directly on a light background — the flat accent color fails WCAG contrast there.
 
 ## Typography
 
