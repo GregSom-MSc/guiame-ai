@@ -8,6 +8,10 @@
    ============================================ */
 
 :root {
+  /* Primary navy — the one brand navy, shared by every page and every guide */
+  --color-navy: #081d3c;
+  /* Blue endpoint for navy→blue gradients (day banners, placeholder tiles) */
+  --color-accent-blue: #1e68ab;
   /* Mustard accent — buttons, badges, backgrounds, borders, large display numbers */
   --color-accent: #c9a227;
   /* Pale mustard — gradient highlight only */
@@ -1732,11 +1736,11 @@ CONTACT PAGE SPECIFIC STYLES
 .day-label {
   display: inline-block;
   color: var(--color-accent);
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
 .day-banner h2 {
