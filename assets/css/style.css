@@ -190,7 +190,11 @@ p {
 .nav-toggle {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
+  width: 44px;
+  height: 44px;
   background: transparent;
   padding: 0;
 }
@@ -1165,14 +1169,14 @@ CONTACT PAGE SPECIFIC STYLES
 /* Close button to top-right */
 #bmc-close {
   position: absolute;
-  top: 4px;
-  right: 12px;
+  top: 0;
+  right: 6px;
   background: transparent;
   border: none;
   color: #ccc;
   font-size: 16px; /* bit bigger for touch */
   cursor: pointer;
-  padding: 2px;
+  padding: 10px;
   line-height: 1;
 }
 
