@@ -12,12 +12,14 @@
   --color-navy: #081d3c;
   /* Blue endpoint for navy→blue gradients (day banners, placeholder tiles) */
   --color-accent-blue: #1e68ab;
-  /* Mustard accent — buttons, badges, backgrounds, borders, large display numbers */
+  /* Mustard accent — buttons, badges, backgrounds, borders, large display numbers.
+     Never use this as small text/icon color directly on a light background: the
+     sRGB luminance model makes gold's dark shades read as brown, not gold. For
+     mustard-colored labels on light backgrounds, use a navy chip (background +
+     this color as the text) instead of darkening the mustard itself. */
   --color-accent: #c9a227;
   /* Pale mustard — gradient highlight only */
   --color-accent-light: #dcc373;
-  /* Dark mustard — text/icons on light backgrounds (keeps real contrast) */
-  --color-accent-text: #8a6a14;
   /* Raw triplet for rgba() glows/shadows */
   --color-accent-rgb: 201, 162, 39;
 }
@@ -984,7 +986,7 @@ p {
 }
 
 .example-item a.nav-link2:hover {
-  color: var(--color-accent-text);
+  color: var(--color-navy);
 }
 
 /* Examples for 2 day tour */
@@ -1052,7 +1054,7 @@ CONTACT PAGE SPECIFIC STYLES
 
 .form-group input:focus {
   outline: none;
-  border-color: var(--color-accent-text);
+  border-color: var(--color-navy);
   box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.15);
 }
 
@@ -1390,13 +1392,16 @@ CONTACT PAGE SPECIFIC STYLES
 }
 
 .survey-eyebrow {
+  display: inline-block;
   font-size: 0.87rem;
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-accent-text);
+  color: var(--color-accent);
+  background: var(--color-navy);
+  padding: 5px 14px;
+  border-radius: 6px;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 20px rgba(var(--color-accent-rgb), 0.3);
 }
 
 .survey-heading {
@@ -1669,7 +1674,10 @@ CONTACT PAGE SPECIFIC STYLES
   }
 }
 
-.stop-card {
+/* Scoped to .stop-cards-grid (walks.html only) — .stop-card is a different,
+   unrelated component in 2-dias-edinburgh.html / 3-dias-london.html's local
+   styles, and an unscoped selector here would leak into those too. */
+.stop-cards-grid .stop-card {
   background: rgba(255, 255, 255, 0.07);
   border: 1.5px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
@@ -1680,13 +1688,13 @@ CONTACT PAGE SPECIFIC STYLES
   gap: 0.6rem;
 }
 
-.stop-card h3 {
+.stop-cards-grid .stop-card h3 {
   color: #fff;
   font-size: 1.2rem;
   margin: 0;
 }
 
-.stop-card p {
+.stop-cards-grid .stop-card p {
   color: #ccd6e8;
   font-size: 0.88rem;
   line-height: 1.5;
@@ -1814,12 +1822,16 @@ CONTACT PAGE SPECIFIC STYLES
 }
 
 .pdf-promo-eyebrow {
+  display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-accent-text);
-  margin-bottom: 0.4rem;
+  color: var(--color-accent);
+  background: var(--color-navy);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
 }
 
 .pdf-promo-body h3 {
@@ -1848,7 +1860,7 @@ CONTACT PAGE SPECIFIC STYLES
   content: "✓";
   position: absolute;
   left: 0;
-  color: var(--color-accent-text);
+  color: var(--color-navy);
   font-weight: 800;
 }
 
@@ -1895,7 +1907,7 @@ CONTACT PAGE SPECIFIC STYLES
   right: -8px;
 }
 
-.pdf-promo--compact .pdf-promo-body p {
+.pdf-promo--compact .pdf-promo-body p:not(.pdf-promo-eyebrow) {
   font-size: 0.92rem;
   color: #555;
   margin-bottom: 0.85rem;

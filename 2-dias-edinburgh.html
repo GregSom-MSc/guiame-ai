@@ -203,11 +203,15 @@
       }
 
       .stop-tag {
+        display: inline-block;
         font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: var(--color-accent-text);
+        color: var(--color-accent);
+        background: var(--color-navy);
+        padding: 4px 12px;
+        border-radius: 6px;
         margin-bottom: 0.5rem;
       }
 
@@ -218,7 +222,7 @@
         line-height: 1.25;
       }
 
-      .stop-body p {
+      .stop-body p:not(.stop-tag) {
         font-size: 0.95rem;
         color: #555;
         line-height: 1.7;
@@ -242,7 +246,7 @@
       }
 
       .tip-box strong {
-        color: var(--color-accent-text);
+        color: var(--color-navy);
       }
 
       /* Standalone prose section */
@@ -716,7 +720,7 @@
               <a
                 href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85"
                 target="_blank"
-                style="color: var(--color-accent-text); font-weight: 600"
+                style="color: var(--color-navy); font-weight: 600"
                 >ViajarporEscocia.com</a
               >
               (mejor con guía) o en la web oficial del castillo. Sin reserva,
@@ -1310,7 +1314,7 @@
             <a
               href="https://buymeacoffee.com/samuelmex"
               target="_blank"
-              style="color: var(--color-accent-text); font-weight: 600"
+              style="color: var(--color-navy); font-weight: 600"
               >puedes hacerlo aquí</a
             >. Cada apoyo me ayuda a seguir creando contenido como este —
             gracias de verdad.
