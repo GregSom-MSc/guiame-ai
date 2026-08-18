@@ -202,7 +202,10 @@
         justify-content: center;
       }
 
-      .stop-tag {
+      /* Selector repeated deliberately: bumps specificity above any single-
+         class "<container> p" rule (e.g. .stop-card p, .stop-body p),
+         which would otherwise silently win since this tag is itself a <p>. */
+      .stop-tag.stop-tag {
         display: inline-block;
         font-size: 0.72rem;
         font-weight: 700;

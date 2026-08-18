@@ -1391,7 +1391,11 @@ CONTACT PAGE SPECIFIC STYLES
   flex: 1;
 }
 
-.survey-eyebrow {
+/* Selector repeated deliberately: bumps specificity above any single-class
+   "<container> p" rule elsewhere (e.g. .examples p), which would otherwise
+   silently win since this eyebrow is itself a <p>. See .pdf-promo-eyebrow
+   and .stop-tag for the same pattern — this bug has bitten us three times. */
+.survey-eyebrow.survey-eyebrow {
   display: inline-block;
   font-size: 0.87rem;
   font-weight: 900;
@@ -1821,7 +1825,11 @@ CONTACT PAGE SPECIFIC STYLES
   min-width: 0;
 }
 
-.pdf-promo-eyebrow {
+/* Selector repeated deliberately: bumps specificity above any single-class
+   "<container> p" rule elsewhere (e.g. .examples p), which would otherwise
+   silently win since this eyebrow is itself a <p>. See .survey-eyebrow
+   and .stop-tag for the same pattern — this bug has bitten us three times. */
+.pdf-promo-eyebrow.pdf-promo-eyebrow {
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
