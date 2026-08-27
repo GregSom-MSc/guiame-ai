@@ -536,8 +536,78 @@ p {
 /* Guide page — hero primary CTA (enlarged + subtle glow) */
 .btn-hero-cta {
   font-size: 1.2rem;
-  padding: 1rem 2.5rem;
+  padding: 1.4rem 2rem;
   animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Flag watermark buttons — guide.html's two Notion CTAs. A large, faded
+   flag bleeds in from the left edge instead of sitting as an inline emoji
+   icon next to the label, same "pseudo behind, content on top" technique
+   as .day-banner::before / .day-banner-content. */
+.flag-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Oversized flag, deliberately bleeding past the button's own edges —
+   overflow:hidden crops it top/bottom/left so it reads as a full-bleed
+   image rather than an icon, same idea as a photo cropped by its frame. */
+.flag-btn::before {
+  position: absolute;
+  top: 50%;
+  left: -1.25rem;
+  transform: translateY(-50%);
+  font-size: 7.5rem;
+  line-height: 1;
+  opacity: 0.3;
+  -webkit-mask-image: linear-gradient(to right, #000 30%, transparent 75%);
+  mask-image: linear-gradient(to right, #000 30%, transparent 75%);
+  pointer-events: none;
+}
+
+.flag-btn--scotland::before {
+  content: "🏴󠁧󠁢󠁳󠁣󠁴󠁿";
+  /* Blue-and-white saltire washes out more against a blue button than
+     England's red cross does — compensate with a bit more opacity. */
+  opacity: 0.46;
+}
+
+.flag-btn--england::before {
+  content: "🏴󠁧󠁢󠁥󠁮󠁧󠁿";
+}
+
+/* Arrow on the right — faint at rest, "materializes" on hover/press
+   instead of sitting there as static decoration. */
+.flag-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  transform: translateY(-50%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  -webkit-mask-image: linear-gradient(to left, #000 40%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 40%, transparent 100%);
+  opacity: 0.3;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  pointer-events: none;
+}
+
+.flag-btn:hover::after,
+.flag-btn:focus-visible::after,
+.flag-btn:active::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(3px);
+}
+
+.flag-btn strong {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes pulse-glow {
@@ -586,6 +656,21 @@ p {
   overflow: hidden;
 }
 
+/* Home page "Gracias por confiar" band — subtle navy wash, id-scoped so it
+   doesn't touch guide.html/walks.html/contact.html's plain .features use. */
+/* Home page "Gracias por confiar" + stats — one section, id-scoped so it
+   doesn't touch guide.html/walks.html/contact.html's plain .features use. */
+#features {
+  padding: 3rem 2rem;
+  background: rgba(8, 29, 60, 0.15);
+  border-top: 1px solid #e8ecf0;
+  border-bottom: 1px solid #e8ecf0;
+}
+
+#features .social-proof-grid {
+  margin-top: 1rem;
+}
+
 .features-background4 {
   position: absolute;
   inset: 0;
@@ -614,6 +699,20 @@ p {
   padding: 0.2rem 2rem;
   background: #ffffff;
   text-align: center;
+}
+
+/* Home page PDF band — framed like #stats/.survey-section (neutral border),
+   filled with a subtle mustard wash instead of gray to read as its own beat. */
+.pdf-section {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-accent-rgb), 0.06),
+    rgba(var(--color-accent-rgb), 0.14)
+  );
+  border-top: 1px solid #e8ecf0;
+  border-bottom: 1px solid #e8ecf0;
 }
 
 .social-proof-grid {
@@ -1924,7 +2023,7 @@ CONTACT PAGE SPECIFIC STYLES
 /* Full-width banner variant: index.html examples grid */
 .pdf-promo--banner {
   grid-column: 1 / -1;
-  margin: 0 0 0.5rem;
+  margin: 0 auto 0.5rem;
 }
 
 @media (max-width: 640px) {

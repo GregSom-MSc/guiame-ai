@@ -156,16 +156,18 @@
         <div class="hero-content">
           <h1 class="hero-title">Descubre lo mejor de Escocia</h1>
           <p class="hero-subtitle">
-            Restaurantes auténticos, rutas y secretos mejor guardados.<br />
-
-            <strong>Accede aquí a mis recomendaciones:</strong>
+            Restaurantes auténticos, rutas y secretos mejor guardados.
           </p>
+          <h2 class="hero-title"
+            >
+            Accede aquí a mis recomendaciones:
+          </h2>
           <div class="hero-buttons">
             <div
               style="display: flex; flex-direction: column; align-items: center"
             >
               <p class="guide-eyebrow">
-                🗺️ Mi guía de comida, atracciones y secretos
+                🗺️ Guías de comida, atracciones y secretos
               </p>
               <a
                 href="https://www.notion.so/guiame-ai/Guiame-Ahi-Edinburgh-1ea6f90a2be08080941ef3e33aeec6ea?source=copy_link"
@@ -176,14 +178,37 @@
                 "
                 target="_blank"
                 rel="noopener noreferrer"
-                class="btn btn-secondary btn-hero-cta"
+                class="btn btn-primary btn-hero-cta flag-btn flag-btn--scotland"
               >
-                <strong>Guíame Ahí - Edinburgh →</strong>
+                <strong>Guíame Ahí - Edinburgh</strong>
               </a>
-              <p class="guide-caption" style="color: rgba(255, 255, 255, 0.6)">
-                🎁 Gratis · Se abre en Notion
-              </p>
             </div>
+
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 1.5rem;
+              "
+            >
+              <a
+                href="https://guiame-ai.notion.site/Guiame-ai-London-3ae6f90a2be080708698eda82d14b98a"
+                onclick="
+                  if (window.clarity) {
+                    clarity('event', 'open_notion_guide_london');
+                  }
+                "
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary btn-hero-cta flag-btn flag-btn--england"
+              >
+                <strong>Guíame Ahí - London</strong>
+              </a>
+            </div>
+            <p class="guide-caption" style="color: rgba(255, 255, 255, 0.6)">
+              🎁 Gratis · Se abren en Notion
+            </p>
           </div>
 
           <div class="walks-card">
@@ -194,6 +219,11 @@
               ¿Estás en un tour de un día conmigo?
             </h2>
             <p class="hero-subtitle">Ve mis rutas sugeridas.</p>
+                        <p class="hero-subtitle" style="margin-top: 1rem">
+              Cada mapa incluye atracciones, restaurantes, bocadillos y
+              paisajes. Los juegos te ayudarán a descubrir secretos de cada
+              lugar.
+            </p>
 
             <div
               class="hero-buttons"
@@ -208,46 +238,7 @@
               </a>
             </div>
 
-            <p class="hero-subtitle" style="margin-top: 1rem">
-              Cada mapa incluye atracciones, restaurantes, bocadillos y
-              paisajes. Los juegos te ayudarán a descubrir secretos de cada
-              lugar.
-            </p>
-          </div>
 
-          <div
-            style="
-              width: 100%;
-              border-top: 1px solid rgba(255, 255, 255, 0.15);
-              margin: 2.5rem auto;
-              max-width: 400px;
-            "
-          ></div>
-
-          <div class="hero-buttons" style="margin-top: 1.5rem">
-            <a
-              href="https://www.buymeacoffee.com/samuelmex"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-img"
-              onclick="
-                if (window.clarity) {
-                  clarity('event', 'open_bmc_inline');
-                }
-              "
-            >
-              <img
-                src="assets/img/BMCImg.png"
-                alt="¿Te gustaron mis recomendaciones? Invítame un café"
-                style="
-                  max-width: 100%;
-                  border-radius: 8px;
-                  cursor: pointer;
-                  opacity: 0.92;
-                "
-              />
-            </a>
-          </div>
         </div>
 
         <div class="hero-background2"></div>
@@ -255,16 +246,15 @@
 
       <section class="features">
         <div class="container">
-          <h2>Qué encontrarás en mis recomendaciones:</h2>
+          <h2>Qué encontrarás aqui:</h2>
           <p>
-            En ella, reúno lo mejor de mis lugares favoritos en Edinburgh y
-            Escocia. No es una lista genérica de internet. Son lugares que he
-            probado, explorado o recomendado a miles de viajeros. No existe un
-            lugar a donde no haya ido y dicho: "¡Esto es genial, lo
+            En ella, reúno lo mejor de mis lugares favoritos. No es una lista
+            genérica de internet. Son lugares que he probado y explorado. No
+            existe un lugar a donde no haya ido y dicho: "¡Esto es genial, lo
             recomiendo!".
           </p>
           <h3 style="text-align: center; margin: 2rem 0 1.5rem">
-            Estos son algunos ejemplos, explóralos en mi Blog:
+            Explora algunos ejemplos en mi Blog:
           </h3>
           <div class="examples-grid">
             <div class="example-item">
@@ -329,25 +319,6 @@
               </a>
             </div>
           </div>
-
-          <div class="guide-features-cta">
-            <a
-              href="https://www.notion.so/guiame-ai/Guiame-Ahi-Edinburgh-1ea6f90a2be08080941ef3e33aeec6ea?source=copy_link"
-              onclick="
-                if (window.clarity) {
-                  clarity('event', 'open_notion_guide_features');
-                }
-              "
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-secondary"
-            >
-              Ver la guía completa →
-            </a>
-            <p class="guide-caption" style="color: rgba(8, 29, 60, 0.55)">
-              🎁 Gratis · Se abre en Notion
-            </p>
-          </div>
         </div>
       </section>
 
@@ -373,22 +344,35 @@
             únicos.
           </p>
 
+          
           <!-- BMC button -->
           <div class="hero-buttons">
+
+          </div>
+          <div class="hero-buttons" style="margin-top: 1.5rem">
             <a
               href="https://www.buymeacoffee.com/samuelmex"
               target="_blank"
               rel="noopener noreferrer"
+              class="btn-img"
               onclick="
                 if (window.clarity) {
-                  clarity('event', 'open_bmc');
+                  clarity('event', 'open_bmc_inline');
                 }
               "
-              class="btn btn-secondary"
-              style="font-size: 1.2rem; padding: 1rem 2.5rem"
             >
-              Ver mis publicaciones recientes e Invítame un café →
+              <img
+                src="assets/img/BMCImg.png"
+                alt="¿Te gustaron mis recomendaciones? Invítame un café"
+                style="
+                  max-width: 100%;
+                  border-radius: 8px;
+                  cursor: pointer;
+                  opacity: 0.92;
+                "
+              />
             </a>
+          </div>
           </div>
         </div>
         <div class="hero-background4"></div>
@@ -409,6 +393,16 @@
                 Recorre Old Town, Arthur's Seat, New Town y Dean Village — al
                 mejor ritmo y visitando lo mejor. Manda mensaje y lo
                 optimizamos!
+              </p>
+            </div>
+            <div class="example-item">
+              <a href="3-dias-london.html" class="nav-link2">
+                📍 Qué ver en Londres en 3 días
+              </a>
+              <br />
+              <p class="item-desc">
+                Una escapada perfecta si sigues de viaje por el Reino Unido — lo
+                esencial de Londres, bien organizado.
               </p>
             </div>
           </div>
