@@ -641,11 +641,19 @@ p {
   content: "🧭";
 }
 
-.flag-btn--calendar::before {
-  content: "📅";
-  /* White/gray calendar washes out against the mustard button — same
-     fix as Scotland's saltire on the blue buttons: more opacity. */
-  opacity: 0.55;
+/* Five stars — same path used by the actual review widget (.s-star in
+   the survey section), reused here rather than inventing a new star
+   shape, since "Comenta" is literally the review/rating action. Navy
+   fill for contrast against the mustard button. */
+.flag-btn--stars::before {
+  content: "";
+  width: 9rem;
+  height: 9rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23081D3C'%3E%3Cpath transform='translate(1.5,10.1) scale(0.19)' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3Cpath transform='translate(5.8,10.1) scale(0.19)' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3Cpath transform='translate(10.1,10.1) scale(0.19)' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3Cpath transform='translate(14.4,10.1) scale(0.19)' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3Cpath transform='translate(18.7,10.1) scale(0.19)' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.4;
 }
 
 /* WhatsApp's own mark, not a generic emoji speech bubble — an emoji
