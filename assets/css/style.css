@@ -373,6 +373,37 @@ p {
   letter-spacing: -1px;
 }
 
+/* Section title inside a hero, one deliberate tier below h1/.hero-title —
+   reusing .hero-title's size for a section header made it indistinguishable
+   from the real page title. Also the gap above a section that follows a
+   boxed card (e.g. guide.html's walks-card). */
+.hero-section-title {
+  color: #fff;
+  font-size: clamp(1.8rem, 4.5vw, 2.75rem);
+  font-weight: 700;
+  margin: 4rem 0 1rem;
+  letter-spacing: -0.5px;
+}
+
+/* Narrower measure for long-form narrative paragraphs in a hero — the
+   default hero-content width (800px) suits short lines, not a multi-
+   sentence story that needs a comfortable reading line length. */
+.hero-subtitle--narrow {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Same narrow measure, for long-form paragraphs outside a hero (inherits
+   whatever text color the surrounding section already sets, e.g. .features'
+   default gray, unlike .hero-subtitle--narrow which is white-text-only). */
+.narrow-copy {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 .hero-subtitle {
   color: #e0e0e0;
   font-size: clamp(1rem, 2vw, 1.25rem);
@@ -540,6 +571,24 @@ p {
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
+/* Same mustard accent line used in the photo lightbox captions — reused
+   here as a small brand touch on the PDF CTA. Sits inside the button's
+   own left padding, no extra padding needed. */
+.btn-accent-line {
+  position: relative;
+}
+
+.btn-accent-line::before {
+  content: "";
+  position: absolute;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  left: 0.85rem;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+
 /* Flag watermark buttons — guide.html's two Notion CTAs. A large, faded
    flag bleeds in from the left edge instead of sitting as an inline emoji
    icon next to the label, same "pseudo behind, content on top" technique
@@ -555,13 +604,13 @@ p {
 .flag-btn::before {
   position: absolute;
   top: 50%;
-  left: -1.25rem;
+  left: -1.75rem;
   transform: translateY(-50%);
-  font-size: 7.5rem;
+  font-size: 9.5rem;
   line-height: 1;
   opacity: 0.3;
-  -webkit-mask-image: linear-gradient(to right, #000 30%, transparent 75%);
-  mask-image: linear-gradient(to right, #000 30%, transparent 75%);
+  -webkit-mask-image: linear-gradient(to right, #000 25%, transparent 68%);
+  mask-image: linear-gradient(to right, #000 25%, transparent 68%);
   pointer-events: none;
 }
 
@@ -582,9 +631,9 @@ p {
   content: "";
   position: absolute;
   top: 50%;
-  right: 1rem;
-  width: 1.4rem;
-  height: 1.4rem;
+  right: 1.1rem;
+  width: 2.1rem;
+  height: 2.1rem;
   transform: translateY(-50%);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -742,7 +791,6 @@ p {
   color: #fff;
   padding: 2rem;
   text-align: center;
-  margin-top: 4rem;
 }
 
 .footer-container {
@@ -1060,6 +1108,219 @@ p {
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Photo teaser grid — real destination shots instead of another text list,
+   the "Gallery" component the STYLE_GUIDE.md always planned but never
+   built. Same hover-zoom idea documented there. */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 640px;
+  margin: 2rem auto;
+}
+
+@media (max-width: 420px) {
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.photo-grid-item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(8, 29, 60, 0.15);
+  cursor: zoom-in;
+}
+
+.photo-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.photo-grid-item:hover img {
+  transform: scale(1.08);
+}
+
+.photo-grid-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  background: linear-gradient(to top, rgba(8, 29, 60, 0.85), transparent);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Photo lightbox — clicking a gallery photo grows it, FLIP-style, out of
+   its own grid position (via scripts/photo-lightbox.js) instead of a
+   generic fade-in modal, so the expand reads as "that photo" getting
+   bigger, not a new element appearing. Same gesture in reverse to close.
+   A brief flash of the "G" mark is layered on top and fades out as it
+   grows — the .revealed class toggle is what drives that fade. */
+.photo-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 29, 60, 0);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    background 0.35s ease,
+    opacity 0.35s ease,
+    visibility 0s linear 0.35s;
+}
+
+.photo-lightbox.open {
+  background: rgba(8, 29, 60, 0.82);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    background 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.photo-lightbox-frame {
+  position: relative;
+  width: min(90vw, 720px);
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  cursor: zoom-out;
+  transform: translate(0, 0) scale(1);
+  transition: transform 0.7s cubic-bezier(0.22, 0.9, 0.3, 1);
+}
+
+.photo-lightbox-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Logo sits ABOVE the photo (explicit z-index — DOM order alone put the
+   photo on top, so the logo was invisible from the start and nothing
+   ever visibly faded). Both cross-fade together on .revealed. */
+.photo-lightbox-img {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.1s;
+}
+
+.photo-lightbox-frame.revealed .photo-lightbox-img {
+  opacity: 1;
+}
+
+.photo-lightbox-logo {
+  z-index: 2;
+  object-fit: contain !important;
+  background: var(--color-navy);
+  padding: 22%;
+  opacity: 1;
+  transition: opacity 0.4s ease 0.1s;
+}
+
+.photo-lightbox-frame.revealed .photo-lightbox-logo {
+  opacity: 0;
+}
+
+/* Caption block: a permanent bar pinned to the bottom of the image (not
+   centered — it doesn't relocate after appearing, it's always here), on
+   a plain dark panel. No backdrop-filter: blurring an element whose
+   ancestor (.photo-lightbox-frame) is mid-transform at the same time is a
+   known source of rendering glitches/flicker in some browsers — a plain
+   darker background avoids that class of bug entirely.
+   Timing is two clean phases, not one continuous blend: the logo/photo
+   cross-fade (above) finishes at ~750ms, then line/title/description
+   cascade in quickly (line 750-1150ms, title 870-1270ms, desc 990-1390ms)
+   — overlapping each other for a fast, modern stagger, but only starting
+   once the photo has visibly settled, not while it's still mid-fade. All
+   keyed off .revealed, and all fade out together with the rest of the
+   frame on close — nothing here has its own separate hide trigger. */
+.photo-lightbox-caption {
+  position: absolute;
+  z-index: 3;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  margin: 0;
+  padding: 1rem 1.2rem 1rem 1.6rem;
+  border-radius: 12px;
+  background: rgba(8, 29, 60, 0.68);
+}
+
+.photo-lightbox-caption-line {
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 0.55rem;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s ease 0.5s;
+}
+
+.photo-lightbox-frame.revealed .photo-lightbox-caption-line {
+  transform: scaleY(1);
+}
+
+.photo-lightbox-caption-text h3 {
+  color: #fff;
+  font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4rem;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.4s ease 0.62s,
+    transform 0.4s ease 0.62s;
+}
+
+.photo-lightbox-caption-text p {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.4s ease 0.74s,
+    transform 0.4s ease 0.74s;
+}
+
+.photo-lightbox-frame.revealed .photo-lightbox-caption-text h3,
+.photo-lightbox-frame.revealed .photo-lightbox-caption-text p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-lightbox,
+  .photo-lightbox-frame,
+  .photo-lightbox-logo,
+  .photo-lightbox-caption-line,
+  .photo-lightbox-caption-text h3,
+  .photo-lightbox-caption-text p {
+    transition: none !important;
+  }
 }
 
 .example-item {
@@ -1877,7 +2138,7 @@ CONTACT PAGE SPECIFIC STYLES
    ============================================ */
 .pdf-promo {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 2rem;
   background: #fff;
   border: 1px solid #e0e7ee;
@@ -1887,6 +2148,29 @@ CONTACT PAGE SPECIFIC STYLES
   max-width: 780px;
   margin: 2rem auto;
   text-align: left;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.pdf-promo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(8, 29, 60, 0.18);
+}
+
+.pdf-promo-trust {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.pdf-promo-trust svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 .pdf-promo-cover {
@@ -1929,16 +2213,21 @@ CONTACT PAGE SPECIFIC STYLES
    silently win since this eyebrow is itself a <p>. See .survey-eyebrow
    and .stop-tag for the same pattern — this bug has bitten us three times. */
 .pdf-promo-eyebrow.pdf-promo-eyebrow {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--color-accent);
-  background: var(--color-navy);
-  padding: 4px 12px;
-  border-radius: 6px;
+  /* Dark mustard, not the flat accent — plain accent text fails contrast
+     on the white cards this also appears on (see :root notes above). */
+  color: #8a6a14;
   margin-bottom: 0.5rem;
+}
+
+/* On the dark glass card (guide.html), swap to the brighter flat accent —
+   the dark-mustard tone above is tuned for contrast on white, not navy. */
+.pdf-promo--glass .pdf-promo-eyebrow.pdf-promo-eyebrow {
+  color: var(--color-accent);
 }
 
 .pdf-promo-body h3 {
@@ -1979,7 +2268,7 @@ CONTACT PAGE SPECIFIC STYLES
 }
 
 .pdf-promo-price {
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   font-weight: 800;
   color: #081d3c;
 }
@@ -1995,35 +2284,92 @@ CONTACT PAGE SPECIFIC STYLES
 /* Compact variant: single soft mention (walks.html, inline mid-page) */
 .pdf-promo--compact {
   padding: 1.1rem 1.5rem;
-  gap: 1.25rem;
+  gap: 1rem;
   border-radius: 16px;
+  align-items: center;
+}
+
+/* Price + button as one grouped "buy box" instead of a row that wraps —
+   the wrap was leaving the price stranded with a big gap above a
+   full-width button (.btn's own mobile rule forces width:100%). */
+.pdf-promo--compact .pdf-promo-cta-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e8ecf0;
+}
+
+.pdf-promo--compact .pdf-promo-cta-row .btn {
+  align-self: stretch;
 }
 
 .pdf-promo--compact .pdf-promo-cover {
-  width: 64px;
+  width: 100px;
 }
 
 .pdf-promo--compact .pdf-promo-cover img {
   border-radius: 6px;
+  box-shadow: 0 8px 16px rgba(8, 29, 60, 0.25);
 }
 
 .pdf-promo--compact .pdf-promo-ribbon {
-  font-size: 0.55rem;
-  padding: 2px 6px;
-  top: -6px;
-  right: -8px;
+  font-size: 0.62rem;
+  padding: 3px 8px;
+  top: -8px;
+  right: -10px;
 }
 
 .pdf-promo--compact .pdf-promo-body p:not(.pdf-promo-eyebrow) {
   font-size: 0.92rem;
   color: #555;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.5rem;
 }
 
 /* Full-width banner variant: index.html examples grid */
 .pdf-promo--banner {
   grid-column: 1 / -1;
   margin: 0 auto 0.5rem;
+}
+
+/* Dark-hero variant: guide.html's hero has a navy photo background, so the
+   plain white card reads as a stark cutout. Frosted glass instead, same
+   treatment as .walks-card on that same hero. */
+.pdf-promo--glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.25);
+}
+
+.pdf-promo--glass .pdf-promo-body p:not(.pdf-promo-eyebrow) {
+  color: #ccd6e8;
+}
+
+.pdf-promo--glass .pdf-promo-price {
+  color: #fff;
+}
+
+.pdf-promo--glass .pdf-promo-price span {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.pdf-promo--glass .pdf-promo-cover img {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+}
+
+.pdf-promo--glass:hover {
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35);
+}
+
+.pdf-promo--glass .pdf-promo-trust {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.pdf-promo--glass .pdf-promo-cta-row {
+  border-top-color: rgba(255, 255, 255, 0.15);
 }
 
 @media (max-width: 640px) {
