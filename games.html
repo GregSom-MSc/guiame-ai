@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#081D3C" />
+
+    <title>Juegos de Escocia | Quiz y Rompecabezas | Guíame.ai</title>
+
+    <meta
+      name="description"
+      content="Pon a prueba lo que sabes de Escocia con un quiz por niveles, o arma un rompecabezas con paisajes reales de Edinburgh y las Highlands."
+    />
+    <meta name="author" content="Samuel Moreno" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="canonical" href="https://guiame.ai/games.html" />
+
+    <meta property="og:title" content="Juegos de Escocia | Guíame.ai" />
+    <meta
+      property="og:description"
+      content="Un quiz y un rompecabezas para pasar el rato mientras viajas por Escocia."
+    />
+    <meta
+      property="og:image"
+      content="https://guiame.ai/assets/img/iconOG.png"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://guiame.ai/games.html" />
+    <meta property="og:locale" content="es_ES" />
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="assets/img/icon.ico" />
+
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "vudv3j54i7");
+    </script>
+
+    <style>
+      /* ── Games page — page-specific styles ──────────────────────── */
+
+      .games-hero {
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 1.5rem 4rem;
+        text-align: center;
+      }
+
+      /* ── Game picker: two big clickable cards ── */
+      .game-picker {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+        max-width: 640px;
+        margin: 2.5rem auto 0;
+      }
+
+      .game-picker-card {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1.5px solid rgba(255, 255, 255, 0.18);
+        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        cursor: pointer;
+        color: #fff;
+        text-align: center;
+        transition:
+          transform 0.25s ease,
+          background 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      .game-picker-card:hover,
+      .game-picker-card:focus-visible {
+        background: rgba(255, 255, 255, 0.13);
+        border-color: var(--color-accent);
+        transform: translateY(-4px);
+        outline: none;
+      }
+
+      .game-picker-card.active {
+        background: rgba(201, 162, 39, 0.16);
+        border-color: var(--color-accent);
+      }
+
+      /* Bleeding icon watermark — same technique as guide.html's flag
+         buttons (oversized icon bleeding off the edge, masked fade)
+         instead of a small centered emoji, just scaled up for this
+         much taller card. */
+      .game-picker-card {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .game-picker-card::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -2rem;
+        transform: translateY(-50%);
+        font-size: 13rem;
+        line-height: 1;
+        opacity: 0.22;
+        -webkit-mask-image: linear-gradient(
+          to right,
+          #000 25%,
+          transparent 70%
+        );
+        mask-image: linear-gradient(to right, #000 25%, transparent 70%);
+        pointer-events: none;
+      }
+
+      .game-picker-card--brain::before {
+        content: "🧠";
+      }
+
+      .game-picker-card--puzzle::before {
+        content: "🧩";
+      }
+
+      .game-picker-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Quiet text link, not a bordered button — a lower-emphasis way
+         back than the picker cards themselves. */
+      .hero-subtle-link {
+        display: inline-block;
+        margin-top: 2rem;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: color 0.2s ease;
+      }
+
+      .hero-subtle-link:hover,
+      .hero-subtle-link:focus-visible {
+        color: #fff;
+      }
+
+      .game-picker-card h2 {
+        color: #fff;
+        font-size: 1.25rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .game-picker-card p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      /* ── Shared game panel chrome ── */
+      .game-panel {
+        display: none;
+        padding: 3rem 1.5rem 4rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .game-panel.active {
+        display: block;
+      }
+
+      /* Title box — a self-contained, borderless ("rimless") card so the
+         watermark icon is centered and fully contained instead of
+         bleeding off a panel edge where overflow:hidden or low opacity
+         could clip/hide it (that's what was going wrong before). */
+      .game-title-box {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        background: #f8f9fa;
+        padding: 2.5rem 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .game-title-box::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 13rem;
+        line-height: 1;
+        opacity: 0.16;
+        pointer-events: none;
+      }
+
+      .game-title-box--brain::before {
+        content: "🧠";
+      }
+
+      .game-title-box--puzzle::before {
+        content: "🧩";
+      }
+
+      .game-title-box-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Same "ghost button" recipe as .btn-tertiary (transparent fill,
+         outlined border, hover lift + tint) — recolored for navy-on-
+         light instead of white-on-dark, since .btn-tertiary itself is
+         built for walks.html's dark hero and would be invisible here. */
+      .game-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: transparent;
+        border: 2px solid rgba(8, 29, 60, 0.2);
+        color: var(--color-navy);
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 0.6rem 1.25rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .game-back:hover,
+      .game-back:focus-visible {
+        background: rgba(8, 29, 60, 0.06);
+        border-color: var(--color-navy);
+        transform: translateY(-2px);
+        outline: none;
+      }
+
+      .game-step {
+        display: none;
+        text-align: center;
+      }
+
+      .game-step.active {
+        display: block;
+      }
+
+      /* ── Difficulty / piece-count choice chips (shared by both games) ── */
+      .choice-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.85rem;
+        margin: 1.75rem 0;
+      }
+
+      .choice-chip {
+        background: #fff;
+        border: 1.5px solid #e0e7ee;
+        border-radius: 10px;
+        padding: 0.85rem 1.5rem;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--color-navy);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .choice-chip:hover,
+      .choice-chip:focus-visible {
+        border-color: var(--color-accent);
+        background: #fffaf0;
+        outline: none;
+      }
+
+      /* Difficulty buttons — escalating intensity using only the site's
+         own navy/mustard, not a generic green/amber/red: light mustard
+         tint for Fácil, solid mustard for Intermedio, solid navy for
+         Avanzado. The dot row underneath is real information (how many
+         of 3 = how hard), not decoration. */
+      .difficulty-chip {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 1.1rem 2.1rem;
+        border-radius: 14px;
+        border: none;
+        font-weight: 800;
+        font-size: 1rem;
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .difficulty-chip:hover,
+      .difficulty-chip:focus-visible {
+        transform: translateY(-3px);
+        outline: none;
+      }
+
+      .difficulty-chip--easy {
+        background: #fff8e6;
+        border: 1.5px solid var(--color-accent);
+        color: var(--color-navy);
+        box-shadow: 0 4px 14px rgba(201, 162, 39, 0.15);
+      }
+
+      .difficulty-chip--easy:hover,
+      .difficulty-chip--easy:focus-visible {
+        box-shadow: 0 10px 22px rgba(201, 162, 39, 0.25);
+      }
+
+      .difficulty-chip--medium {
+        background: linear-gradient(
+          135deg,
+          var(--color-accent-light) 0%,
+          var(--color-accent) 100%
+        );
+        color: var(--color-navy);
+        box-shadow: 0 4px 14px rgba(201, 162, 39, 0.3);
+      }
+
+      .difficulty-chip--medium:hover,
+      .difficulty-chip--medium:focus-visible {
+        box-shadow: 0 10px 24px rgba(201, 162, 39, 0.42);
+      }
+
+      .difficulty-chip--hard {
+        background: linear-gradient(135deg, #081d3c 0%, #0c2b5a 100%);
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(8, 29, 60, 0.35);
+      }
+
+      .difficulty-chip--hard:hover,
+      .difficulty-chip--hard:focus-visible {
+        box-shadow: 0 10px 24px rgba(8, 29, 60, 0.5);
+      }
+
+      .difficulty-dots {
+        display: flex;
+        gap: 5px;
+      }
+
+      .difficulty-dots span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+        opacity: 0.3;
+      }
+
+      .difficulty-dots span.filled {
+        opacity: 1;
+      }
+
+      /* ══════════════════ SHARED TITLE STYLES (quiz + puzzle) ══════ */
+      .game-title {
+        font-size: clamp(2.2rem, 6vw, 3.2rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: linear-gradient(
+          135deg,
+          var(--color-navy) 20%,
+          var(--color-accent) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin: 0 0 0.2rem;
+      }
+
+      .game-byline {
+        font-size: 0.85rem;
+        color: #999;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .game-subtitle {
+        font-size: 1.15rem;
+        color: var(--color-navy);
+        font-weight: 700;
+        margin: 0 0 1.5rem;
+      }
+
+      /* ══════════════════ QUIZ ══════════════════ */
+
+      .quiz-progress {
+        font-size: 0.85rem;
+        color: #888;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .quiz-question {
+        font-size: clamp(1.2rem, 3vw, 1.6rem);
+        font-weight: 800;
+        color: var(--color-navy);
+        margin: 0 auto 1.75rem;
+        max-width: 560px;
+      }
+
+      .quiz-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.85rem;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      .quiz-option {
+        background: #fff;
+        border: 1.5px solid #e0e7ee;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--color-navy);
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        transition: all 0.2s ease;
+      }
+
+      .quiz-option:hover:not(:disabled) {
+        border-color: var(--color-accent);
+      }
+
+      .quiz-option-letter {
+        flex-shrink: 0;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #f0f2f5;
+        color: var(--color-navy);
+        font-size: 0.8rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Reveal icon (check/X) — hidden until .correct/.incorrect is
+         applied, then scales in with a small bounce. */
+      .quiz-option-icon {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        opacity: 0;
+        transform: scale(0.4);
+        transition:
+          opacity 0.25s ease 0.1s,
+          transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s;
+      }
+
+      .quiz-option-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .quiz-option.correct .quiz-option-icon,
+      .quiz-option.incorrect .quiz-option-icon {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      @keyframes quizOptionPop {
+        0% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.04);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .quiz-option.correct,
+      .quiz-option.incorrect {
+        animation: quizOptionPop 0.35s ease;
+      }
+
+      .quiz-option.correct {
+        border-color: #2e7d4f;
+        background: #eafaf0;
+      }
+
+      .quiz-option.correct .quiz-option-letter {
+        background: #2e7d4f;
+        color: #fff;
+      }
+
+      .quiz-option.correct .quiz-option-icon {
+        color: #2e7d4f;
+      }
+
+      .quiz-option.incorrect {
+        border-color: #c0503d;
+        background: #fdf1ee;
+      }
+
+      .quiz-option.incorrect .quiz-option-letter {
+        background: #c0503d;
+        color: #fff;
+      }
+
+      .quiz-option.incorrect .quiz-option-icon {
+        color: #c0503d;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .quiz-option.correct,
+        .quiz-option.incorrect,
+        .quiz-option-icon {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      .quiz-option:disabled {
+        cursor: default;
+      }
+
+      .quiz-next {
+        margin-top: 1.75rem;
+        display: none;
+      }
+
+      .quiz-next.active {
+        display: inline-block;
+      }
+
+      /* Score box — navy card with the brain bleeding in from the right,
+         same technique as the game-title-box/game-picker-card icons. */
+      .quiz-score-box {
+        position: relative;
+        overflow: hidden;
+        max-width: 420px;
+        margin: 1.5rem auto 0;
+        padding: 2.5rem 2rem;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #081d3c 0%, #0c2b5a 100%);
+        box-shadow: 0 10px 32px rgba(8, 29, 60, 0.25);
+      }
+
+      .quiz-score-box::before {
+        content: "🧠";
+        position: absolute;
+        top: 50%;
+        right: -2rem;
+        transform: translateY(-50%);
+        font-size: 11rem;
+        line-height: 1;
+        opacity: 0.18;
+        -webkit-mask-image: linear-gradient(
+          to left,
+          #000 25%,
+          transparent 75%
+        );
+        mask-image: linear-gradient(to left, #000 25%, transparent 75%);
+        pointer-events: none;
+      }
+
+      .quiz-score-box-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .quiz-score-number {
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 0.4rem;
+      }
+
+      .quiz-score-label {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      .quiz-mood-gif {
+        display: block;
+        max-width: 160px;
+        margin: 1.5rem auto 0;
+        border-radius: 12px;
+      }
+
+      /* ══════════════════ PUZZLE ══════════════════ */
+      .puzzle-image-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.9rem;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      .puzzle-image-choice {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .puzzle-image-choice img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .puzzle-image-choice:hover {
+        transform: translateY(-3px);
+      }
+
+      .puzzle-image-choice.selected {
+        border-color: var(--color-accent);
+      }
+
+      .puzzle-board-wrap {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .puzzle-board {
+        display: grid;
+        gap: 3px;
+        background: var(--color-navy);
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        box-shadow: 0 10px 32px rgba(8, 29, 60, 0.2);
+      }
+
+      .puzzle-piece {
+        background-repeat: no-repeat;
+        cursor: pointer;
+        transition:
+          filter 0.15s ease,
+          transform 0.15s ease,
+          opacity 0.15s ease;
+      }
+
+      .puzzle-piece:hover {
+        filter: brightness(1.08);
+      }
+
+      /* Brief "pop" on swap — toggled in games.js right before/after the
+         background-position change, not a persistent state. */
+      .puzzle-piece.swapping {
+        transform: scale(0.82);
+        opacity: 0.5;
+      }
+
+      .puzzle-piece.selected {
+        outline: 3px solid var(--color-accent);
+        outline-offset: -3px;
+        z-index: 1;
+        position: relative;
+      }
+
+      .puzzle-meta {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        font-size: 0.85rem;
+        color: #888;
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+
+      /* Win reveal — same technique as the photo lightbox captions: a
+         mustard line grows top-to-bottom, then text slides up into a
+         bottom bar. Reused deliberately, not reinvented, so the page's
+         one big "wow" moment still feels like part of this site. */
+      .puzzle-win {
+        display: none;
+        position: relative;
+        max-width: 480px;
+        margin: 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        box-shadow: 0 10px 32px rgba(8, 29, 60, 0.2);
+      }
+
+      .puzzle-win.active {
+        display: block;
+      }
+
+      .puzzle-win img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .puzzle-win-caption {
+        position: absolute;
+        left: 1.25rem;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        padding: 1rem 1.2rem 1rem 1.6rem;
+        border-radius: 12px;
+        background: rgba(8, 29, 60, 0.68);
+      }
+
+      .puzzle-win-line {
+        position: absolute;
+        top: 1rem;
+        bottom: 1rem;
+        left: 0.55rem;
+        width: 4px;
+        border-radius: 2px;
+        background: var(--color-accent);
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.5s ease 0.15s;
+      }
+
+      .puzzle-win.revealed .puzzle-win-line {
+        transform: scaleY(1);
+      }
+
+      .puzzle-win-text h3 {
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin: 0 0 0.3rem;
+        text-align: left;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.4s ease 0.3s,
+          transform 0.4s ease 0.3s;
+      }
+
+      .puzzle-win-text p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin: 0;
+        text-align: left;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.4s ease 0.45s,
+          transform 0.4s ease 0.45s;
+      }
+
+      .puzzle-win.revealed .puzzle-win-text h3,
+      .puzzle-win.revealed .puzzle-win-text p {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .puzzle-win-line,
+        .puzzle-win-text h3,
+        .puzzle-win-text p,
+        .puzzle-piece {
+          transition: none !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .puzzle-image-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .game-picker {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="logo">
+          <img
+            src="assets/img/icon.png"
+            alt="Guíame.ai Logo"
+            class="logo-img"
+          />
+          <span class="logo-text">By Samuel Moreno</span>
+        </div>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">Inicio</a></li>
+            <li><a href="guide.html" class="nav-link">Guía</a></li>
+            <li>
+              <a
+                href="https://buymeacoffee.com/samuelmex/posts"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="nav-link"
+                >Blog</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="nav-link"
+                >Reserva y Comenta</a
+              >
+            </li>
+            <li><a href="contact.html" class="nav-link">Contacto</a></li>
+          </ul>
+        </nav>
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ═══════════ HERO + GAME PICKER ═══════════ -->
+      <section class="games-hero">
+        <h1 class="hero-title">Juegos de Escocia</h1>
+        <p class="hero-subtitle">
+          Un quiz para ver cuánto sabes, o un rompecabezas para armar mientras
+          esperas tu próximo bus.
+        </p>
+
+        <div class="game-picker">
+          <button
+            class="game-picker-card game-picker-card--brain"
+            id="pickQuiz"
+            aria-label="Jugar el quiz"
+          >
+            <div class="game-picker-content">
+              <h2>Trivia</h2>
+              <p>Preguntas por nivel, de fácil a avanzado</p>
+            </div>
+          </button>
+          <button
+            class="game-picker-card game-picker-card--puzzle"
+            id="pickPuzzle"
+            aria-label="Jugar el rompecabezas"
+          >
+            <div class="game-picker-content">
+              <h2>Rompecabezas</h2>
+              <p>Elige una foto y arma el paisaje</p>
+            </div>
+          </button>
+        </div>
+
+        <a href="walks.html" class="hero-subtle-link">← Volver a las rutas</a>
+
+        <div class="hero-background2"></div>
+      </section>
+
+      <!-- ═══════════ QUIZ PANEL ═══════════ -->
+      <section class="game-panel" id="quizPanel">
+        <div class="container">
+          <button class="game-back" id="quizBack">← Elegir otro juego</button>
+
+          <!-- Step 1: difficulty -->
+          <div class="game-step active" id="quizStepDifficulty">
+            <div class="game-title-box game-title-box--brain">
+              <div class="game-title-box-content">
+                <p class="game-title">Trivia de Escocia</p>
+                <p class="game-byline">by Samuel Moreno</p>
+              </div>
+            </div>
+            <h3 class="game-subtitle">¿Qué nivel prefieres?</h3>
+            <div class="choice-row">
+              <button
+                class="difficulty-chip difficulty-chip--easy"
+                data-level="facil"
+              >
+                Fácil
+                <span class="difficulty-dots">
+                  <span class="filled"></span><span></span><span></span>
+                </span>
+              </button>
+              <button
+                class="difficulty-chip difficulty-chip--medium"
+                data-level="intermedio"
+              >
+                Intermedio
+                <span class="difficulty-dots">
+                  <span class="filled"></span><span class="filled"></span
+                  ><span></span>
+                </span>
+              </button>
+              <button
+                class="difficulty-chip difficulty-chip--hard"
+                data-level="avanzado"
+              >
+                Avanzado
+                <span class="difficulty-dots">
+                  <span class="filled"></span><span class="filled"></span
+                  ><span class="filled"></span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: question -->
+          <div class="game-step" id="quizStepQuestion">
+            <p class="quiz-progress" id="quizProgress"></p>
+            <h2 class="quiz-question" id="quizQuestionText"></h2>
+            <div class="quiz-options" id="quizOptions"></div>
+            <button class="btn btn-primary quiz-next" id="quizNext">
+              Siguiente →
+            </button>
+          </div>
+
+          <!-- Step 3: score -->
+          <div class="game-step" id="quizStepScore">
+            <p class="quiz-progress">¡Terminaste!</p>
+            <div class="quiz-score-box">
+              <div class="quiz-score-box-content">
+                <div class="quiz-score-number" id="quizScoreNumber"></div>
+                <p class="quiz-score-label" id="quizScoreLabel">
+                  respuestas correctas
+                </p>
+              </div>
+            </div>
+            <img class="quiz-mood-gif" id="quizMoodGif" src="" alt="" />
+            <div class="choice-row">
+              <button class="btn btn-primary" id="quizPlayAgain">
+                Jugar de nuevo
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ PUZZLE PANEL ═══════════ -->
+      <section class="game-panel" id="puzzlePanel">
+        <div class="container">
+          <button class="game-back" id="puzzleBack">← Elegir otro juego</button>
+
+          <!-- Step 1: choose photo -->
+          <div class="game-step active" id="puzzleStepImage">
+            <div class="game-title-box game-title-box--puzzle">
+              <div class="game-title-box-content">
+                <p class="game-title">Rompecabezas</p>
+                <p class="game-byline">by Samuel Moreno</p>
+              </div>
+            </div>
+            <h2 class="game-subtitle">Elige una foto</h2>
+            <div class="puzzle-image-grid" id="puzzleImageGrid"></div>
+          </div>
+
+          <!-- Step 2: choose piece count -->
+          <div class="game-step" id="puzzleStepSize">
+            <h2 style="text-align: center">¿Cuántas piezas?</h2>
+            <div class="choice-row">
+              <button class="choice-chip" data-size="3">9 piezas</button>
+              <button class="choice-chip" data-size="4">16 piezas</button>
+              <button class="choice-chip" data-size="5">25 piezas</button>
+              <button class="choice-chip" data-size="6">
+                36 piezas (para los geeks)
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: play -->
+          <div class="game-step" id="puzzleStepPlay">
+            <h2 style="text-align: center">
+              Toca dos piezas para intercambiarlas
+            </h2>
+
+            <div class="puzzle-board-wrap">
+              <div class="puzzle-board" id="puzzleBoard"></div>
+              <div class="puzzle-win" id="puzzleWin">
+                <img id="puzzleWinImg" src="" alt="" />
+                <div class="puzzle-win-caption">
+                  <span class="puzzle-win-line"></span>
+                  <div class="puzzle-win-text">
+                    <h3>¡Lo lograste!</h3>
+                    <p id="puzzleWinMoves"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="puzzle-meta">
+              <span id="puzzleMoveCount">0 movimientos</span>
+            </div>
+
+            <div class="choice-row">
+              <button class="btn btn-tertiary" id="puzzlePlayAgain">
+                Elegir otra foto
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <nav>
+          <a href="index.html">Inicio</a> · <a href="guide.html">Guía</a> ·
+          <a href="contact.html">Contacto</a> ·
+          <a href="about.html">Sobre mí</a> ·
+          <a href="https://buymeacoffee.com/samuelmex/posts" target="_blank"
+            >Blog</a
+          >
+        </nav>
+        <p><b>&copy; 2026 Guíame.ai · Hecho en Edinburgh</b></p>
+        <p class="footer-author">by Samuel Moreno</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/games.js"></script>
+
+    <a
+      href="https://wa.me/5215513841895"
+      target="_blank"
+      class="whatsapp-floating"
+      rel="noopener noreferrer"
+      aria-label="Chat with us on WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12c0 2.14.71 4.11 1.9 5.69L2 22l4.31-1.9A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.78 14.38c-.25.7-.73 1.27-1.4 1.41-.67.14-1.4.07-2.38-.38-.98-.45-2.03-1.36-2.95-2.78-.92-1.42-1.5-3.06-1.68-4.5-.18-1.44.14-2.84.92-3.78.34-.41.85-.65 1.4-.65h.2c.24 0 .47.1.64.28.17.18.26.42.24.67l-.3 2.03c-.02.25-.13.48-.32.65l-.96.94c-.1.1-.13.24-.07.37.3.65.84 1.25 1.6 1.8.76.55 1.6.9 2.45 1.03.2.03.42-.05.55-.22l.94-.96c.17-.19.4-.3.65-.32l2.03-.3c.25-.02.49.07.67.24.18.17.28.4.28.64v.2c0 .55-.24 1.06-.65 1.4z"
+        />
+      </svg>
+    </a>
+  </body>
+</html>
