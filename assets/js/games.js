@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
       list = [];
     }
     list.push({ value, date: Date.now() });
-    list.sort((a, b) => (higherIsBetter ? b.value - a.value : a.value - b.value));
+    list.sort((a, b) =>
+      higherIsBetter ? b.value - a.value : a.value - b.value,
+    );
     list = list.slice(0, 5);
     try {
       localStorage.setItem(key, JSON.stringify(list));
@@ -35,7 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
     return list;
   }
 
-  async function fetchTopScores(table, filterCol, filterVal, orderCol, ascending) {
+  async function fetchTopScores(
+    table,
+    filterCol,
+    filterVal,
+    orderCol,
+    ascending,
+  ) {
     const dir = ascending ? "asc" : "desc";
     const url =
       `${SUPABASE_URL}/rest/v1/${table}?${filterCol}=eq.${filterVal}` +
@@ -190,7 +198,12 @@ document.addEventListener("DOMContentLoaded", function () {
     facil: [
       {
         q: "¿Cómo se llama la vaca escocesa de pelo largo y cuernos grandes, muy fotografiada por los turistas?",
-        options: ["Highland Cow", "Vaca Holstein", "Vaca Jersey", "Vaca Charolesa"],
+        options: [
+          "Highland Cow",
+          "Vaca Holstein",
+          "Vaca Jersey",
+          "Vaca Charolesa",
+        ],
         correct: 0,
       },
       {
@@ -230,7 +243,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "En los Juegos de las Tierras Altas (Highland Games), ¿qué objeto de madera lanzan los atletas?",
-        options: ["El caber (tronco)", "Una piedra", "Un martillo", "Una lanza"],
+        options: [
+          "El caber (tronco)",
+          "Una piedra",
+          "Un martillo",
+          "Una lanza",
+        ],
         correct: 0,
       },
       {
@@ -250,7 +268,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: '¿Qué escritor escocés escribió el poema "La dama del lago" (The Lady of the Lake)?',
-        options: ["Walter Scott", "Robert Burns", "Robert Louis Stevenson", "Arthur Conan Doyle"],
+        options: [
+          "Walter Scott",
+          "Robert Burns",
+          "Robert Louis Stevenson",
+          "Arthur Conan Doyle",
+        ],
         correct: 0,
       },
       {
@@ -280,14 +303,24 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "¿Qué rey murió al caer de su caballo?",
-        options: ["Kenneth MacAlpin", "El rey Kentigern", "David I", "Alejandro III"],
+        options: [
+          "Kenneth MacAlpin",
+          "El rey Kentigern",
+          "David I",
+          "Alejandro III",
+        ],
         correct: 3,
       },
     ],
     intermedio: [
       {
         q: "¿Qué rey unificó a pictos y escotos bajo el reino de Alba en el siglo IX?",
-        options: ["Kenneth MacAlpin", "Macbeth", "Malcolm III", "Alexander III"],
+        options: [
+          "Kenneth MacAlpin",
+          "Macbeth",
+          "Malcolm III",
+          "Alexander III",
+        ],
         correct: 0,
       },
       {
@@ -302,7 +335,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "¿Quién diseñó el Canal Caledonio, que conecta el Lago Ness con el mar?",
-        options: ["Thomas Telford", "Robert Adam", "William Chambers", "Andy Scott"],
+        options: [
+          "Thomas Telford",
+          "Robert Adam",
+          "William Chambers",
+          "Andy Scott",
+        ],
         correct: 0,
       },
       {
@@ -327,7 +365,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "Según la leyenda de la Casa de los Binns, ¿con quién jugó a las cartas Tam Dalyell?",
-        options: ["Con el diablo", "Con un fantasma", "Con un rey", "Con un vecino"],
+        options: [
+          "Con el diablo",
+          "Con un fantasma",
+          "Con un rey",
+          "Con un vecino",
+        ],
         correct: 0,
       },
       {
@@ -337,7 +380,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "¿Cuál de estos muros romanos marcaba aproximadamente la frontera entre las actuales Lowlands y Highlands?",
-        options: ["El Muro Antonino", "El Muro de Adriano", "La Muralla China", "El Muro de Berlín"],
+        options: [
+          "El Muro Antonino",
+          "El Muro de Adriano",
+          "La Muralla China",
+          "El Muro de Berlín",
+        ],
         correct: 0,
       },
       {
@@ -347,7 +395,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "¿Qué rey escocés derrotó la influencia noruega en la Batalla de Largs?",
-        options: ["Alexander III", "Kenneth MacAlpin", "Malcolm III", "David I"],
+        options: [
+          "Alexander III",
+          "Kenneth MacAlpin",
+          "Malcolm III",
+          "David I",
+        ],
         correct: 0,
       },
       {
@@ -377,7 +430,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "¿Qué rey murió al caer de su caballo?",
-        options: ["Kenneth MacAlpin", "El rey Kentigern", "David I", "Alejandro III"],
+        options: [
+          "Kenneth MacAlpin",
+          "El rey Kentigern",
+          "David I",
+          "Alejandro III",
+        ],
         correct: 3,
       },
     ],
@@ -404,17 +462,32 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "Aproximadamente, ¿cuántas vacas Highland reproductoras registradas existen hoy en el Reino Unido?",
-        options: ["Entre 3,000 y 6,000", "Entre 50,000 y 60,000", "Más de 500,000", "Menos de 500"],
+        options: [
+          "Entre 3,000 y 6,000",
+          "Entre 50,000 y 60,000",
+          "Más de 500,000",
+          "Menos de 500",
+        ],
         correct: 0,
       },
       {
         q: "Aproximadamente, ¿qué proporción de los terneros de carne nacidos en Gran Bretaña son hijos de un toro Aberdeen Angus?",
-        options: ["1 de cada 5", "1 de cada 2", "1 de cada 20", "1 de cada 100"],
+        options: [
+          "1 de cada 5",
+          "1 de cada 2",
+          "1 de cada 20",
+          "1 de cada 100",
+        ],
         correct: 0,
       },
       {
         q: "Aproximadamente, ¿cuántas centrales hidroeléctricas operan en las Highlands escocesas?",
-        options: ["Más de 80", "Menos de 10", "Alrededor de 500", "Exactamente 25"],
+        options: [
+          "Más de 80",
+          "Menos de 10",
+          "Alrededor de 500",
+          "Exactamente 25",
+        ],
         correct: 0,
       },
       {
@@ -424,7 +497,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "Aproximadamente, ¿cuántas toneladas de cebada produce Escocia al año?",
-        options: ["Cerca de 2 millones", "Cerca de 200,000", "Cerca de 20 millones", "Cerca de 500,000"],
+        options: [
+          "Cerca de 2 millones",
+          "Cerca de 200,000",
+          "Cerca de 20 millones",
+          "Cerca de 500,000",
+        ],
         correct: 0,
       },
       {
@@ -449,12 +527,22 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "Según el censo de 2022, ¿cuántas personas en Escocia reportaron tener alguna habilidad en gaélico?",
-        options: ["Cerca de 130,000", "Cerca de 13,000", "Cerca de 1.3 millones", "Cerca de 500,000"],
+        options: [
+          "Cerca de 130,000",
+          "Cerca de 13,000",
+          "Cerca de 1.3 millones",
+          "Cerca de 500,000",
+        ],
         correct: 0,
       },
       {
         q: "Aproximadamente, ¿cuántas ovejas hay en Escocia?",
-        options: ["Cerca de 7 millones", "Cerca de 700,000", "Cerca de 70 millones", "Cerca de 17 millones"],
+        options: [
+          "Cerca de 7 millones",
+          "Cerca de 700,000",
+          "Cerca de 70 millones",
+          "Cerca de 17 millones",
+        ],
         correct: 0,
       },
       {
@@ -474,7 +562,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         q: "¿Qué rey murió al caer de su caballo?",
-        options: ["Kenneth MacAlpin", "El rey Kentigern", "David I", "Alejandro III"],
+        options: [
+          "Kenneth MacAlpin",
+          "El rey Kentigern",
+          "David I",
+          "Alejandro III",
+        ],
         correct: 3,
       },
     ],
@@ -645,7 +738,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (qualifiesForGlobalBoard(global, score, "score", true)) {
         showClaimBox("quiz", async (name) => {
-          await insertScore("quiz_scores", { name, level: quizLevel, score, total });
+          await insertScore("quiz_scores", {
+            name,
+            level: quizLevel,
+            score,
+            total,
+          });
           const updated = await fetchTopScores(
             "quiz_scores",
             "level",
@@ -667,9 +765,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  document
-    .getElementById("quizPlayAgain")
-    .addEventListener("click", resetQuiz);
+  document.getElementById("quizPlayAgain").addEventListener("click", resetQuiz);
 
   /* ════════════════════ PUZZLE ════════════════════ */
   const PUZZLE_IMAGES = [
@@ -680,10 +776,10 @@ document.addEventListener("DOMContentLoaded", function () {
         "Uno de los mejores miradores de Edinburgh, coronado por monumentos que parecen sacados de Atenas.",
     },
     {
-      src: "assets/img/L1-06.jpeg",
-      title: "Tower Bridge, Londres",
+      src: "assets/img/greyfriars.jpg",
+      title: "Greyfriars Bobby",
       caption:
-        "Si tu viaje sigue hasta Londres, este puente es parada obligada junto al Támesis.",
+        "El perro más famoso de Escocia, el guardián del cementerio de Greyfriars.",
     },
     {
       src: "assets/img/meadowsCherries.jpg",
