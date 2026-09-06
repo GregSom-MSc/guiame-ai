@@ -687,6 +687,115 @@
         margin-top: 1rem;
       }
 
+      /* ══════════════════ LEADERBOARDS (quiz + puzzle) ══════════════ */
+      .leaderboard-section {
+        max-width: 420px;
+        margin: 2rem auto 0;
+        text-align: left;
+      }
+
+      .leaderboard-title {
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--color-navy);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 1.5rem 0 0.75rem;
+      }
+
+      .leaderboard-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .leaderboard-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: #fff;
+        border: 1.5px solid #e0e7ee;
+        border-radius: 10px;
+        padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--color-navy);
+      }
+
+      .leaderboard-rank {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        color: var(--color-navy);
+        font-size: 0.75rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .leaderboard-name {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .leaderboard-value {
+        flex-shrink: 0;
+        color: #888;
+        font-weight: 700;
+        font-size: 0.85rem;
+      }
+
+      .leaderboard-empty {
+        font-size: 0.85rem;
+        color: #999;
+        font-style: italic;
+        list-style: none;
+      }
+
+      .leaderboard-claim {
+        margin-top: 1rem;
+        padding: 1.25rem;
+        border-radius: 14px;
+        background: #fff8e6;
+        border: 1.5px solid var(--color-accent);
+        text-align: center;
+      }
+
+      .leaderboard-claim-text {
+        font-weight: 700;
+        color: var(--color-navy);
+        margin: 0 0 0.75rem;
+      }
+
+      .leaderboard-claim-row {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .leaderboard-input {
+        padding: 0.65rem 1rem;
+        border: 1.5px solid #e0e7ee;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-family: inherit;
+        max-width: 200px;
+      }
+
+      .leaderboard-input:focus {
+        outline: none;
+        border-color: var(--color-accent);
+      }
+
       /* Win reveal — same technique as the photo lightbox captions: a
          mustard line grows top-to-bottom, then text slides up into a
          bottom bar. Reused deliberately, not reinvented, so the page's
@@ -946,6 +1055,37 @@
               </div>
             </div>
             <img class="quiz-mood-gif" id="quizMoodGif" src="" alt="" />
+
+            <div class="leaderboard-section">
+              <h3 class="leaderboard-title">Tu top 5 en este nivel</h3>
+              <ol class="leaderboard-list" id="quizPersonalBoard"></ol>
+
+              <h3 class="leaderboard-title">Top 5 mundial</h3>
+              <ol class="leaderboard-list" id="quizGlobalBoard"></ol>
+
+              <div
+                class="leaderboard-claim"
+                id="quizClaimBox"
+                style="display: none"
+              >
+                <p class="leaderboard-claim-text">
+                  ¡Entraste al top 5 mundial! Escribe tu nombre:
+                </p>
+                <div class="leaderboard-claim-row">
+                  <input
+                    type="text"
+                    id="quizNameInput"
+                    maxlength="40"
+                    placeholder="Tu nombre"
+                    class="leaderboard-input"
+                  />
+                  <button class="btn btn-primary" id="quizSubmitName">
+                    Guardar
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <div class="choice-row">
               <button class="btn btn-primary" id="quizPlayAgain">
                 Jugar de nuevo
@@ -1009,6 +1149,42 @@
               <span id="puzzleMoveCount">0 movimientos</span>
             </div>
 
+            <div
+              class="leaderboard-section"
+              id="puzzleLeaderboardSection"
+              style="display: none"
+            >
+              <h3 class="leaderboard-title">
+                Tu top 5 con esta cantidad de piezas
+              </h3>
+              <ol class="leaderboard-list" id="puzzlePersonalBoard"></ol>
+
+              <h3 class="leaderboard-title">Top 5 mundial</h3>
+              <ol class="leaderboard-list" id="puzzleGlobalBoard"></ol>
+
+              <div
+                class="leaderboard-claim"
+                id="puzzleClaimBox"
+                style="display: none"
+              >
+                <p class="leaderboard-claim-text">
+                  ¡Entraste al top 5 mundial! Escribe tu nombre:
+                </p>
+                <div class="leaderboard-claim-row">
+                  <input
+                    type="text"
+                    id="puzzleNameInput"
+                    maxlength="40"
+                    placeholder="Tu nombre"
+                    class="leaderboard-input"
+                  />
+                  <button class="btn btn-primary" id="puzzleSubmitName">
+                    Guardar
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <div class="choice-row">
               <button class="btn btn-tertiary" id="puzzlePlayAgain">
                 Elegir otra foto
@@ -1044,7 +1220,7 @@
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
     >
-      <svg viewBox="0 0 24 24" fill="currentColor">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
         <path
           d="M12 2C6.48 2 2 6.48 2 12c0 2.14.71 4.11 1.9 5.69L2 22l4.31-1.9A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.78 14.38c-.25.7-.73 1.27-1.4 1.41-.67.14-1.4.07-2.38-.38-.98-.45-2.03-1.36-2.95-2.78-.92-1.42-1.5-3.06-1.68-4.5-.18-1.44.14-2.84.92-3.78.34-.41.85-.65 1.4-.65h.2c.24 0 .47.1.64.28.17.18.26.42.24.67l-.3 2.03c-.02.25-.13.48-.32.65l-.96.94c-.1.1-.13.24-.07.37.3.65.84 1.25 1.6 1.8.76.55 1.6.9 2.45 1.03.2.03.42-.05.55-.22l.94-.96c.17-.19.4-.3.65-.32l2.03-.3c.25-.02.49.07.67.24.18.17.28.4.28.64v.2c0 .55-.24 1.06-.65 1.4z"
         />

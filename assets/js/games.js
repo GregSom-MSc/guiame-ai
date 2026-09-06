@@ -6,6 +6,139 @@
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", function () {
+  /* ════════════════════ LEADERBOARDS (shared by quiz + puzzle) ═══════
+     Same Supabase project the footer's star-rating badge already uses
+     (see survey.js) — new tables (quiz_scores, puzzle_scores), same
+     public anon-key pattern. Personal top-5 lives in localStorage;
+     global top-5 is only written to when a result actually qualifies
+     (beats the current 5th place, or the board has fewer than 5 rows) —
+     so a name is only ever asked for when it matters, and the table
+     never fills up with ordinary attempts. */
+  const SUPABASE_URL = "https://rtbeinelcbnbaqwmoavp.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_O-UR8sgGojHFfAMHHg40Xg_DDEw9FB3";
+
+  function addToPersonalHistory(key, value, higherIsBetter) {
+    let list = [];
+    try {
+      list = JSON.parse(localStorage.getItem(key)) || [];
+    } catch (_) {
+      list = [];
+    }
+    list.push({ value, date: Date.now() });
+    list.sort((a, b) => (higherIsBetter ? b.value - a.value : a.value - b.value));
+    list = list.slice(0, 5);
+    try {
+      localStorage.setItem(key, JSON.stringify(list));
+    } catch (_) {
+      /* private browsing / storage blocked — just skip persisting */
+    }
+    return list;
+  }
+
+  async function fetchTopScores(table, filterCol, filterVal, orderCol, ascending) {
+    const dir = ascending ? "asc" : "desc";
+    const url =
+      `${SUPABASE_URL}/rest/v1/${table}?${filterCol}=eq.${filterVal}` +
+      `&select=name,${orderCol}&order=${orderCol}.${dir}&limit=5`;
+    const res = await fetch(url, {
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+      },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  }
+
+  async function insertScore(table, payload) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  }
+
+  function qualifiesForGlobalBoard(list, value, orderCol, higherIsBetter) {
+    if (list.length < 5) return true;
+    const worst = list[list.length - 1][orderCol];
+    return higherIsBetter ? value > worst : value < worst;
+  }
+
+  /* Renders a <ol> from either personal ({value, date}) or global
+     ({name, <orderCol>}) entries. Always textContent, never innerHTML —
+     a global entry's "name" came from a stranger on the internet. */
+  function renderLeaderboard(listEl, items, orderCol, formatValue, isGlobal) {
+    listEl.innerHTML = "";
+    if (!items.length) {
+      const li = document.createElement("li");
+      li.className = "leaderboard-empty";
+      li.textContent = "Aún no hay resultados.";
+      listEl.appendChild(li);
+      return;
+    }
+    items.forEach((item, i) => {
+      const li = document.createElement("li");
+
+      const rank = document.createElement("span");
+      rank.className = "leaderboard-rank";
+      rank.textContent = String(i + 1);
+
+      const name = document.createElement("span");
+      name.className = "leaderboard-name";
+      name.textContent = isGlobal ? item.name : "Tú";
+
+      const value = document.createElement("span");
+      value.className = "leaderboard-value";
+      value.textContent = formatValue(isGlobal ? item[orderCol] : item.value);
+
+      li.append(rank, name, value);
+      listEl.appendChild(li);
+    });
+  }
+
+  /* Wires up the "you made the top 5!" name field. Reused for both
+     games — prefix picks which set of #<prefix>ClaimBox/NameInput/
+     SubmitName elements to use. onSubmit does the actual insert+refetch
+     for whichever game called it. */
+  function showClaimBox(prefix, onSubmit) {
+    const box = document.getElementById(`${prefix}ClaimBox`);
+    const input = document.getElementById(`${prefix}NameInput`);
+    const btn = document.getElementById(`${prefix}SubmitName`);
+
+    box.style.display = "block";
+    box.innerHTML = `
+      <p class="leaderboard-claim-text">¡Entraste al top 5 mundial! Escribe tu nombre:</p>
+      <div class="leaderboard-claim-row">
+        <input type="text" id="${prefix}NameInput" maxlength="40" placeholder="Tu nombre" class="leaderboard-input" />
+        <button class="btn btn-primary" id="${prefix}SubmitName">Guardar</button>
+      </div>
+    `;
+
+    const freshInput = document.getElementById(`${prefix}NameInput`);
+    const freshBtn = document.getElementById(`${prefix}SubmitName`);
+
+    freshBtn.addEventListener("click", async () => {
+      const name = freshInput.value.trim() || "Anónimo";
+      freshBtn.disabled = true;
+      freshBtn.textContent = "Guardando...";
+      try {
+        await onSubmit(name);
+        box.innerHTML =
+          '<p class="leaderboard-claim-text">¡Guardado! Ya apareces en el top 5 mundial.</p>';
+      } catch (err) {
+        console.error("Leaderboard submit error:", err);
+        freshBtn.disabled = false;
+        freshBtn.textContent = "Reintentar";
+      }
+    });
+  }
+
   /* ── Shared: game picker ── */
   const gamesHero = document.querySelector(".games-hero");
   const quizPanel = document.getElementById("quizPanel");
@@ -478,6 +611,60 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     showStep(quizPanel, "quizStepScore");
+    handleQuizLeaderboards(quizScore, total);
+  }
+
+  async function handleQuizLeaderboards(score, total) {
+    const personalKey = `guiame_quiz_history_${quizLevel}`;
+    const personal = addToPersonalHistory(personalKey, score, true);
+    renderLeaderboard(
+      document.getElementById("quizPersonalBoard"),
+      personal,
+      "value",
+      (v) => `${v} / ${total}`,
+      false,
+    );
+
+    document.getElementById("quizClaimBox").style.display = "none";
+
+    try {
+      const global = await fetchTopScores(
+        "quiz_scores",
+        "level",
+        quizLevel,
+        "score",
+        false,
+      );
+      renderLeaderboard(
+        document.getElementById("quizGlobalBoard"),
+        global,
+        "score",
+        (v) => `${v} / ${total}`,
+        true,
+      );
+
+      if (qualifiesForGlobalBoard(global, score, "score", true)) {
+        showClaimBox("quiz", async (name) => {
+          await insertScore("quiz_scores", { name, level: quizLevel, score, total });
+          const updated = await fetchTopScores(
+            "quiz_scores",
+            "level",
+            quizLevel,
+            "score",
+            false,
+          );
+          renderLeaderboard(
+            document.getElementById("quizGlobalBoard"),
+            updated,
+            "score",
+            (v) => `${v} / ${total}`,
+            true,
+          );
+        });
+      }
+    } catch (err) {
+      console.warn("Quiz leaderboard error:", err);
+    }
   }
 
   document
@@ -585,6 +772,7 @@ document.addEventListener("DOMContentLoaded", function () {
     puzzleBoard.style.display = "grid";
     puzzleBoard.style.gridTemplateColumns = `repeat(${puzzleSize}, 1fr)`;
     puzzleBoard.innerHTML = "";
+    document.getElementById("puzzleLeaderboardSection").style.display = "none";
 
     for (let slot = 0; slot < puzzleSize * puzzleSize; slot++) {
       const piece = document.createElement("button");
@@ -699,6 +887,67 @@ document.addEventListener("DOMContentLoaded", function () {
     puzzleBoard.style.display = "none";
     puzzleWin.classList.add("active");
     setTimeout(() => puzzleWin.classList.add("revealed"), 200);
+
+    document.getElementById("puzzleLeaderboardSection").style.display = "block";
+    handlePuzzleLeaderboards(puzzleMoves);
+  }
+
+  async function handlePuzzleLeaderboards(moves) {
+    const pieceCount = puzzleSize * puzzleSize;
+    const personalKey = `guiame_puzzle_history_${pieceCount}`;
+    const personal = addToPersonalHistory(personalKey, moves, false);
+    renderLeaderboard(
+      document.getElementById("puzzlePersonalBoard"),
+      personal,
+      "value",
+      (v) => `${v} movimientos`,
+      false,
+    );
+
+    document.getElementById("puzzleClaimBox").style.display = "none";
+
+    try {
+      const global = await fetchTopScores(
+        "puzzle_scores",
+        "piece_count",
+        pieceCount,
+        "moves",
+        true,
+      );
+      renderLeaderboard(
+        document.getElementById("puzzleGlobalBoard"),
+        global,
+        "moves",
+        (v) => `${v} movimientos`,
+        true,
+      );
+
+      if (qualifiesForGlobalBoard(global, moves, "moves", false)) {
+        showClaimBox("puzzle", async (name) => {
+          await insertScore("puzzle_scores", {
+            name,
+            piece_count: pieceCount,
+            moves,
+          });
+          const updated = await fetchTopScores(
+            "puzzle_scores",
+            "piece_count",
+            pieceCount,
+            "moves",
+            true,
+          );
+          renderLeaderboard(
+            document.getElementById("puzzleGlobalBoard"),
+            updated,
+            "moves",
+            (v) => `${v} movimientos`,
+            true,
+          );
+        });
+      }
+    } catch (err) {
+      console.warn("Puzzle leaderboard error:", err);
+    }
   }
 
   document
