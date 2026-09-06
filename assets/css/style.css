@@ -2311,6 +2311,32 @@ CONTACT PAGE SPECIFIC STYLES
   font-weight: 800;
 }
 
+/* Generic checkmark list — same technique as .pdf-promo-list, under a
+   sitewide-reusable name since this isn't PDF-specific. */
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  text-align: left;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  color: var(--color-navy);
+  font-weight: 800;
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-navy);
+  font-weight: 800;
+}
+
 .pdf-promo-cta-row {
   display: flex;
   align-items: center;
