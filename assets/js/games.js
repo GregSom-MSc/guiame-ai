@@ -785,25 +785,42 @@ document.addEventListener("DOMContentLoaded", function () {
       src: "assets/img/meadowsCherries.jpg",
       title: "The Meadows",
       caption:
-        "Cerezos en flor en uno de los parques más queridos por los locales.",
+        "Cerezos en flor en uno de los parques más queridos de la ciudad.",
     },
     {
       src: "assets/img/newtown2.jpg",
       title: "New Town",
       caption:
-        "Las calles georgianas más elegantes de Edinburgh, ideales para pasear sin prisa.",
+        "Las elegantes calles georgianas del New Town, ideales para pasear sin prisa.",
     },
     {
       src: "assets/img/CastleView.jpg",
       title: "Edinburgh Castle",
+      caption: "La postal más icónica, vigilando desde lo alto de Castle Rock.",
+    },
+    {
+      src: "assets/img/caltonhill1.jpg",
+      title: "Calton Hill",
       caption:
-        "La postal más icónica de la ciudad, vigilando desde lo alto de Castle Rock.",
+        "Uno de los mejores miradores de la ciudad, coronado por monumentos que parecen sacados de Atenas.",
+    },
+    {
+      src: "assets/img/EFI_night.jpg",
+      title: "Instituto de los Futuros de Edimburgo",
+      caption:
+        "Mi edificio favorito, el Hub financiero y de negocios de la Universidad de Edimburgo, iluminado de noche.",
     },
     {
       src: "assets/img/coo.jpg",
       title: "Highland Coo",
       caption:
         "La vaca peluda más fotografiada de Escocia — imposible no sonreírle.",
+    },
+    {
+      src: "assets/img/LochNess.jpg",
+      title: "Loch Ness",
+      caption:
+        "El lago más famoso de Escocia, conocido por el legendario Nessie.",
     },
   ];
 
