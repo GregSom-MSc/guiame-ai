@@ -2083,12 +2083,6 @@ CONTACT PAGE SPECIFIC STYLES
   z-index: 1;
 }
 
-@media (max-width: 768px) {
-  .stop-cards-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Scoped to .stop-cards-grid (walks.html only) — .stop-card is a different,
    unrelated component in 2-dias-edinburgh.html / 3-dias-london.html's local
    styles, and an unscoped selector here would leak into those too. */
@@ -2096,25 +2090,176 @@ CONTACT PAGE SPECIFIC STYLES
   background: rgba(255, 255, 255, 0.07);
   border: 1.5px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
-  padding: 1.5rem 1.2rem;
-  text-align: center;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* padding-top (not aspect-ratio) sets the 4:3 box: aspect-ratio doesn't
+   resolve correctly here — a column-flex item whose only child has
+   height:100% is a known Chromium quirk where it falls back to the img's
+   own natural ratio instead. Percentage padding is always resolved
+   against the containing block's width regardless of flex context, so
+   this sidesteps that interaction entirely. */
+.stop-card-photo {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  cursor: pointer;
+}
+
+.stop-card-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.stop-card-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
   gap: 0.6rem;
+  padding: 0.9rem 1.1rem;
+  background: linear-gradient(to top, rgba(8, 29, 60, 0.88), transparent);
 }
 
-.stop-cards-grid .stop-card h3 {
+.stop-card-line {
+  width: 3px;
+  align-self: stretch;
+  border-radius: 2px;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.stop-cards-grid .stop-card-title {
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
   margin: 0;
+  text-align: left;
 }
 
-.stop-cards-grid .stop-card p {
+/* Grid-rows 0fr->1fr trick: animates height without knowing the content's
+   real height in advance. The inner needs overflow:hidden so its content
+   (including padding) stays clipped to ~0 while collapsed. */
+.stop-card-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  min-height: 0;
+  transition: grid-template-rows 0.4s ease;
+}
+
+/* overflow:hidden + min-height:0 live here with NO padding of their own —
+   padding on this element would put a permanent floor under the 0fr
+   collapse (padding can't shrink away, only content height can), so it's
+   pushed one level deeper onto -content instead. */
+.stop-card-body-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.stop-card-body-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem 1.2rem 1.3rem;
+}
+
+.stop-card.expanded .stop-card-body {
+  grid-template-rows: 1fr;
+}
+
+.stop-card-body-content p {
   color: #ccd6e8;
   font-size: 0.88rem;
   line-height: 1.5;
+  text-align: left;
   margin: 0;
-  flex-grow: 1;
+}
+
+.stop-card-body-content .btn-tertiary {
+  align-self: flex-start;
+}
+
+/* Desktop has room to show everything at once — no click needed. */
+/* Desktop grid rows stretch cards to equal height by default — rather than
+   leaving dead space under a short card's button, the body fills that
+   extra height and the paragraph absorbs it, pinning the button(s) to the
+   bottom so every card's CTA lines up regardless of description length. */
+@media (min-width: 769px) {
+  .stop-card-photo {
+    cursor: default;
+  }
+  .stop-card-body {
+    grid-template-rows: 1fr !important;
+    flex-grow: 1;
+  }
+  .stop-card-body-inner,
+  .stop-card-body-content {
+    height: 100%;
+  }
+  .stop-card-body-content p {
+    flex: 1 0 auto;
+  }
+}
+
+/* Mobile: the grid becomes a peeking, swipeable carousel instead of a
+   stacked single column — native scroll-snap gives free swipe physics on
+   touch and trackpad alike, no custom drag handling needed. */
+@media (max-width: 768px) {
+  .stop-cards-grid {
+    display: flex;
+    align-items: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 8%;
+    padding-inline: 8%;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .stop-cards-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .stop-cards-grid .stop-card {
+    flex: 0 0 84%;
+    scroll-snap-align: center;
+  }
+}
+
+.stop-cards-dots {
+  display: none;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.9rem 0 0;
+}
+
+@media (max-width: 768px) {
+  .stop-cards-dots {
+    display: flex;
+  }
+}
+
+.stop-cards-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.stop-cards-dot.active {
+  background: var(--color-accent);
+  width: 20px;
+  border-radius: 4px;
+  transition:
+    width 0.25s ease,
+    border-radius 0.25s ease;
 }
 
 /* ============================================
