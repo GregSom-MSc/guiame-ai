@@ -1428,6 +1428,37 @@ p {
   line-height: 1.4;
 }
 
+/* Index-only itinerary thumbnails — a dedicated class, not .example-item,
+   since that class already carries a different (icon+text, no photo)
+   treatment on contact.html via an unscoped .examples-grid .example-item
+   rule; reusing it here would inherit that layout by accident. Photo/
+   caption/line pieces (.stop-card-photo etc.) are the same global classes
+   walks.html's stop-cards use — .stop-card-title is re-declared because
+   that one rule IS scoped to .stop-cards-grid specifically. */
+.itinerary-card {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(8, 29, 60, 0.1);
+  border: 1px solid #e0e7ff;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.itinerary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(8, 29, 60, 0.18);
+}
+
+.itinerary-card .stop-card-title {
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  text-align: left;
+}
+
 /* ============================================
 CONTACT PAGE SPECIFIC STYLES
 ============================================ */
