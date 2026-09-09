@@ -1428,13 +1428,14 @@ p {
   line-height: 1.4;
 }
 
-/* Index-only itinerary thumbnails — a dedicated class, not .example-item,
-   since that class already carries a different (icon+text, no photo)
-   treatment on contact.html via an unscoped .examples-grid .example-item
-   rule; reusing it here would inherit that layout by accident. Photo/
-   caption/line pieces (.stop-card-photo etc.) are the same global classes
-   walks.html's stop-cards use — .stop-card-title is re-declared because
-   that one rule IS scoped to .stop-cards-grid specifically. */
+/* Itinerary thumbnails (index.html + guide.html) — a dedicated class, not
+   .example-item, since that class already carries a different (icon+text,
+   no photo) treatment on contact.html via an unscoped .examples-grid
+   .example-item rule; reusing it here would inherit that layout by
+   accident. Photo/caption/line pieces (.stop-card-photo etc.) are the same
+   global classes walks.html's stop-cards use — .stop-card-title is
+   re-declared because that one rule IS scoped to .stop-cards-grid
+   specifically. */
 .itinerary-card {
   display: block;
   border-radius: 16px;
@@ -1457,6 +1458,22 @@ p {
   font-weight: 700;
   margin: 0;
   text-align: left;
+}
+
+/* guide.html keeps a description under the photo (its audience is deeper
+   in the funnel and benefits from the extra detail) — same values as
+   .example-item .item-desc, re-declared since that rule is scoped to a
+   wrapper this card doesn't use. Selector is "p.itinerary-card-desc" (not
+   just the class) to deliberately outrank the section's own ".examples p"
+   rule, which would otherwise win the shared text-align/max-width
+   properties by matching a class+tag combinator at equal specificity. */
+p.itinerary-card-desc {
+  font-size: 0.82rem;
+  color: #888;
+  line-height: 1.4;
+  margin: 0.75rem 0 0;
+  max-width: none;
+  text-align: center;
 }
 
 /* ============================================
