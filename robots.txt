@@ -15,3 +15,9 @@ Disallow: /assets/
 Disallow: /.github/
 Disallow: /README.md
 Disallow: /LICENSE
+
+# Favicon must stay crawlable even though /assets/ is blocked above —
+# Google can't show it in search results otherwise (falls back to a
+# generic globe icon), and it needs the specific file(s), not the folder.
+Allow: /assets/img/icon.ico
+Allow: /assets/img/icon.png
