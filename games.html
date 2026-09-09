@@ -596,6 +596,39 @@
         border-radius: 12px;
       }
 
+      /* Secondary "invite a coffee" aside for end-of-game screens — same
+         card treatment as .quiz-score-box (gradient/radius/shadow) so it
+         reads as this page's own convention, just without that card's
+         watermark icon and sized down to stay a friendly aside rather
+         than compete with the score/leaderboard above it. */
+      .bmc-aside {
+        max-width: 420px;
+        margin: 2rem auto 0;
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #081d3c 0%, #0c2b5a 100%);
+        box-shadow: 0 10px 32px rgba(8, 29, 60, 0.25);
+        text-align: center;
+      }
+
+      .bmc-aside .hero-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .bmc-aside .hero-subtitle {
+        font-size: 0.92rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .bmc-aside .hero-buttons {
+        margin: 0;
+      }
+
+      .bmc-aside .btn-img img {
+        max-width: 220px;
+      }
+
       /* ══════════════════ PUZZLE ══════════════════ */
       .puzzle-image-grid {
         display: grid;
@@ -1083,6 +1116,39 @@
               </div>
             </div>
 
+            <div class="bmc-aside">
+              <h3 class="hero-title">¿Te sacó una sonrisa?</h3>
+              <p class="hero-subtitle">
+                Armar estas preguntas con datos reales (no relleno de
+                internet) me tomó su tiempo. Si te divertiste, invítame un
+                café ☕ — cada uno me ayuda a seguir creando cosas como esta.
+              </p>
+              <div class="hero-buttons">
+                <a
+                  href="https://www.buymeacoffee.com/samuelmex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-img"
+                  onclick="
+                    if (window.clarity) {
+                      clarity('event', 'open_bmc_quiz_end');
+                    }
+                  "
+                >
+                  <img
+                    src="assets/img/BMCImg.png"
+                    alt="Invítame un café"
+                    style="
+                      max-width: 100%;
+                      border-radius: 8px;
+                      cursor: pointer;
+                      opacity: 0.92;
+                    "
+                  />
+                </a>
+              </div>
+            </div>
+
             <div class="choice-row">
               <button class="btn btn-primary" id="quizPlayAgain">
                 Jugar de nuevo
@@ -1182,10 +1248,82 @@
               </div>
             </div>
 
+            <div class="bmc-aside">
+              <h3 class="hero-title">¿Te gustó el paisaje?</h3>
+              <p class="hero-subtitle">
+                Cada foto del rompecabezas la tomé yo mismo en mis años
+                viviendo aquí. Si te gustó armarlo, invítame un café ☕ — me
+                ayuda a seguir compartiendo Escocia.
+              </p>
+              <div class="hero-buttons">
+                <a
+                  href="https://www.buymeacoffee.com/samuelmex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-img"
+                  onclick="
+                    if (window.clarity) {
+                      clarity('event', 'open_bmc_puzzle_end');
+                    }
+                  "
+                >
+                  <img
+                    src="assets/img/BMCImg.png"
+                    alt="Invítame un café"
+                    style="
+                      max-width: 100%;
+                      border-radius: 8px;
+                      cursor: pointer;
+                      opacity: 0.92;
+                    "
+                  />
+                </a>
+              </div>
+            </div>
+
             <div class="choice-row">
               <button class="btn btn-tertiary" id="puzzlePlayAgain">
                 Elegir otra foto
               </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="container">
+          <div class="pdf-promo pdf-promo--compact" style="margin-bottom: 2.5rem">
+            <div class="pdf-promo-cover">
+              <img
+                src="assets/img/BMCPDFGuide.png"
+                alt="Portada de la guía Guíame Ahí Edimburgo en PDF"
+                loading="lazy"
+              />
+              <span class="pdf-promo-ribbon">PDF</span>
+            </div>
+            <div class="pdf-promo-body">
+              <p class="pdf-promo-eyebrow">Guía en PDF</p>
+              <p>
+                ¿Te gustó jugar? La guía completa en PDF tiene mucho más para
+                tu próximo viaje: rutas, escapadas y mis tours favoritos por
+                Escocia.
+              </p>
+              <div class="pdf-promo-cta-row">
+                <p class="pdf-promo-price">£6.97<span>pago único</span></p>
+                <a
+                  href="https://buymeacoffee.com/samuelmex/e/565709"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary"
+                  onclick="
+                    if (window.clarity) {
+                      clarity('event', 'pdf_guide_click_games');
+                    }
+                  "
+                >
+                  Consigue tu guía en PDF
+                </a>
+              </div>
             </div>
           </div>
         </div>
