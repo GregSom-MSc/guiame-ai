@@ -1512,54 +1512,6 @@ p.itinerary-card-desc {
   max-width: 220px;
 }
 
-/* Sticky pill jump-nav, positioned just under the site's own sticky
-   header (77px: 1rem top+bottom padding + the 45px logo) rather than
-   overlapping it. Pill color reuses the same navy-wash tint as the
-   #features band elsewhere, not a new hue. */
-.pill-nav-wrap {
-  position: sticky;
-  top: 77px;
-  z-index: 900;
-  background: rgba(255, 255, 255, 0.97);
-  border-bottom: 1px solid #e0e7ee;
-  padding: 0.7rem 0;
-}
-
-.pill-nav {
-  display: flex;
-  gap: 0.6rem;
-  overflow-x: auto;
-  padding: 0 1.2rem;
-  scrollbar-width: none;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.pill-nav::-webkit-scrollbar {
-  display: none;
-}
-
-.pill-nav a {
-  flex-shrink: 0;
-  padding: 0.5rem 1.1rem;
-  border-radius: 8px;
-  background: rgba(8, 29, 60, 0.06);
-  border: 1px solid rgba(8, 29, 60, 0.12);
-  color: var(--color-navy);
-  font-size: 0.85rem;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-}
-
-.pill-nav a:hover,
-.pill-nav a:focus-visible {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #fff;
-  outline: none;
-}
-
 /* Full-bleed photo band used as each section's header (same navy-wash
    pattern as .hero-background2, applied twice with different photos) and
    again, faded harder, as the divider strip between the two sections. */
@@ -1698,13 +1650,14 @@ p.itinerary-card-desc {
    with white text (matches .section-toggle's pill so every level of
    toggle in this page reads as the same control); open = flips to white
    with navy text, signaling "this one's active" without needing a second
-   color. Square corners throughout (8px, matching .btn) rather than the
-   fully-rounded pill-nav look. */
+   color. Square corners throughout (8px, matching .btn). scroll-margin-top
+   just clears the sticky site header (~77px) for a direct #slug link;
+   there's no pill-nav anymore to also account for. */
 .topic-accordion {
   border-radius: 8px;
   margin-bottom: 0.9rem;
   overflow: hidden;
-  scroll-margin-top: 160px;
+  scroll-margin-top: 90px;
   border: 1px solid #e0e7ee;
 }
 
@@ -1878,11 +1831,6 @@ a.entry-item:focus-visible .entry-item-link {
   transition: all 0.2s ease;
 }
 
-@media (max-width: 640px) {
-  .pill-nav-wrap {
-    top: 70px;
-  }
-}
 
 /* ============================================
 CONTACT PAGE SPECIFIC STYLES

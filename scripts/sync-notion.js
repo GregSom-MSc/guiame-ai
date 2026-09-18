@@ -4,7 +4,7 @@
 //   - Top level of the page  -> a "section" (gets its own photo band)
 //   - A toggle whose children are ALL toggles -> a "subtitle" grouping
 //   - A toggle whose children are anything else -> a "topic" (an accordion
-//     of entries, shown in the pill nav)
+//     of entries)
 // This is derived purely from the block structure, not a hardcoded list of
 // titles, so adding/renaming/moving a toggle in Notion needs no code change.
 //
@@ -151,16 +151,14 @@ function renderEntry(block) {
                 </li>`;
 }
 
-function renderToggleNode(block, slugify, pillNavEntries) {
+function renderToggleNode(block, slugify) {
   const title = plainText(getRichText(block)).trim() || "Sin título";
   const children = block._children || [];
   const childToggles = children.filter(isToggleLike);
   const isGroup = children.length > 0 && childToggles.length === children.length;
 
   if (isGroup) {
-    const inner = children
-      .map((c) => renderToggleNode(c, slugify, pillNavEntries))
-      .join("\n");
+    const inner = children.map((c) => renderToggleNode(c, slugify)).join("\n");
     return `          <details class="subtitle-toggle">
             <summary>${escapeHtml(title)}</summary>
             <div class="subtitle-toggle-body">
@@ -170,7 +168,6 @@ ${inner}
   }
 
   const slug = slugify(title);
-  pillNavEntries.push({ slug, title });
   const entriesHtml = children
     .map(renderEntry)
     .filter(Boolean)
@@ -186,12 +183,12 @@ ${entriesHtml}
           </details>`;
 }
 
-function renderSection(block, slugify, pillNavEntries) {
+function renderSection(block, slugify) {
   const title = plainText(getRichText(block)).trim() || "Sin título";
   const photo = SECTION_PHOTOS[title] || DEFAULT_SECTION_PHOTO;
   const children = block._children || [];
   const innerHtml = children
-    .map((c) => (isToggleLike(c) ? renderToggleNode(c, slugify, pillNavEntries) : ""))
+    .map((c) => (isToggleLike(c) ? renderToggleNode(c, slugify) : ""))
     .filter(Boolean)
     .join("\n\n");
 
@@ -213,17 +210,6 @@ ${innerHtml}
           </div>
         </section>
       </details>`;
-}
-
-function renderPillNav(entries) {
-  const links = entries
-    .map((e) => `          <a href="#${e.slug}">${escapeHtml(e.title)}</a>`)
-    .join("\n");
-  return `      <div class="pill-nav-wrap">
-        <nav class="pill-nav" aria-label="Ir directo a un tema">
-${links}
-        </nav>
-      </div>`;
 }
 
 function renderDivider() {
@@ -251,10 +237,7 @@ async function buildContentHtml(pageId) {
   }
 
   const slugify = makeSlugger();
-  const pillNavEntries = [];
-  const sectionHtmlParts = sections.map((s) =>
-    renderSection(s, slugify, pillNavEntries)
-  );
+  const sectionHtmlParts = sections.map((s) => renderSection(s, slugify));
 
   const withDividers = [];
   sectionHtmlParts.forEach((html, i) => {
@@ -262,7 +245,7 @@ async function buildContentHtml(pageId) {
     if (i < sectionHtmlParts.length - 1) withDividers.push(renderDivider());
   });
 
-  return `${renderPillNav(pillNavEntries)}\n\n${withDividers.join("\n\n")}`;
+  return withDividers.join("\n\n");
 }
 
 function writeContentIntoFile(filePath, contentHtml) {
