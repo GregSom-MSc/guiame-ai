@@ -2,9 +2,10 @@
 //
 // Each configured page must be structured as nested Notion "toggle" blocks:
 //   - Top level of the page  -> a "section" (gets its own photo band)
-//   - A toggle whose children are ALL toggles -> a "subtitle" grouping
-//   - A toggle whose children are anything else -> a "topic" (an accordion
-//     of entries)
+//   - A toggle with at least one toggle child -> a "subtitle" grouping,
+//     rendering its nested toggles AND any of its own direct entries
+//   - A toggle with no toggle children -> a "topic" (an accordion of
+//     entries/prose)
 // This is derived purely from the block structure, not a hardcoded list of
 // titles, so adding/renaming/moving a toggle in Notion needs no code change.
 //
@@ -42,6 +43,8 @@ const DIVIDER_PHOTO = "assets/img/caltonhillpan.jpg";
 const START_MARKER = "<!-- NOTION:CONTENT:START";
 const END_MARKER = "<!-- NOTION:CONTENT:END -->";
 
+const LIST_ITEM_TYPES = ["bulleted_list_item", "numbered_list_item"];
+
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, "&amp;")
@@ -52,6 +55,20 @@ function escapeHtml(str) {
 
 function plainText(richText) {
   return (richText || []).map((rt) => rt.plain_text).join("");
+}
+
+// Preserves bold/italic and embedded line breaks (Notion's shift+Enter is a
+// literal "\n" inside a single rich-text run) instead of flattening
+// everything to plain text — needed for poems/prose, not just plain labels.
+function annotatedTextToHtml(richText) {
+  return (richText || [])
+    .map((rt) => {
+      let text = escapeHtml(rt.plain_text).replace(/\n/g, "<br>\n");
+      if (rt.annotations && rt.annotations.italic) text = `<em>${text}</em>`;
+      if (rt.annotations && rt.annotations.bold) text = `<strong>${text}</strong>`;
+      return text;
+    })
+    .join("");
 }
 
 // Notion has two kinds of "toggle": a plain Toggle list block (type
@@ -112,73 +129,115 @@ function makeSlugger() {
   };
 }
 
-function renderEntry(block) {
-  const richText = block[block.type] && block[block.type].rich_text;
+// A single list item (bulleted/numbered) -> one entry card, linked if it
+// carries a hyperlink annotation. Uses the rich-text array's own index to
+// split label vs. link, rather than searching concatenated plain text, so
+// a label that happens to repeat the link's display text elsewhere can't
+// throw off where the label is cut.
+function renderListEntry(block) {
+  const richText = getRichText(block);
   if (!richText || richText.length === 0) return null;
 
-  const linkSeg = richText.find((rt) => rt.href);
-  const fullText = plainText(richText);
-  let label = fullText;
-  if (linkSeg) {
-    const idx = fullText.lastIndexOf(linkSeg.plain_text);
-    if (idx !== -1) label = fullText.slice(0, idx);
-  }
-  label = label.replace(/[:\s]+$/, "").trim();
-  if (!label) label = fullText.trim();
-  if (!label) return null;
+  const linkIdx = richText.findIndex((rt) => rt.href);
+  const linkSeg = linkIdx !== -1 ? richText[linkIdx] : null;
+  const labelRuns = linkSeg ? richText.slice(0, linkIdx) : richText;
+
+  let labelHtml = annotatedTextToHtml(labelRuns).replace(/[:\s]+$/, "").trim();
+  if (!labelHtml) labelHtml = annotatedTextToHtml(richText).trim();
+  if (!labelHtml) return null;
 
   if (linkSeg) {
-    return `                <li>
-                  <a
-                    href="${escapeHtml(linkSeg.href)}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="entry-item"
-                    aria-label="Ver enlace"
-                  >
-                    <div class="entry-item-text">
-                      <strong>${escapeHtml(label)}</strong>
-                      <p>${escapeHtml(linkSeg.href)}</p>
-                    </div>
-                    <span class="entry-item-link" aria-hidden="true">↗</span>
-                  </a>
-                </li>`;
-  }
-  return `                <li class="entry-item">
+    return `                <a
+                  href="${escapeHtml(linkSeg.href)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="entry-item"
+                  aria-label="Ver enlace"
+                >
                   <div class="entry-item-text">
-                    <strong>${escapeHtml(label)}</strong>
+                    <strong>${labelHtml}</strong>
+                    <p>${escapeHtml(linkSeg.href)}</p>
                   </div>
-                </li>`;
+                  <span class="entry-item-link" aria-hidden="true">↗</span>
+                </a>`;
+  }
+  return `                <div class="entry-item">
+                  <div class="entry-item-text">
+                    <strong>${labelHtml}</strong>
+                  </div>
+                </div>`;
+}
+
+// Consecutive plain "paragraph" blocks (a poem, a story) are joined into
+// ONE flowing card instead of one fragmented card per line — an empty
+// paragraph (Notion's own way of marking a blank line between stanzas)
+// naturally becomes a blank line here too, and each block's own embedded
+// "\n" runs are preserved via annotatedTextToHtml above.
+function renderProseGroup(paragraphBlocks) {
+  const html = paragraphBlocks
+    .map((b) => annotatedTextToHtml(getRichText(b)))
+    .join("<br>\n");
+  return `                <div class="entry-item">
+                  <div class="entry-item-text">
+                    <p class="entry-item-prose">${html}</p>
+                  </div>
+                </div>`;
+}
+
+// Renders a mixed list of children in order — nested toggles, list-item
+// entries, and prose paragraphs can all sit side by side (e.g. "Shopping"
+// holding both sub-category toggles AND one direct link), which is why
+// this isn't a strict "is this toggle a pure group or a pure leaf" check.
+function renderChildren(children, slugify) {
+  const parts = [];
+  let proseBuffer = [];
+
+  function flushProse() {
+    if (proseBuffer.length > 0) {
+      parts.push(renderProseGroup(proseBuffer));
+      proseBuffer = [];
+    }
+  }
+
+  for (const child of children) {
+    if (isToggleLike(child)) {
+      flushProse();
+      parts.push(renderToggleNode(child, slugify));
+    } else if (LIST_ITEM_TYPES.includes(child.type)) {
+      flushProse();
+      const rendered = renderListEntry(child);
+      if (rendered) parts.push(rendered);
+    } else if (child.type === "paragraph") {
+      proseBuffer.push(child);
+    }
+    // Other block types (dividers, images, etc.) are skipped for now.
+  }
+  flushProse();
+  return parts;
 }
 
 function renderToggleNode(block, slugify) {
   const title = plainText(getRichText(block)).trim() || "Sin título";
   const children = block._children || [];
-  const childToggles = children.filter(isToggleLike);
-  const isGroup = children.length > 0 && childToggles.length === children.length;
+  const isGroup = children.some(isToggleLike);
+  const innerParts = renderChildren(children, slugify);
 
   if (isGroup) {
-    const inner = children.map((c) => renderToggleNode(c, slugify)).join("\n");
     return `          <details class="subtitle-toggle">
             <summary>${escapeHtml(title)}</summary>
             <div class="subtitle-toggle-body">
-${inner}
+${innerParts.join("\n")}
             </div>
           </details>`;
   }
 
   const slug = slugify(title);
-  const entriesHtml = children
-    .map(renderEntry)
-    .filter(Boolean)
-    .join("\n");
-
   return `          <details class="topic-accordion" id="${slug}">
             <summary>${escapeHtml(title)}</summary>
             <div class="topic-accordion-body">
-              <ul class="entry-list">
-${entriesHtml}
-              </ul>
+              <div class="entry-list">
+${innerParts.join("\n")}
+              </div>
             </div>
           </details>`;
 }
@@ -187,10 +246,7 @@ function renderSection(block, slugify) {
   const title = plainText(getRichText(block)).trim() || "Sin título";
   const photo = SECTION_PHOTOS[title] || DEFAULT_SECTION_PHOTO;
   const children = block._children || [];
-  const innerHtml = children
-    .map((c) => (isToggleLike(c) ? renderToggleNode(c, slugify) : ""))
-    .filter(Boolean)
-    .join("\n\n");
+  const innerHtml = renderChildren(children, slugify).join("\n\n");
 
   return `      <details class="section-toggle">
         <summary>${escapeHtml(title)}</summary>

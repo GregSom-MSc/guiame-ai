@@ -1704,7 +1704,6 @@ p.itinerary-card-desc {
 }
 
 .entry-list {
-  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -1757,12 +1756,14 @@ p.itinerary-card-desc {
   gap: 0.9rem;
 }
 
-/* Solid navy on the left, fading to transparent by ~60% — "diffused to
-   the right" — so the name/link text sits on strong color while the link
-   button at the far right lands on the plain white body behind it.
-   Entries with a real destination use this class on the <a> itself (the
-   whole card is the link, not just the small icon); entries with nothing
-   to link to (e.g. a poem stub) keep it on a plain <li> instead. */
+/* Solid navy staying solid until 85% before fading — only the last sliver
+   (reserved for the link icon) dilutes. It was 55% before, which worked
+   for a short one-line name but let long/wrapped text (a fuller
+   description, a full poem stanza) drift onto the faded, near-white part
+   of the card, where light-colored text became illegible. Entries with a
+   real destination use this class on the <a> itself (the whole card is
+   the link, not just the small icon); entries with nothing to link to
+   (a poem, a plain description) keep it on a plain <div> instead. */
 .entry-item {
   display: flex;
   align-items: center;
@@ -1773,7 +1774,7 @@ p.itinerary-card-desc {
   background: linear-gradient(
     to right,
     rgba(8, 29, 60, 0.92) 0%,
-    rgba(8, 29, 60, 0.92) 55%,
+    rgba(8, 29, 60, 0.92) 85%,
     rgba(8, 29, 60, 0) 100%
   );
   transition: box-shadow 0.2s ease;
@@ -1815,6 +1816,17 @@ a.entry-item:focus-visible .entry-item-link {
   color: rgba(255, 255, 255, 0.85);
   line-height: 1.4;
   word-break: break-all;
+}
+
+/* Poem/prose body text (no name, no link) — a normal reading size with
+   normal word-wrap, not the small break-all styling above meant for
+   raw URLs sitting under a name. */
+.entry-item-text p.entry-item-prose {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.7;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .entry-item-link {
