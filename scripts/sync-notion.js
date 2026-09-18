@@ -54,6 +54,24 @@ function plainText(richText) {
   return (richText || []).map((rt) => rt.plain_text).join("");
 }
 
+// Notion has two kinds of "toggle": a plain Toggle list block (type
+// "toggle"), and a Toggle heading (a heading_1/2/3 block with its toggle
+// arrow turned on — same rich_text/children shape, but the API reports it
+// as type "heading_1" etc. with is_toggleable: true). Treat both the same.
+const HEADING_TYPES = ["heading_1", "heading_2", "heading_3"];
+
+function isToggleLike(block) {
+  if (block.type === "toggle") return true;
+  if (HEADING_TYPES.includes(block.type)) {
+    return Boolean(block[block.type].is_toggleable);
+  }
+  return false;
+}
+
+function getRichText(block) {
+  return block[block.type] && block[block.type].rich_text;
+}
+
 async function fetchChildren(blockId) {
   const blocks = [];
   let cursor;
@@ -134,9 +152,9 @@ function renderEntry(block) {
 }
 
 function renderToggleNode(block, slugify, pillNavEntries) {
-  const title = plainText(block.toggle.rich_text).trim() || "Sin título";
+  const title = plainText(getRichText(block)).trim() || "Sin título";
   const children = block._children || [];
-  const childToggles = children.filter((c) => c.type === "toggle");
+  const childToggles = children.filter(isToggleLike);
   const isGroup = children.length > 0 && childToggles.length === children.length;
 
   if (isGroup) {
@@ -169,11 +187,11 @@ ${entriesHtml}
 }
 
 function renderSection(block, slugify, pillNavEntries) {
-  const title = plainText(block.toggle.rich_text).trim() || "Sin título";
+  const title = plainText(getRichText(block)).trim() || "Sin título";
   const photo = SECTION_PHOTOS[title] || DEFAULT_SECTION_PHOTO;
   const children = block._children || [];
   const innerHtml = children
-    .map((c) => (c.type === "toggle" ? renderToggleNode(c, slugify, pillNavEntries) : ""))
+    .map((c) => (isToggleLike(c) ? renderToggleNode(c, slugify, pillNavEntries) : ""))
     .filter(Boolean)
     .join("\n\n");
 
@@ -217,9 +235,19 @@ function renderDivider() {
 
 async function buildContentHtml(pageId) {
   const topBlocks = await fetchChildren(pageId);
-  const sections = topBlocks.filter((b) => b.type === "toggle");
+  const sections = topBlocks.filter(isToggleLike);
   if (sections.length === 0) {
-    throw new Error("No top-level toggle blocks found on the Notion page.");
+    // Diagnostic only — block types/flags, never rich_text content.
+    const seenTypes = topBlocks
+      .map((b) =>
+        HEADING_TYPES.includes(b.type)
+          ? `${b.type}(is_toggleable=${Boolean(b[b.type].is_toggleable)})`
+          : b.type
+      )
+      .join(", ");
+    throw new Error(
+      `No top-level toggle-like blocks found. Top-level block types seen: [${seenTypes}]`
+    );
   }
 
   const slugify = makeSlugger();
