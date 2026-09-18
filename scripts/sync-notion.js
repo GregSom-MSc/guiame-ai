@@ -184,6 +184,21 @@ function renderProseGroup(paragraphBlocks) {
                 </div>`;
 }
 
+// A plain "paragraph" block is Notion's default for *both* a poem line
+// AND a plain "Name: description" venue line typed without ever turning
+// on the bullet-list formatting — the block type alone can't tell them
+// apart. Content can: a real link, or a colon early in the line (the
+// "Name: description" shape every venue/list line follows), means it's
+// its own standalone entry; anything else is treated as flowing prose to
+// be grouped with its neighbors (a poem's verses).
+function looksLikeListEntry(richText) {
+  if (!richText || richText.length === 0) return false;
+  if (richText.some((rt) => rt.href)) return true;
+  const text = plainText(richText);
+  const colonIdx = text.indexOf(":");
+  return colonIdx !== -1 && colonIdx < 60 && colonIdx < text.length - 1;
+}
+
 // Renders a mixed list of children in order — nested toggles, list-item
 // entries, and prose paragraphs can all sit side by side (e.g. "Shopping"
 // holding both sub-category toggles AND one direct link), which is why
@@ -208,7 +223,13 @@ function renderChildren(children, slugify) {
       const rendered = renderListEntry(child);
       if (rendered) parts.push(rendered);
     } else if (child.type === "paragraph") {
-      proseBuffer.push(child);
+      if (looksLikeListEntry(getRichText(child))) {
+        flushProse();
+        const rendered = renderListEntry(child);
+        if (rendered) parts.push(rendered);
+      } else {
+        proseBuffer.push(child);
+      }
     }
     // Other block types (dividers, images, etc.) are skipped for now.
   }
