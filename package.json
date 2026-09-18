@@ -1,0 +1,12 @@
+{
+  "name": "guiame-ai-notion-sync",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Syncs Notion knowledge-base pages into static HTML pages on guiame.ai",
+  "scripts": {
+    "sync-notion": "node scripts/sync-notion.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  }
+}

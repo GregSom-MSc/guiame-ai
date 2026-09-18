@@ -1477,6 +1477,414 @@ p.itinerary-card-desc {
 }
 
 /* ============================================
+   guiaedin.html — Notion-synced knowledge base page
+   ============================================ */
+
+/* Same "invite a coffee" aside already shipped on games.html — copied
+   here (not shared via a single class both pages import) since games.html
+   keeps its component CSS inline in its own <style> block; this page
+   follows the other pages' pattern of living in the shared stylesheet. */
+.bmc-aside {
+  max-width: 420px;
+  margin: 2rem auto 0;
+  padding: 2rem 1.5rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #081d3c 0%, #0c2b5a 100%);
+  box-shadow: 0 10px 32px rgba(8, 29, 60, 0.25);
+  text-align: center;
+}
+
+.bmc-aside .hero-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.bmc-aside .hero-subtitle {
+  font-size: 0.92rem;
+  margin-bottom: 1.25rem;
+}
+
+.bmc-aside .hero-buttons {
+  margin: 0;
+}
+
+.bmc-aside .btn-img img {
+  max-width: 220px;
+}
+
+/* Sticky pill jump-nav, positioned just under the site's own sticky
+   header (77px: 1rem top+bottom padding + the 45px logo) rather than
+   overlapping it. Pill color reuses the same navy-wash tint as the
+   #features band elsewhere, not a new hue. */
+.pill-nav-wrap {
+  position: sticky;
+  top: 77px;
+  z-index: 900;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid #e0e7ee;
+  padding: 0.7rem 0;
+}
+
+.pill-nav {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0 1.2rem;
+  scrollbar-width: none;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pill-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.pill-nav a {
+  flex-shrink: 0;
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  background: rgba(8, 29, 60, 0.06);
+  border: 1px solid rgba(8, 29, 60, 0.12);
+  color: var(--color-navy);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.pill-nav a:hover,
+.pill-nav a:focus-visible {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  outline: none;
+}
+
+/* Full-bleed photo band used as each section's header (same navy-wash
+   pattern as .hero-background2, applied twice with different photos) and
+   again, faded harder, as the divider strip between the two sections. */
+.section-band {
+  position: relative;
+  padding: 3.5rem 2rem;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.section-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 29, 60, 0.85) 0%,
+    rgba(12, 43, 90, 0.85) 100%
+  );
+}
+
+.section-band-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.section-band h2 {
+  color: #fff;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0 0 0.5rem;
+}
+
+.section-band p {
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Wraps a .section-band in the same reveal interaction as the topic
+   accordions below it — collapsed to a small centered pill by default.
+   On open, the pill doesn't stay put as a redundant second copy of the
+   title sitting on top of the band's own (bigger) title — it shrinks
+   down to a slim, text-free close-tab flush against the band, so the
+   band itself reads as what the pill "became" rather than something
+   stacked below a leftover duplicate label. */
+.section-toggle {
+  text-align: center;
+  padding: 1.6rem 0;
+}
+
+.section-toggle[open] {
+  padding-bottom: 0;
+}
+
+/* Child combinator (>) throughout this block — .section-toggle now wraps
+   the whole topic-accordion list too, so a plain descendant selector here
+   would also match every nested .topic-accordion summary. */
+.section-toggle > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  cursor: pointer;
+  padding: 0.75rem 1.8rem;
+  border-radius: 8px;
+  background: var(--color-navy);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  transition: all 0.2s ease;
+}
+
+.section-toggle > summary::-webkit-details-marker {
+  display: none;
+}
+
+.section-toggle > summary::after {
+  content: "▾";
+  color: var(--color-accent-light);
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.section-toggle[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+.section-toggle > summary:hover,
+.section-toggle > summary:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-navy);
+  outline: none;
+}
+
+.section-toggle[open] > summary {
+  gap: 0;
+  padding: 0.35rem 1.2rem;
+  border-radius: 8px 8px 0 0;
+  background: rgba(8, 29, 60, 0.9);
+  font-size: 0;
+}
+
+.section-toggle[open] > summary::after {
+  color: #fff;
+}
+
+.section-toggle[open] > summary:hover,
+.section-toggle[open] > summary:focus-visible {
+  background: var(--color-accent);
+}
+
+.section-toggle[open] > summary:hover::after,
+.section-toggle[open] > summary:focus-visible::after {
+  color: var(--color-navy);
+}
+
+.section-divider-photo {
+  position: relative;
+  height: 130px;
+  background-size: cover;
+  background-position: center;
+}
+
+.section-divider-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 29, 60, 0.8);
+}
+
+/* Each Notion toggle → a native <details>. Collapsed = a solid navy bar
+   with white text (matches .section-toggle's pill so every level of
+   toggle in this page reads as the same control); open = flips to white
+   with navy text, signaling "this one's active" without needing a second
+   color. Square corners throughout (8px, matching .btn) rather than the
+   fully-rounded pill-nav look. */
+.topic-accordion {
+  border-radius: 8px;
+  margin-bottom: 0.9rem;
+  overflow: hidden;
+  scroll-margin-top: 160px;
+  border: 1px solid #e0e7ee;
+}
+
+.topic-accordion summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.1rem 1.3rem;
+  font-weight: 700;
+  background: var(--color-navy);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.topic-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.topic-accordion summary::after {
+  content: "▸";
+  color: #fff;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.topic-accordion[open] summary {
+  background: #fff;
+  color: var(--color-navy);
+  border-bottom: 1px solid #e0e7ee;
+}
+
+.topic-accordion[open] summary::after {
+  color: var(--color-accent);
+  transform: rotate(90deg);
+}
+
+.topic-accordion-body {
+  padding: 1rem 1rem 1.2rem;
+  background: #fff;
+}
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+/* Middle grouping layer (e.g. "Alimento: Foodie Guide") between a
+   section and its leaf topic-accordions — a plain underlined heading
+   rather than another pill/bar, so the visual hierarchy reads as
+   section (pill) > subtitle (heading) > topic (bar) without three
+   competing button styles. */
+.subtitle-toggle {
+  margin: 1.4rem 0;
+}
+
+.subtitle-toggle > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  list-style: none;
+  cursor: pointer;
+  padding: 0.5rem 0 0.7rem;
+  border-bottom: 2px solid var(--color-accent);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--color-navy);
+}
+
+.subtitle-toggle > summary::-webkit-details-marker {
+  display: none;
+}
+
+.subtitle-toggle > summary::after {
+  content: "▸";
+  color: var(--color-accent);
+  margin-left: auto;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.subtitle-toggle[open] > summary::after {
+  transform: rotate(90deg);
+}
+
+.subtitle-toggle-body {
+  padding: 0.9rem 0 0 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* Solid navy on the left, fading to transparent by ~60% — "diffused to
+   the right" — so the name/link text sits on strong color while the link
+   button at the far right lands on the plain white body behind it.
+   Entries with a real destination use this class on the <a> itself (the
+   whole card is the link, not just the small icon); entries with nothing
+   to link to (e.g. a poem stub) keep it on a plain <li> instead. */
+.entry-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: linear-gradient(
+    to right,
+    rgba(8, 29, 60, 0.92) 0%,
+    rgba(8, 29, 60, 0.92) 55%,
+    rgba(8, 29, 60, 0) 100%
+  );
+  transition: box-shadow 0.2s ease;
+}
+
+a.entry-item {
+  cursor: pointer;
+}
+
+a.entry-item:hover,
+a.entry-item:focus-visible {
+  box-shadow: 0 4px 14px rgba(8, 29, 60, 0.28);
+  outline: none;
+}
+
+/* The icon reacts to hovering the whole card, not just its own small
+   box — it's decorative (aria-hidden) now that the <a> is the real
+   target, so it has no meaningful :hover of its own. */
+a.entry-item:hover .entry-item-link,
+a.entry-item:focus-visible .entry-item-link {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.entry-item-text {
+  text-align: left;
+}
+
+.entry-item-text strong {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.entry-item-text p {
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.entry-item-link {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(8, 29, 60, 0.08);
+  color: var(--color-navy);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .pill-nav-wrap {
+    top: 70px;
+  }
+}
+
+/* ============================================
 CONTACT PAGE SPECIFIC STYLES
 ============================================ */
 

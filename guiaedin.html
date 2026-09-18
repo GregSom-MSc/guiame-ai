@@ -1,833 +1,1091 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Guía local de Edimburgo por Guíame.ai. Recomendaciones para comer, beber, caminar y descubrir la ciudad.">
-  <title>Guía Edinburgh | Guíame.ai</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" href="https://guiame.ai/assets/img/e_f.ico">
-  <style>
-    /* ===== GUIDE PAGE STYLES ===== */
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#081D3C" />
 
-    /* Guide Hero Section */
-    .guide-hero {
-      background: linear-gradient(135deg, #134074 0%, #0f2546 100%);
-      color: white;
-      padding: 80px 20px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+    <title>
+      Guíame Ahí - Edinburgh | Guía completa y curiosidades | Guíame.ai
+    </title>
 
-    .guide-hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-      background-size: cover;
-      opacity: 0.5;
-    }
+    <meta
+      name="description"
+      content="La guía viva de Edinburgh de Samuel Moreno: restaurantes, pubs, whisky, souvenirs, poemas escoceses, leyendas y curiosidades locales — actualizada directamente desde sus notas."
+    />
+    <meta name="author" content="Samuel Moreno" />
+    <meta name="robots" content="index, follow" />
 
-    .guide-hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 1;
-    }
+    <link rel="canonical" href="https://guiame.ai/guiaedin.html" />
 
-    .hero-subtitle {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      position: relative;
-      z-index: 1;
-    }
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Guíame Ahí - Edinburgh | Guía completa y curiosidades"
+    />
+    <meta
+      property="og:description"
+      content="Restaurantes, pubs, whisky, souvenirs, poemas escoceses, leyendas y curiosidades locales de Edinburgh, seleccionados por un guía local."
+    />
+    <meta
+      property="og:image"
+      content="https://guiame.ai/assets/img/iconOG.png"
+    />
+    <meta property="og:url" content="https://guiame.ai/guiaedin.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="article:author" content="Samuel Moreno" />
 
-    /* Table of Contents */
-    .toc-section {
-      background-color: #f0f4f8;
-      padding: 60px 20px;
-    }
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Guíame Ahí - Edinburgh | Guíame.ai" />
+    <meta
+      name="twitter:description"
+      content="La guía viva de Edinburgh: restaurantes, pubs, whisky, souvenirs, poemas y curiosidades locales."
+    />
+    <meta
+      name="twitter:image"
+      content="https://guiame.ai/assets/img/iconOG.png"
+    />
 
-    .toc-section h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 2rem;
-      color: #134074;
-    }
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="assets/img/icon.ico" />
 
-    .toc-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .toc-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 25px 15px;
-      background: white;
-      border-radius: 12px;
-      text-decoration: none;
-      color: #134074;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      gap: 10px;
-    }
-
-    .toc-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(19, 64, 116, 0.2);
-      background: #f9f3ff;
-    }
-
-    .toc-emoji {
-      font-size: 2.5rem;
-    }
-
-    /* Guide Sections */
-    .guide-section {
-      padding: 60px 20px;
-      background-color: white;
-    }
-
-    .guide-section.alternate {
-      background-color: #f9fafb;
-    }
-
-    .guide-section h2 {
-      font-size: 2.2rem;
-      color: #134074;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-intro {
-      text-align: center;
-      margin-bottom: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      color: #555;
-      font-size: 1.05rem;
-    }
-
-    /* Cards Grid */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .content-card {
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      border-left: 4px solid #134074;
-    }
-
-    .content-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(19, 64, 116, 0.15);
-    }
-
-    .content-card h3 {
-      color: #134074;
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-
-    .content-card p {
-      color: #555;
-      line-height: 1.8;
-      margin-bottom: 15px;
-    }
-
-    .content-card ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .content-card li {
-      padding: 8px 0;
-      color: #555;
-      border-bottom: 1px solid #eee;
-    }
-
-    .content-card li:last-child {
-      border-bottom: none;
-    }
-
-    .content-card.featured {
-      background: linear-gradient(135deg, #134074 0%, #0f2546 100%);
-      color: white;
-      border-left: 0;
-    }
-
-    .content-card.featured h3 {
-      color: #4db8ff;
-    }
-
-    .content-card.featured p {
-      color: #e0e7ff;
-    }
-
-    .content-card.featured li {
-      color: #e0e7ff;
-      border-bottom-color: rgba(255,255,255,0.1);
-    }
-
-    .content-card.featured .btn-secondary {
-      background: white;
-      color: #134074;
-    }
-
-    .content-card.featured .btn-secondary:hover {
-      background: #4db8ff;
-      color: white;
-    }
-
-    .info-card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      border-left: 4px solid #4db8ff;
-    }
-
-    .info-card h3 {
-      color: #134074;
-      margin-bottom: 10px;
-    }
-
-    .info-card p {
-      color: #555;
-      line-height: 1.7;
-    }
-
-    .info-card a {
-      color: #134074;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .info-card a:hover {
-      text-decoration: underline;
-    }
-
-    .recommendation {
-      color: #134074;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      background: linear-gradient(135deg, #134074 0%, #0f2546 100%);
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    .cta-section h2 {
-      color: white;
-      margin-bottom: 15px;
-      font-size: 2rem;
-    }
-
-    .cta-section p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-      opacity: 0.95;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-secondary {
-      background-color: white;
-      color: #134074;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 6px;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-      background-color: #4db8ff;
-      color: white;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .guide-hero h1 {
-        font-size: 1.8rem;
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": "https://guiame.ai/guiaedin.html",
+        "url": "https://guiame.ai/guiaedin.html",
+        "name": "Guíame Ahí - Edinburgh",
+        "description": "Guía viva de Edinburgh con restaurantes, pubs, whisky, souvenirs, poemas escoceses y curiosidades locales.",
+        "inLanguage": "es",
+        "author": {
+          "@type": "Person",
+          "name": "Samuel Moreno",
+          "sameAs": [
+            "https://www.linkedin.com/in/samuelgmoreno",
+            "https://www.buymeacoffee.com/samuelmex"
+          ]
+        },
+        "publisher": {
+          "@id": "https://guiame.ai/#organization"
+        },
+        "isPartOf": {
+          "@id": "https://guiame.ai/#website"
+        }
       }
+    </script>
 
-      .hero-subtitle {
-        font-size: 1rem;
-      }
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "vudv3j54i7");
+    </script>
+  </head>
 
-      .guide-section h2 {
-        font-size: 1.8rem;
-      }
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <a class="logo" href="index.html">
+          <img
+            src="assets/img/icon.png"
+            alt="Guíame.ai Logo"
+            class="logo-img"
+          />
+          <span class="logo-text">By Samuel Moreno</span>
+        </a>
 
-      .toc-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 15px;
-      }
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">Inicio</a></li>
+            <li><a href="guide.html" class="nav-link">Guía</a></li>
+            <li>
+              <a
+                href="https://buymeacoffee.com/samuelmex/posts"
+                target="_blank"
+                class="nav-link"
+                >Blog</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://viajarporescocia.com/qr/?trackingCode=5c2409ae10384489b03cb40640714c85"
+                target="_blank"
+                class="nav-link"
+                >Reserva y Comenta</a
+              >
+            </li>
+            <li><a href="contact.html" class="nav-link">Escríbeme</a></li>
+          </ul>
+        </nav>
 
-      .toc-card {
-        padding: 20px 10px;
-      }
-
-      .toc-emoji {
-        font-size: 2rem;
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .btn {
-        min-width: unset;
-        width: 100%;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-      }
-
-      .btn-primary,
-      .btn-secondary {
-        width: 100%;
-      }
-    }
-
-    /* Smooth scrolling */
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ===== Header / Navigation ===== -->
-  <header>
-    <nav>
-      <div class="logo"><strong>Guíame.ai</strong></div>
-      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
-        &#9776;
-      </button>
-      <div class="menu" id="main-menu">
-        <a href="index.html">Inicio</a>
-        <a href="guide.html">Guía Original</a>
-        <a href="guiaedin.html">Guía Edinburgh</a>
-        <a href="contact.html">Contacto</a>
-        <a href="https://buymeacoffee.com/samuelmex/e/415862">Apóyame</a>
-        <a href="about.html">Sobre mí</a>
+        <button class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
-    </nav>
-  </header>
+    </header>
 
-  <!-- ===== Page Content ===== -->
-  <main>
-    <!-- Hero Section -->
-    <section class="guide-hero">
-      <div class="hero-overlay">
-        <h1>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Pocket Guide to Edinburgh 🏴󠁧󠁢󠁳󠁣󠁴󠁿</h1>
-        <p class="hero-subtitle">Gracias por acompañarme en esta aventura</p>
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="hero" style="min-height: 60vh">
+        <div
+          class="hero-background2"
+          style="
+            background-image:
+              linear-gradient(
+                135deg,
+                rgba(8, 29, 60, 0.82) 0%,
+                rgba(12, 43, 90, 0.82) 100%
+              ),
+              url(&quot;assets/img/CastleView.jpg&quot;);
+            background-size: cover;
+            background-position: center;
+          "
+        ></div>
+        <div class="hero-content">
+          <h1 class="hero-title">Guíame Ahí - Edinburgh</h1>
+          <p class="hero-subtitle">
+            Restaurantes, pubs, whisky, souvenirs, poemas y curiosidades — todo
+            lo que he ido guardando en mis años viviendo aquí, en un solo lugar
+            que se actualiza directamente desde mis notas.
+          </p>
+        </div>
+      </section>
+
+      <!-- NOTION:CONTENT:START — everything from here to NOTION:CONTENT:END
+           is regenerated by scripts/sync-notion.js on every sync run.
+           Hand edits inside this block will be overwritten within 2 hours;
+           edit the Notion page itself instead. Everything outside these
+           markers (head, header, hero, footer, CTA) is untouched by the
+           sync and safe to hand-edit normally. -->
+
+      <div class="pill-nav-wrap">
+        <nav class="pill-nav" aria-label="Ir directo a un tema">
+          <a href="#menus-escoceses">🍽️ Menús escoceses</a>
+          <a href="#internacional">🌍 Internacional</a>
+          <a href="#pubs-historicos">🍺 Pubs históricos</a>
+          <a href="#desayuno-y-almuerzo">☀️ Desayuno y almuerzo</a>
+          <a href="#afternoon-tea">🫖 Afternoon Tea</a>
+          <a href="#panito-y-cafe">🥐 Panito y café</a>
+          <a href="#helado">🍦 Helado</a>
+          <a href="#ropa-tartan-cashmere">🧣 Ropa (tartán / cashmere)</a>
+          <a href="#teashop">🍵 Teashop</a>
+          <a href="#whisky">🥃 Whisky</a>
+          <a href="#paisaje-cultural">🏛️ Paisaje cultural</a>
+          <a href="#libros">📚 Libros</a>
+          <a href="#souvenirs-de-harry-potter">⚡ Souvenirs de Harry Potter</a>
+          <a href="#tabaco">🚬 Tabaco</a>
+          <a href="#poemas-escoceses">📜 Poemas escoceses</a>
+          <a href="#la-leyenda-de-mckenzie">👻 La leyenda de Mckenzie</a>
+          <a href="#koestler-parapsychology-unit">🔮 Koestler Parapsychology Unit</a>
+          <a href="#harry-potter-noticias-y-melodias">🪄 Harry Potter: noticias y melodías</a>
+          <a href="#bello-libro-de-edinburgh">📖 Bello libro de Edinburgh</a>
+          <a href="#inglaterra-vs-escocia">⚔️ Inglaterra vs Escocia</a>
+          <a href="#que-es-el-haggis">🎥 ¿Qué es el haggis?</a>
+          <a href="#playlist-de-escocia">🎵 Playlist de Escocia</a>
+          <a href="#highland-cathedral">🎶 Highland Cathedral</a>
+        </nav>
       </div>
-    </section>
 
-    <!-- Table of Contents -->
-    <section class="toc-section">
-      <div class="container">
-        <h2>Contenido de la Guía</h2>
-        <div class="toc-grid">
-          <a href="#alimento" class="toc-card">
-            <span class="toc-emoji">🍖</span>
-            <span>Alimento</span>
-          </a>
-          <a href="#festivals" class="toc-card">
-            <span class="toc-emoji">🎪</span>
-            <span>Festivals</span>
-          </a>
-          <a href="#shopping" class="toc-card">
-            <span class="toc-emoji">🛍️</span>
-            <span>Shopping</span>
-          </a>
-          <a href="#museos" class="toc-card">
-            <span class="toc-emoji">🎨</span>
-            <span>Museos</span>
-          </a>
-          <a href="#whisky" class="toc-card">
-            <span class="toc-emoji">🥃</span>
-            <span>Whisky & Gin</span>
-          </a>
-          <a href="#jardines" class="toc-card">
-            <span class="toc-emoji">🏰</span>
-            <span>Jardines</span>
-          </a>
-          <a href="#ceilidh" class="toc-card">
-            <span class="toc-emoji">💃</span>
-            <span>Ceilidh</span>
-          </a>
-          <a href="#camping" class="toc-card">
-            <span class="toc-emoji">🏕️</span>
-            <span>Camping</span>
-          </a>
-          <a href="#frases" class="toc-card">
-            <span class="toc-emoji">✍️</span>
-            <span>Frases & Música</span>
-          </a>
-          <a href="#divisas" class="toc-card">
-            <span class="toc-emoji">💷</span>
-            <span>Divisas</span>
-          </a>
-          <a href="#transporte" class="toc-card">
-            <span class="toc-emoji">🚌</span>
-            <span>Transporte</span>
-          </a>
-          <a href="#alojamiento" class="toc-card">
-            <span class="toc-emoji">🏨</span>
-            <span>Alojamiento</span>
-          </a>
+      <details class="section-toggle">
+        <summary>📋 Prácticos para tu viaje</summary>
+        <section
+          class="section-band"
+          style="background-image: url(&quot;assets/img/victoriastreetmain.jpg&quot;);"
+        >
+          <div class="section-band-content">
+            <h2>📋 Prácticos para tu viaje</h2>
+            <p>1️⃣ Elige un tema — 2️⃣ Pica para desplegar</p>
+          </div>
+        </section>
+
+        <section class="examples">
+          <div class="container" style="max-width: 820px">
+          <details class="topic-accordion" id="menus-escoceses">
+            <summary>🍽️ Menús escoceses</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/FieldForkEX1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Field &amp; Fork (cocina escocesa moderna, cerca de Grassmarket)</strong>
+                      <p>https://maps.app.goo.gl/FieldForkEX1</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/TheDoricEX2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>The Doric (haggis, neeps and tatties, Old Town)</strong>
+                      <p>https://maps.app.goo.gl/TheDoricEX2</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="internacional">
+            <summary>🌍 Internacional</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/PassornEX3"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Passorn (tailandés auténtico, reserva con antelación)</strong>
+                      <p>https://maps.app.goo.gl/PassornEX3</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/LocandaEX4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Locanda De Gusti (trattoria italiana cerca de Leith)</strong>
+                      <p>https://maps.app.goo.gl/LocandaEX4</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="pubs-historicos">
+            <summary>🍺 Pubs históricos</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/SheepHeidEX5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>The Sheep Heid Inn (el pub más antiguo de Escocia, con bolera de skittles)</strong>
+                      <p>https://maps.app.goo.gl/SheepHeidEX5</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/GuildfordEX6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>The Guildford Arms (techos victorianos, buena selección de cervezas)</strong>
+                      <p>https://maps.app.goo.gl/GuildfordEX6</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="desayuno-y-almuerzo">
+            <summary>☀️ Desayuno y almuerzo</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/LovecrumbsEX7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Lovecrumbs (café de especialidad y pasteles caseros)</strong>
+                      <p>https://maps.app.goo.gl/LovecrumbsEX7</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/UnionGeniusEX8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Union of Genius (sopas artesanales de autor)</strong>
+                      <p>https://maps.app.goo.gl/UnionGeniusEX8</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="afternoon-tea">
+            <summary>🫖 Afternoon Tea</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/ColonnadesEX9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>The Colonnades at The Signet Library (afternoon tea clásico, sala con columnas)</strong>
+                      <p>https://maps.app.goo.gl/ColonnadesEX9</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/EteaketEX10"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Eteaket (versión relajada, tés de origen propio)</strong>
+                      <p>https://maps.app.goo.gl/EteaketEX10</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="panito-y-cafe">
+            <summary>🥐 Panito y café</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/TwelveTriEX11"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Twelve Triangles (panadería de barrio, cruasanes recién horneados)</strong>
+                      <p>https://maps.app.goo.gl/TwelveTriEX11</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/WellingtonEX12"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Wellington Coffee (café de especialidad tostado localmente)</strong>
+                      <p>https://maps.app.goo.gl/WellingtonEX12</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="helado">
+            <summary>🍦 Helado</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/MarysMilkEX13"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Mary's Milk Bar (helado artesanal hecho a mano, Grassmarket)</strong>
+                      <p>https://maps.app.goo.gl/MarysMilkEX13</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/SLucaEX14"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>S. Luca (heladería familiar italiana desde 1908)</strong>
+                      <p>https://maps.app.goo.gl/SLucaEX14</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="ropa-tartan-cashmere">
+            <summary>🧣 Ropa (tartán / cashmere)</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/KinlochEX15"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Kinloch Anderson (sastrería de tartán y kilts desde 1868)</strong>
+                      <p>https://maps.app.goo.gl/KinlochEX15</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/BelindaEX16"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Belinda Robertson Cashmere (cashmere escocés de alta gama)</strong>
+                      <p>https://maps.app.goo.gl/BelindaEX16</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="teashop">
+            <summary>🍵 Teashop</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/EteaketTeaEX17"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Eteaket Teashop (más de 40 variedades de té de origen único)</strong>
+                      <p>https://maps.app.goo.gl/EteaketTeaEX17</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/ChocTreeEX18"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>The Chocolate Tree (té y chocolate artesanal, hecho en Escocia)</strong>
+                      <p>https://maps.app.goo.gl/ChocTreeEX18</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="whisky">
+            <summary>🥃 Whisky</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/ScotchWhiskyEX19"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>The Scotch Whisky Experience (recorrido introductorio antes de comprar)</strong>
+                      <p>https://maps.app.goo.gl/ScotchWhiskyEX19</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/CadenheadsEX20"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Cadenhead's Whisky Shop (la embotelladora independiente más antigua)</strong>
+                      <p>https://maps.app.goo.gl/CadenheadsEX20</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="paisaje-cultural">
+            <summary>🏛️ Paisaje cultural</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/NatMuseumEX21"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>National Museum of Scotland (entrada gratuita, ideal un día de lluvia)</strong>
+                      <p>https://maps.app.goo.gl/NatMuseumEX21</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/ScotGalleryEX22"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Scottish National Gallery (colección compacta de altísimo nivel)</strong>
+                      <p>https://maps.app.goo.gl/ScotGalleryEX22</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="libros">
+            <summary>📚 Libros</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/ArmchairEX23"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Armchair Books (librería de segunda mano, Grassmarket)</strong>
+                      <p>https://maps.app.goo.gl/ArmchairEX23</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/GoldenHareEX24"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Golden Hare Books (selección curada, espacio muy bonito)</strong>
+                      <p>https://maps.app.goo.gl/GoldenHareEX24</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="souvenirs-de-harry-potter">
+            <summary>⚡ Souvenirs de Harry Potter</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/MuseumCtxEX25"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>The Museum Context (artículos con licencia oficial)</strong>
+                      <p>https://maps.app.goo.gl/MuseumCtxEX25</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/DiagonHouseEX26"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Diagon House (ambientación temática, cerca de Victoria Street)</strong>
+                      <p>https://maps.app.goo.gl/DiagonHouseEX26</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="tabaco">
+            <summary>🚬 Tabaco</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/RobertGrahamEX27"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Robert Graham Tobacconist (estanco tradicional desde 1874)</strong>
+                      <p>https://maps.app.goo.gl/RobertGrahamEX27</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+          </div>
+        </section>
+      </details>
+
+      <div
+        class="section-divider-photo"
+        style="background-image: url('assets/img/caltonhillpan.jpg')"
+      ></div>
+
+      <details class="section-toggle">
+        <summary>✨ Frases y curiosidades! 🖋🎵👻</summary>
+        <section
+          class="section-band"
+          style="background-image: url(&quot;assets/img/greyfriarstombs.jpg&quot;);"
+        >
+          <div class="section-band-content">
+            <h2>✨ Frases y curiosidades! 🖋🎵👻</h2>
+            <p>1️⃣ Elige un tema — 2️⃣ Pica para desplegar</p>
+          </div>
+        </section>
+
+        <section class="examples">
+          <div class="container" style="max-width: 820px">
+          <details class="topic-accordion" id="poemas-escoceses">
+            <summary>📜 Poemas escoceses</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li class="entry-item">
+                  <div class="entry-item-text">
+                    <strong>Auld Lang Syne — Robert Burns: &quot;Should auld acquaintance be forgot, and never brought to mind? Should auld acquaintance be forgot, and auld lang syne!&quot;</strong>
+                  </div>
+                </li>
+                <li class="entry-item">
+                  <div class="entry-item-text">
+                    <strong>Address to a Haggis — Robert Burns: Texto completo próximamente.</strong>
+                  </div>
+                </li>
+                <li class="entry-item">
+                  <div class="entry-item-text">
+                    <strong>Freedom — John Barbour: Texto completo próximamente.</strong>
+                  </div>
+                </li>
+                <li class="entry-item">
+                  <div class="entry-item-text">
+                    <strong>The Lady of the Lake — Walter Scott: Texto completo próximamente.</strong>
+                  </div>
+                </li>
+                <li class="entry-item">
+                  <div class="entry-item-text">
+                    <strong>Edinburgh — William McGonagall: Texto completo próximamente.</strong>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="la-leyenda-de-mckenzie">
+            <summary>👻 La leyenda de Mckenzie</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li class="entry-item">
+                  <div class="entry-item-text">
+                    <strong>La verdadera historia del Poltergeist de Greyfriars Kirkyard — el fantasma más agresivo documentado de Escocia.</strong>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="koestler-parapsychology-unit">
+            <summary>🔮 Koestler Parapsychology Unit</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/KoestlerEX28"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>La única biblioteca universitaria del mundo dedicada a lo paranormal, en la Universidad de Edinburgh</strong>
+                      <p>https://maps.app.goo.gl/KoestlerEX28</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="harry-potter-noticias-y-melodias">
+            <summary>🪄 Harry Potter: noticias y melodías</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/HPNewsEX29"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Dónde J.K. Rowling escribió los primeros capítulos, y qué calles inspiraron el Callejón Diagon</strong>
+                      <p>https://maps.app.goo.gl/HPNewsEX29</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="bello-libro-de-edinburgh">
+            <summary>📖 Bello libro de Edinburgh</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/LibroEdinEX30"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Una recopilación fotográfica que resume por qué esta ciudad enamora a quien la visita</strong>
+                      <p>https://maps.app.goo.gl/LibroEdinEX30</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="inglaterra-vs-escocia">
+            <summary>⚔️ Inglaterra vs Escocia</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/RivalryEX31"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Un vistazo, con humor, a siglos de rivalidad histórica entre ambos países</strong>
+                      <p>https://maps.app.goo.gl/RivalryEX31</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="que-es-el-haggis">
+            <summary>🎥 ¿Qué es el haggis?</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/HaggisVidEX32"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>Video corto que explica de qué está hecho realmente — y por qué vale la pena probarlo</strong>
+                      <p>https://maps.app.goo.gl/HaggisVidEX32</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="playlist-de-escocia">
+            <summary>🎵 Playlist de Escocia</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/PlaylistEX33"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>La música que suena en mis tours, en Spotify</strong>
+                      <p>https://maps.app.goo.gl/PlaylistEX33</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="topic-accordion" id="highland-cathedral">
+            <summary>🎶 Highland Cathedral</summary>
+            <div class="topic-accordion-body">
+              <ul class="entry-list">
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/HighlandCathEX34"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-item"
+                    aria-label="Ver enlace"
+                  >
+                    <div class="entry-item-text">
+                      <strong>La melodía de gaita más emotiva de Escocia — casi un himno no oficial</strong>
+                      <p>https://maps.app.goo.gl/HighlandCathEX34</p>
+                    </div>
+                    <span class="entry-item-link" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </details>
+          </div>
+        </section>
+      </details>
+
+      <!-- NOTION:CONTENT:END -->
+
+      <!-- MONETIZATION TOUCHPOINTS -->
+      <section class="features">
+        <div class="container">
+          <div class="bmc-aside">
+            <h3 class="hero-title">¿Te sirvió esta guía?</h3>
+            <p class="hero-subtitle">
+              Voy actualizando esta página con lo que encuentro en mis años
+              viviendo aquí. Si te fue útil, invítame un café ☕ — cada uno me
+              ayuda a seguir sumando lugares como estos.
+            </p>
+            <div class="hero-buttons">
+              <a
+                href="https://www.buymeacoffee.com/samuelmex"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-img"
+                onclick="
+                  if (window.clarity) {
+                    clarity('event', 'open_bmc_guiaedin');
+                  }
+                "
+              >
+                <img
+                  src="assets/img/BMCImg.png"
+                  alt="Invítame un café"
+                  style="
+                    max-width: 100%;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    opacity: 0.92;
+                  "
+                />
+              </a>
+            </div>
+          </div>
+
+          <div class="pdf-promo pdf-promo--compact" style="margin-top: 2.5rem">
+            <div class="pdf-promo-cover">
+              <img
+                src="assets/img/BMCPDFGuide.png"
+                alt="Portada de la guía Guíame Ahí Edimburgo en PDF"
+                loading="lazy"
+              />
+              <span class="pdf-promo-ribbon">PDF</span>
+            </div>
+            <div class="pdf-promo-body">
+              <p class="pdf-promo-eyebrow">Guía en PDF</p>
+              <p>
+                Esta página se actualiza sola, pero si prefieres algo que
+                funcione sin señal y con rutas completas, la guía en PDF tiene
+                todo eso y más.
+              </p>
+              <div class="pdf-promo-cta-row">
+                <p class="pdf-promo-price">£6.97<span>pago único</span></p>
+                <a
+                  href="https://buymeacoffee.com/samuelmex/e/565709"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary"
+                  onclick="
+                    if (window.clarity) {
+                      clarity('event', 'pdf_guide_click_guiaedin');
+                    }
+                  "
+                >
+                  Consigue tu guía en PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-container">
+        <nav>
+          <a href="index.html">Inicio</a> · <a href="guide.html">Guía</a> ·
+          <a href="contact.html">Contacto</a> ·
+          <a href="about.html">Sobre mí</a> ·
+          <a href="https://buymeacoffee.com/samuelmex/posts" target="_blank"
+            >Blog</a
+          >
+        </nav>
+        <p><b>© 2026 Guíame.ai · Hecho en Edinburgh</b></p>
+        <p class="footer-author">by Samuel Moreno</p>
+
+        <!-- ★ Quality badge — score loaded live from Supabase -->
+        <div
+          class="quality-badge"
+          id="qualityBadge"
+          aria-label="Valoración media de los viajeros"
+        >
+          <span class="qb-dot" title="Actualizado en tiempo real"></span>
+          <span class="qb-stars" id="qbStars" aria-hidden="true"></span>
+          <span class="qb-score" id="qbScore">Cargando...</span>
+          <span class="qb-count" id="qbCount"></span>
         </div>
       </div>
-    </section>
+    </footer>
 
-    <!-- Alimento: Foodie Guide Section -->
-    <section id="alimento" class="guide-section">
-      <div class="container">
-        <h2>🍖 Alimento: Foodie Guide</h2>
-        <div class="section-intro">
-          <p>Descubre los mejores sabores de Edinburgh. Desde comida tradicional escocesa hasta cocina moderna.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Traditional Scottish Fare</h3>
-            <p>Prueba el haggis auténtico, fish & chips frescos y carne escocesa de primera.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Cafeterías Locales</h3>
-            <p>Brew Lab, artisan coffee shops y cafés con excelente atmósfera.</p>
-            <a href="#" class="btn btn-secondary">Descubrir</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Fine Dining</h3>
-            <p>Restaurantes de alta cocina en Leith con vistas al agua y experiencias culinarias excepcionales.</p>
-            <a href="#" class="btn btn-secondary">Reservar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Pubs Tradicionales</h3>
-            <p>La verdadera experiencia escocesa: ambiente acogedor, real ale y conversaciones con locales.</p>
-            <a href="#" class="btn btn-secondary">Visitar</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <script src="assets/js/survey.js"></script>
+    <script src="assets/js/main.js"></script>
 
-    <!-- Edinburgh August Festivals Section -->
-    <section id="festivals" class="guide-section alternate">
-      <div class="container">
-        <h2>🎪 Edinburgh August Festivals</h2>
-        <div class="section-intro">
-          <p>August es el mes de los festivales. Música, teatro, danza y arte en cada esquina.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Edinburgh Fringe Festival</h3>
-            <p>El festival de artes escénicas más grande del mundo. Teatro, música y actuaciones callejeras.</p>
-            <a href="#" class="btn btn-secondary">Información</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Edinburgh International Festival</h3>
-            <p>Ópera, ballet, teatro y conciertos de clase mundial en los principales venues de la ciudad.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Military Tattoo</h3>
-            <p>Espectáculo impresionante con gaitas escocesas y ceremonias militares en el castillo.</p>
-            <a href="#" class="btn btn-secondary">Ver</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Festival Fringe Venues</h3>
-            <p>Explora los venues distribuidos por toda la ciudad, desde teatros hasta sótanos.</p>
-            <a href="#" class="btn btn-secondary">Descubrir</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <a
+      href="https://wa.me/5215513841895"
+      target="_blank"
+      class="whatsapp-floating"
+      rel="noopener noreferrer"
+      aria-label="Chat with us on WhatsApp"
+    >
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12c0 2.14.71 4.11 1.9 5.69L2 22l4.31-1.9A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.78 14.38c-.25.7-.73 1.27-1.4 1.41-.67.14-1.4.07-2.38-.38-.98-.45-2.03-1.36-2.95-2.78-.92-1.42-1.5-3.06-1.68-4.5-.18-1.44.14-2.84.92-3.78.34-.41.85-.65 1.4-.65h.2c.24 0 .47.1.64.28.17.18.26.42.24.67l-.3 2.03c-.02.25-.13.48-.32.65l-.96.94c-.1.1-.13.24-.07.37.3.65.84 1.25 1.6 1.8.76.55 1.6.9 2.45 1.03.2.03.42-.05.55-.22l.94-.96c.17-.19.4-.3.65-.32l2.03-.3c.25-.02.49.07.67.24.18.17.28.4.28.64v.2c0 .55-.24 1.06-.65 1.4z"
+        />
+      </svg>
+    </a>
 
-    <!-- Shopping Section -->
-    <section id="shopping" class="guide-section">
-      <div class="container">
-        <h2>🛍️ Shopping!</h2>
-        <div class="section-intro">
-          <p>Desde tiendas de diseñador hasta mercados locales y antigüedades únicas.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Royal Mile</h3>
-            <p>Tiendas tradicionales escocesas con souvenirs, tartán, lana y productos locales auténticos.</p>
-            <a href="#" class="btn btn-secondary">Visitar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Princes Street</h3>
-            <p>La avenida principal con grandes marcas internacionales y tiendas de lujo.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">South Bridge & Victoria Street</h3>
-            <p>Tiendas independientes, vintage, arte local y galerías creativas de artistas escoceses.</p>
-            <a href="#" class="btn btn-secondary">Descubrir</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Sunday Markets</h3>
-            <p>Mercadillos de fin de semana con artesanías, comida local y productos únicos.</p>
-            <a href="#" class="btn btn-secondary">Encontrar</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Museos Section -->
-    <section id="museos" class="guide-section alternate">
-      <div class="container">
-        <h2>🎨 Museos</h2>
-        <div class="section-intro">
-          <p>Edinburgh alberga museos de clase mundial que cuentan la historia de Escocia.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">National Museum of Scotland</h3>
-            <p>Museo principal con colecciones sobre la historia, arte y naturaleza de Escocia. Entrada gratuita en muchas galerías.</p>
-            <a href="#" class="btn btn-secondary">Visitar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Scottish National Gallery</h3>
-            <p>Obras maestras de arte escocés e internacional. Edificio histórico hermoso en el corazón de la ciudad.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Writer's Museum</h3>
-            <p>Dedicado a Robert Burns, Walter Scott y Robert Louis Stevenson. Perfecto para amantes de la literatura.</p>
-            <a href="#" class="btn btn-secondary">Descubrir</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Camera Obscura & World of Illusions</h3>
-            <p>Experiencia interactiva única con vistas a 360° de la ciudad desde la azotea.</p>
-            <a href="#" class="btn btn-secondary">Ver</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Whisky & Gin Experiences Section -->
-    <section id="whisky" class="guide-section">
-      <div class="container">
-        <h2>🥃 Whisky & Gin Experiences</h2>
-        <div class="section-intro">
-          <p>Degusta los mejores whiskies y gins escoceses en destilerías y bares especializados.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Scotch Whisky Experience</h3>
-            <p>Tour interactivo sobre la historia del whisky escocés con degustación incluida.</p>
-            <a href="#" class="btn btn-secondary">Reservar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">The Scotch Malt Whisky Society</h3>
-            <p>Club exclusivo con una colección extraordinaria de whiskies raros y eventos de degustación.</p>
-            <a href="#" class="btn btn-secondary">Visitar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Gin Distillery Tours</h3>
-            <p>Destilerías locales de gin artesanal con tours y catas de gins premium escoceses.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Whisky & Gin Bars</h3>
-            <p>Bares especializados con sommelier de whisky y selección premium de bebidas escocesas.</p>
-            <a href="#" class="btn btn-secondary">Descubrir</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Jardines, Paseos y Castillos Section -->
-    <section id="jardines" class="guide-section alternate">
-      <div class="container">
-        <h2>🏰 Jardines, Paseos y Castillos</h2>
-        <div class="section-intro">
-          <p>Explora los paisajes históricos y naturales más hermosos de Edinburgh y alrededores.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Edinburgh Castle</h3>
-            <p>El símbolo de Edinburgh. Castillo histórico con vistas panorámicas de la ciudad.</p>
-            <a href="#" class="btn btn-secondary">Visitar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Princes Street Gardens</h3>
-            <p>Parque central hermoso con flores, vistas al castillo y espacios para relajarse.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Arthur's Seat</h3>
-            <p>Montaña en el parque Holyrood. Senderismo de 45 minutos con vistas espectaculares de la ciudad.</p>
-            <a href="#" class="btn btn-secondary">Caminar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Castillos Cercanos</h3>
-            <p>Excursiones a Stirling Castle, Blackness Castle y otros castillos históricos de Escocia.</p>
-            <a href="#" class="btn btn-secondary">Descubrir</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Ceilidh Section -->
-    <section id="ceilidh" class="guide-section">
-      <div class="container">
-        <h2>💃 Ceilidh (Baile y Música)</h2>
-        <div class="section-intro">
-          <p>Experiencia auténtica escocesa: baila al ritmo de gaitas y música tradicional.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Ceilidh Halls</h3>
-            <p>Salones dedicados donde bailarines de todas las edades disfrutan de la música tradicional escocesa.</p>
-            <a href="#" class="btn btn-secondary">Ir a Bailar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Live Music Venues</h3>
-            <p>Bares y pubs con música en vivo: gaitas, violín y acordeón tradicional.</p>
-            <a href="#" class="btn btn-secondary">Escuchar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Traditional Sessions</h3>
-            <p>Sesiones espontáneas en pubs donde músicos locales tocan música tradicional escocesa.</p>
-            <a href="#" class="btn btn-secondary">Disfrutar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Bagpipe Performances</h3>
-            <p>Espectáculos de gaitas en calles principales y eventos especiales durante la temporada.</p>
-            <a href="#" class="btn btn-secondary">Ver</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Camping & Glamping Section -->
-    <section id="camping" class="guide-section alternate">
-      <div class="container">
-        <h2>🏕️ Camping & Glamping por Escocia</h2>
-        <div class="section-intro">
-          <p>Experimenta la naturaleza escocesa de forma única: desde camping tradicional hasta glamping de lujo.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Traditional Camping</h3>
-            <p>Campamentos en parques nacionales: Loch Lomond, Cairngorms. Naturaleza pura y tranquilidad.</p>
-            <a href="#" class="btn btn-secondary">Reservar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Glamping Experiences</h3>
-            <p>Tiendas de lujo y cabañas boutique. Naturaleza con comodidad.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Caravan Parks</h3>
-            <p>Parques para caravanas y campers. Servicios completos y ubicaciones estratégicas.</p>
-            <a href="#" class="btn btn-secondary">Ver Opciones</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Coastal Camping</h3>
-            <p>Campamentos junto a playas escocesas. Wake up con vistas al mar.</p>
-            <a href="#" class="btn btn-secondary">Descubrir</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Frases, Música y Más Section -->
-    <section id="frases" class="guide-section">
-      <div class="container">
-        <h2>✍️ Frases, Música y Más!</h2>
-        <div class="section-intro">
-          <p>Sumérgete en la riqueza cultural escocesa: literatura, música y tradiciones.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Scottish Literature</h3>
-            <p>Robert Burns, Walter Scott, Robert Louis Stevenson. Librerías especializadas y museos dedicados.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Palabras & Acentos</h3>
-            <p>Aprende el verdadero acento escocés. Frases útiles y expresiones locales auténticas.</p>
-            <a href="#" class="btn btn-secondary">Aprender</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Música Tradicional</h3>
-            <p>Gaitas, violín, acordeón. Música celta y folk que define a Escocia.</p>
-            <a href="#" class="btn btn-secondary">Escuchar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Poetry & Book Clubs</h3>
-            <p>Eventos literarios, lecturas poéticas y clubes de libros en cafés y librerías locales.</p>
-            <a href="#" class="btn btn-secondary">Unirse</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Cambio de Divisas Section -->
-    <section id="divisas" class="guide-section alternate">
-      <div class="container">
-        <h2>💷 Cambio de Divisas</h2>
-        <div class="section-intro">
-          <p>Post Offices son la mejor opción para cambiar moneda. Aquí tienes las ubicaciones principales:</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">📍 Centro Ciudad - Junto a Greyfriars</h3>
-            <p>Ubicación estratégica en el corazón histórico. Fácil de encontrar y buenas tasas.</p>
-            <a href="https://maps.app.goo.gl/cfhdvWiWY8Xucxxb6?g_st=ipc" target="_blank" class="btn btn-secondary">Ver en Mapa</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">📍 Estación Waverley</h3>
-            <p>Post Office en la estación principal. Ideal si llegas en tren. Horas extendidas.</p>
-            <a href="https://maps.app.goo.gl/jmewrmDKv9t2JjDv6?g_st=ipc" target="_blank" class="btn btn-secondary">Ver en Mapa</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">📍 East Side - Royal Mail</h3>
-            <p>Hacia el oriente de la ciudad, junto a Royal Mail. Buena alternativa.</p>
-            <a href="https://maps.app.goo.gl/uSZTLFx8T1VEsSSVA?g_st=ipc" target="_blank" class="btn btn-secondary">Ver en Mapa</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">💡 Cajeros Automáticos (ATMs)</h3>
-            <p>Busca "Cash Point" o "ATM" por toda la ciudad. Cómodo y con buenas tasas. Bancos repartidos por la ciudad.</p>
-            <a href="#" class="btn btn-secondary">Encontrar ATM</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Transporte Section -->
-    <section id="transporte" class="guide-section">
-      <div class="container">
-        <h2>🚌 Transporte</h2>
-        <div class="section-intro">
-          <p>Moverse por Edinburgh es sencillo y accesible. Aquí tienes todas tus opciones:</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Transporte Público</h3>
-            <p><strong>Autobuses:</strong> La mejor forma de moverse. Compra un Ridacard (día/semana) o paga por viaje.<br>
-            <strong>Tranvía:</strong> Conecta New Town con el aeropuerto. Moderno y puntual.</p>
-            <a href="#" class="btn btn-secondary">Información</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">A Pie</h3>
-            <p>Edinburgh es perfecta para caminar. El centro es compacto y las vistas son increíbles. Lleva zapatos cómodos.</p>
-            <a href="#" class="btn btn-secondary">Rutas</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Taxi & Ride Sharing</h3>
-            <p><strong>Taxi:</strong> Abundantes y fiables.<br>
-            <strong>Uber:</strong> Disponible en la ciudad (más caro que taxi local).</p>
-            <a href="#" class="btn btn-secondary">Reservar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Tours Guiados</h3>
-            <p>Ghost tours, bus tours históricos y walking tours. Perfectos para aprender la historia mientras explores.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Alojamiento Section -->
-    <section id="alojamiento" class="guide-section alternate">
-      <div class="container">
-        <h2>🏨 Alojamiento</h2>
-        <div class="section-intro">
-          <p>Aquí encontrarás opciones cómodas y bien ubicadas para tu estancia en Edinburgh.</p>
-        </div>
-        <div class="cards-grid">
-          <div class="content-card featured">
-            <h3 class="recommendation">Centro Histórico</h3>
-            <p>La mejor opción si quieres estar cerca de las principales atracciones. Royal Mile es el corazón de la ciudad.</p>
-            <a href="#" class="btn btn-secondary">Ver Opciones</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">South Side</h3>
-            <p>Zona universitaria con ambiente joven, bares y cafés. Buena conexión al centro.</p>
-            <a href="#" class="btn btn-secondary">Explorar</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">Leith</h3>
-            <p>Barrio porteño en desarrollo con excelentes restaurantes, galerías y vida nocturna.</p>
-            <a href="#" class="btn btn-secondary">Descubrir</a>
-          </div>
-          <div class="content-card featured">
-            <h3 class="recommendation">New Town</h3>
-            <p>Arquitectura georgiana elegante, tranquilo pero con acceso fácil al centro histórico.</p>
-            <a href="#" class="btn btn-secondary">Buscar</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <div class="container">
-        <h2>❓ ¿Necesitas Ayuda?</h2>
-        <p>¿Preguntas, recomendaciones o necesitas un tour personalizado?</p>
-        <div class="cta-buttons">
-          <a href="contact.html" class="btn btn-primary">Envía un Mensaje</a>
-          <a href="https://buymeacoffee.com/samuelmex/e/415862" class="btn btn-secondary" target="_blank">Apóyame ☕</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===== Footer ===== -->
-  <footer>
-    <p>© 2025 Guíame.ai · Hecho en Edinburgh</p>
-  </footer>
-
-  <script>
-    document.getElementById('hamburger-btn').addEventListener('click', function() {
-      document.getElementById('main-menu').classList.toggle('open');
-    });
-  </script>
-
-</body>
+    <div class="whatsapp-tooltip" id="waTooltip">
+      ¡Aquí Estoy para ayudarte!
+    </div>
+  </body>
 </html>

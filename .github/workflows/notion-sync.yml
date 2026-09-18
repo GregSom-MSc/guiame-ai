@@ -1,0 +1,38 @@
+name: Sync Notion content
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm ci
+
+      - name: Run Notion sync
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: npm run sync-notion
+
+      - name: Commit and push if content changed
+        run: |
+          git config user.name "guiame-notion-sync"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No content changes."
+          else
+            git add guiaedin.html
+            git commit -m "Sync content from Notion"
+            git push
+          fi
