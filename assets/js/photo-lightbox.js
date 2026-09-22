@@ -85,14 +85,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const now = performance.now();
     const dt = Math.max(now - lastT, 8);
     const dx = e.clientX - startX;
-    const SENSITIVITY = 0.56;
-    grid.scrollLeft = startScroll - dx * SENSITIVITY;
+
+    // Target position (with reduced sensitivity)
+    const target = startScroll - dx * 0.62;
+
+    // Lerp toward the target → creates the “stuck / heavy” feeling
+    grid.scrollLeft += (target - grid.scrollLeft) * 0.28; // 0.2–0.35 feels good
+
     dragDistance += Math.abs(e.clientX - lastX);
-    velocity = (e.clientX - lastX) / dt; // px / ms
+    velocity = (e.clientX - lastX) / dt;
     lastX = e.clientX;
     lastT = now;
 
-    // Keep tilt live while dragging
     if (!rafId) {
       rafId = requestAnimationFrame(() => {
         updateTilt();
@@ -108,8 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.releasePointerCapture?.(e.pointerId);
 
     // Momentum – scale velocity into a sensible distance
-    const momentum = Math.max(-400, Math.min(400, velocity * 900));
-    if (Math.abs(momentum) > 20) {
+    const momentum = Math.max(-180, Math.min(180, velocity * 420));
+    if (Math.abs(momentum) > 12) {
       grid.scrollBy({ left: -momentum, behavior: "smooth" });
     }
     // Final tilt after momentum settles
