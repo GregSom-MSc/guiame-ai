@@ -1,137 +1,149 @@
 /* ============================================
-   PHOTO LIGHTBOX — guide.html's photo grid
-   Opens: FLIP-grow out of the clicked thumbnail's own position (compute
-   the scale/translate delta, apply it instantly, then animate to
-   identity) — reads as "that photo" getting bigger, not a new element
-   appearing.
-   Closes: simple fade-out (overlay opacity → 0, which fades everything
-   inside it, no rect math needed) — triggered by a second click, the
-   backdrop, Escape, or a wheel scroll in either direction. Fading out
-   instead of shrinking back also means closing never depends on the
-   thumbnail's rect still being valid, so it works reliably at any moment.
+   PHOTO GRID — continuous CoverFlow + FLIP lightbox
    ============================================ */
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".photo-grid");
   const overlay = document.getElementById("photoLightbox");
   if (!grid || !overlay) return;
 
-  // Total pointer travel since the last pointerdown. The click handler
-  // below (shared with desktop) checks this to tell a swipe from a tap —
-  // without it, releasing a drag over a card also fires a native click
-  // and pops the lightbox open mid-swipe.
-  let dragDistance = 0;
+  // -------------------------------------------------
+  // 1. Continuous CoverFlow tilt (works on every viewport)
+  // -------------------------------------------------
+  const MAX_ANGLE = 38; // degrees
+  const MAX_SCALE_DROP = 0.18;
+  const MAX_OPACITY_DROP = 0.4;
 
-  if (window.innerWidth <= 640) {
-    let isDragging = false;
-    let startX = 0;
-    let startScrollLeft = 0;
-    let lastMoveX = 0;
-    let lastMoveTime = 0;
-    let lastVelocity = 0;
+  // Make sure the grid itself has 3-D context (add this once in CSS too)
+  grid.style.perspective = "1200px";
+  grid.style.perspectiveOrigin = "50% 50%";
 
-    // Continuous CoverFlow tilt: every card's rotateY/scale/opacity is
-    // derived from its live distance from the viewport's center, so the
-    // tilt tracks the finger/scroll in real time instead of snapping
-    // between two fixed states at a class-toggle boundary.
-    const MAX_ANGLE = 32;
-    const MAX_SCALE_DROP = 0.14;
-    const MAX_OPACITY_DROP = 0.35;
+  const updateTilt = () => {
+    const items = [...grid.querySelectorAll(".photo-grid-item")];
+    if (!items.length) return;
 
-    const updateTilt = () => {
-      const items = [...grid.querySelectorAll(".photo-grid-item")];
-      const mid = grid.scrollLeft + grid.clientWidth / 2;
-      const halfViewport = grid.clientWidth / 2;
+    // Use getBoundingClientRect so padding / gaps never break the math
+    const gridRect = grid.getBoundingClientRect();
+    const mid = gridRect.left + gridRect.width / 2;
+    const half = gridRect.width / 2;
 
-      let closest = items[0];
-      let closestDistance = Infinity;
+    let closest = null;
+    let closestDist = Infinity;
 
-      items.forEach((item) => {
-        const itemMid = item.offsetLeft + item.offsetWidth / 2;
-        const rawOffset = itemMid - mid;
-        const normalized = Math.max(
-          -1,
-          Math.min(1, rawOffset / halfViewport),
-        );
+    items.forEach((item) => {
+      const r = item.getBoundingClientRect();
+      const itemMid = r.left + r.width / 2;
+      const raw = itemMid - mid;
+      const n = Math.max(-1, Math.min(1, raw / half)); // -1 … 1
 
-        // Positive rotateY recedes an element's RIGHT edge, negative
-        // recedes its LEFT edge (verified empirically, not assumed) — so
-        // a card to the right of center (normalized > 0) needs a
-        // POSITIVE angle to fan its outer/right edge away, matching a
-        // real CoverFlow. The earlier inverted sign made every card fan
-        // inward instead of outward, which read as backwards while
-        // scrolling.
-        const angle = normalized * MAX_ANGLE;
-        const scale = 1 - Math.abs(normalized) * MAX_SCALE_DROP;
-        const opacity = 1 - Math.abs(normalized) * MAX_OPACITY_DROP;
+      // Positive rotateY = right edge recedes (classic CoverFlow)
+      const angle = n * MAX_ANGLE;
+      const scale = 1 - Math.abs(n) * MAX_SCALE_DROP;
+      const opacity = 1 - Math.abs(n) * MAX_OPACITY_DROP;
 
-        item.style.transform = `rotateY(${angle}deg) scale(${scale})`;
-        item.style.opacity = opacity;
+      item.style.transform = `rotateY(${angle}deg) scale(${scale})`;
+      item.style.opacity = opacity;
+      item.style.zIndex = Math.round(100 - Math.abs(n) * 50);
 
-        const distance = Math.abs(rawOffset);
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closest = item;
-        }
-      });
-
-      items.forEach((item) =>
-        item.classList.toggle("is-current", item === closest),
-      );
-    };
-
-    const pointerDown = (event) => {
-      isDragging = true;
-      dragDistance = 0;
-      grid.classList.add("dragging");
-      startX = event.clientX;
-      startScrollLeft = grid.scrollLeft;
-      lastMoveX = event.clientX;
-      lastMoveTime = performance.now();
-      lastVelocity = 0;
-      grid.setPointerCapture(event.pointerId);
-    };
-
-    const pointerMove = (event) => {
-      if (!isDragging) return;
-
-      const dx = event.clientX - startX;
-      const now = performance.now();
-      const dt = Math.max(now - lastMoveTime, 16);
-
-      grid.scrollLeft = startScrollLeft - dx;
-      dragDistance += Math.abs(event.clientX - lastMoveX);
-      lastVelocity = (event.clientX - lastMoveX) / dt;
-      lastMoveX = event.clientX;
-      lastMoveTime = now;
-      updateTilt();
-    };
-
-    const pointerUp = (event) => {
-      if (!isDragging) return;
-
-      isDragging = false;
-      grid.classList.remove("dragging");
-      grid.releasePointerCapture?.(event.pointerId);
-
-      const momentum = Math.max(-260, Math.min(260, lastVelocity * 750));
-      if (Math.abs(momentum) > 15) {
-        grid.scrollBy({ left: momentum, behavior: "smooth" });
+      const dist = Math.abs(raw);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closest = item;
       }
+    });
 
-      requestAnimationFrame(updateTilt);
-    };
+    items.forEach((i) => i.classList.toggle("is-current", i === closest));
+  };
 
-    grid.addEventListener("pointerdown", pointerDown);
-    grid.addEventListener("pointermove", pointerMove);
-    grid.addEventListener("pointerup", pointerUp);
-    grid.addEventListener("pointerleave", pointerUp);
-    grid.addEventListener("pointercancel", pointerUp);
-    grid.addEventListener("scroll", updateTilt, { passive: true });
-    requestAnimationFrame(updateTilt);
-  }
+  // -------------------------------------------------
+  // 2. Smooth drag / momentum (pointer events)
+  // -------------------------------------------------
+  let isDragging = false;
+  let startX = 0;
+  let startScroll = 0;
+  let lastX = 0;
+  let lastT = 0;
+  let velocity = 0;
+  let dragDistance = 0;
+  let rafId = null;
 
-  const OVERLAY_FADE_MS = 350; // must match .photo-lightbox's opacity transition
+  const onPointerDown = (e) => {
+    if (e.button !== 0) return; // left button only
+    isDragging = true;
+    dragDistance = 0;
+    grid.classList.add("dragging");
+    startX = e.clientX;
+    startScroll = grid.scrollLeft;
+    lastX = e.clientX;
+    lastT = performance.now();
+    velocity = 0;
+    grid.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  };
 
+  const onPointerMove = (e) => {
+    if (!isDragging) return;
+    const now = performance.now();
+    const dt = Math.max(now - lastT, 8);
+    const dx = e.clientX - startX;
+
+    grid.scrollLeft = startScroll - dx;
+    dragDistance += Math.abs(e.clientX - lastX);
+    velocity = (e.clientX - lastX) / dt; // px / ms
+    lastX = e.clientX;
+    lastT = now;
+
+    // Keep tilt live while dragging
+    if (!rafId) {
+      rafId = requestAnimationFrame(() => {
+        updateTilt();
+        rafId = null;
+      });
+    }
+  };
+
+  const onPointerUp = (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    grid.classList.remove("dragging");
+    grid.releasePointerCapture?.(e.pointerId);
+
+    // Momentum – scale velocity into a sensible distance
+    const momentum = Math.max(-400, Math.min(400, velocity * 900));
+    if (Math.abs(momentum) > 20) {
+      grid.scrollBy({ left: -momentum, behavior: "smooth" });
+    }
+    // Final tilt after momentum settles
+    setTimeout(updateTilt, 320);
+  };
+
+  grid.addEventListener("pointerdown", onPointerDown);
+  grid.addEventListener("pointermove", onPointerMove);
+  grid.addEventListener("pointerup", onPointerUp);
+  grid.addEventListener("pointercancel", onPointerUp);
+  grid.addEventListener("pointerleave", onPointerUp);
+
+  // Native scroll (trackpad, mouse-wheel, keyboard) also drives the tilt
+  grid.addEventListener(
+    "scroll",
+    () => {
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          updateTilt();
+          rafId = null;
+        });
+      }
+    },
+    { passive: true },
+  );
+
+  // Initial layout + resize
+  updateTilt();
+  window.addEventListener("resize", updateTilt);
+
+  // -------------------------------------------------
+  // 3. Original FLIP lightbox (kept almost unchanged)
+  // -------------------------------------------------
+  const OVERLAY_FADE_MS = 350;
   const frame = document.getElementById("photoLightboxFrame");
   const bigImg = document.getElementById("photoLightboxImg");
   const title = document.getElementById("photoLightboxTitle");
@@ -162,27 +174,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     frame.classList.remove("revealed");
     frame.style.transition = "none";
-    frame.style.transform = "translate(0, 0) scale(1)";
+    frame.style.transform = "translate(0,0) scale(1)";
     overlay.classList.add("open");
     overlay.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
     const startRect = item.getBoundingClientRect();
     frame.style.transform = deltaFrom(startRect);
-    frame.getBoundingClientRect(); // force reflow before re-enabling transition
+    frame.getBoundingClientRect(); // force reflow
     frame.style.transition = "";
     requestAnimationFrame(() => {
-      frame.style.transform = "translate(0, 0) scale(1)";
+      frame.style.transform = "translate(0,0) scale(1)";
     });
 
     setTimeout(() => frame.classList.add("revealed"), 250);
 
     document.addEventListener("keydown", onKeydown);
-    // Arm wheel-to-close only after the full reveal sequence (line, then
-    // title, then description — about 1s end to end) has finished. A
-    // trackpad or mouse wheel used to scroll down to the gallery can keep
-    // firing momentum events well after the click that opened this, and
-    // closing mid-reveal looked like the caption "disappearing" on its own.
     clearTimeout(wheelArmTimer);
     wheelArmTimer = setTimeout(() => {
       document.addEventListener("wheel", onWheel, { passive: false });
@@ -191,7 +198,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function close() {
     if (!overlay.classList.contains("open")) return;
-
     clearTimeout(wheelArmTimer);
     overlay.classList.remove("open");
     overlay.setAttribute("aria-hidden", "true");
@@ -212,16 +218,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function onWheel(e) {
     e.preventDefault();
-    // Ignore faint deltas — trackpad momentum tapers off rather than
-    // stopping cleanly, and small tail-end ticks shouldn't count as an
-    // intentional "scroll to close." A real scroll gesture clears this.
     if (Math.abs(e.deltaY) < 15) return;
     close();
   }
 
+  // Click only opens if the user didn’t drag
   grid.querySelectorAll(".photo-grid-item").forEach((item) => {
     item.addEventListener("click", () => {
-      if (dragDistance > 10) return;
+      if (dragDistance > 12) return;
       open(item);
     });
   });
