@@ -3014,8 +3014,17 @@ CONTACT PAGE SPECIFIC STYLES
     align-items: stretch;
   }
 
+  /* The site's own sitewide rule (@media max-width:768px .btn{width:100%},
+     meant for .hero-buttons) forces this button full-width too. Left as a
+     flex-wrap row, that shoved the button onto its own line unpredictably
+     — stranding the price above a bar that reached the card's edges with
+     no visual relationship to it. Stacking on purpose reads as one
+     designed unit (price, then a full-width tap target) instead. */
   .pdf-promo-buy {
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
+    gap: 0.85rem;
   }
 
   /* Stays stacked (inherits the base .pdf-promo column rule above) rather
