@@ -15,7 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const overlay = document.getElementById("photoLightbox");
   if (!grid || !overlay) return;
 
-  if (window.innerWidth <= 420) {
+  // Total pointer travel since the last pointerdown. The click handler
+  // below (shared with desktop) checks this to tell a swipe from a tap —
+  // without it, releasing a drag over a card also fires a native click
+  // and pops the lightbox open mid-swipe.
+  let dragDistance = 0;
+
+  if (window.innerWidth <= 640) {
     let isDragging = false;
     let startX = 0;
     let startScrollLeft = 0;
@@ -23,17 +29,38 @@ document.addEventListener("DOMContentLoaded", function () {
     let lastMoveTime = 0;
     let lastVelocity = 0;
 
-    const updateCurrentCard = () => {
+    // Continuous CoverFlow tilt: every card's rotateY/scale/opacity is
+    // derived from its live distance from the viewport's center, so the
+    // tilt tracks the finger/scroll in real time instead of snapping
+    // between two fixed states at a class-toggle boundary.
+    const MAX_ANGLE = 32;
+    const MAX_SCALE_DROP = 0.14;
+    const MAX_OPACITY_DROP = 0.35;
+
+    const updateTilt = () => {
       const items = [...grid.querySelectorAll(".photo-grid-item")];
-      const midpoint = grid.scrollLeft + grid.clientWidth / 2;
+      const mid = grid.scrollLeft + grid.clientWidth / 2;
+      const halfViewport = grid.clientWidth / 2;
 
       let closest = items[0];
       let closestDistance = Infinity;
 
       items.forEach((item) => {
         const itemMid = item.offsetLeft + item.offsetWidth / 2;
-        const distance = Math.abs(midpoint - itemMid);
+        const rawOffset = itemMid - mid;
+        const normalized = Math.max(
+          -1,
+          Math.min(1, rawOffset / halfViewport),
+        );
 
+        const angle = normalized * -MAX_ANGLE;
+        const scale = 1 - Math.abs(normalized) * MAX_SCALE_DROP;
+        const opacity = 1 - Math.abs(normalized) * MAX_OPACITY_DROP;
+
+        item.style.transform = `rotateY(${angle}deg) scale(${scale})`;
+        item.style.opacity = opacity;
+
+        const distance = Math.abs(rawOffset);
         if (distance < closestDistance) {
           closestDistance = distance;
           closest = item;
@@ -47,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const pointerDown = (event) => {
       isDragging = true;
+      dragDistance = 0;
       grid.classList.add("dragging");
       startX = event.clientX;
       startScrollLeft = grid.scrollLeft;
@@ -64,10 +92,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const dt = Math.max(now - lastMoveTime, 16);
 
       grid.scrollLeft = startScrollLeft - dx;
+      dragDistance += Math.abs(event.clientX - lastMoveX);
       lastVelocity = (event.clientX - lastMoveX) / dt;
       lastMoveX = event.clientX;
       lastMoveTime = now;
-      updateCurrentCard();
+      updateTilt();
     };
 
     const pointerUp = (event) => {
@@ -82,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
         grid.scrollBy({ left: momentum, behavior: "smooth" });
       }
 
-      requestAnimationFrame(updateCurrentCard);
+      requestAnimationFrame(updateTilt);
     };
 
     grid.addEventListener("pointerdown", pointerDown);
@@ -90,8 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
     grid.addEventListener("pointerup", pointerUp);
     grid.addEventListener("pointerleave", pointerUp);
     grid.addEventListener("pointercancel", pointerUp);
-    grid.addEventListener("scroll", updateCurrentCard, { passive: true });
-    requestAnimationFrame(updateCurrentCard);
+    grid.addEventListener("scroll", updateTilt, { passive: true });
+    requestAnimationFrame(updateTilt);
   }
 
   const OVERLAY_FADE_MS = 350; // must match .photo-lightbox's opacity transition
@@ -184,7 +213,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   grid.querySelectorAll(".photo-grid-item").forEach((item) => {
-    item.addEventListener("click", () => open(item));
+    item.addEventListener("click", () => {
+      if (dragDistance > 10) return;
+      open(item);
+    });
   });
 
   overlay.addEventListener("click", (e) => {
