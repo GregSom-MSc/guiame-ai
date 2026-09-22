@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.releasePointerCapture?.(e.pointerId);
 
     // Momentum – scale velocity into a sensible distance
-    const momentum = Math.max(-180, Math.min(180, velocity * 420));
+    const momentum = Math.max(-180, Math.min(180, velocity * 200));
     if (Math.abs(momentum) > 12) {
       grid.scrollBy({ left: -momentum, behavior: "smooth" });
     }
