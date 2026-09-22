@@ -141,8 +141,13 @@ async function submitRating() {
   }
 }
 
-/* ── Load aggregate rating → footer badge + Schema.org ── */
+/* ── Load aggregate rating → every badge instance on the page + Schema.org.
+   A page can have more than one badge now (hero + a PDF promo card), so
+   this updates all matching elements by class rather than a single id. ── */
 async function loadBadge() {
+  const scoreEls = document.querySelectorAll('.qb-score');
+  if (!scoreEls.length) return;
+
   try {
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/ratings?select=stars`,
@@ -158,7 +163,7 @@ async function loadBadge() {
     const data = await res.json();
 
     if (!data.length) {
-      document.getElementById('qbScore').textContent = 'Sé el primero en valorar';
+      scoreEls.forEach(el => el.textContent = 'Sé el primero en valorar');
       return;
     }
 
@@ -166,11 +171,13 @@ async function loadBadge() {
     const count = data.length;
     const avgStr = avg.toFixed(1);
 
-    /* Render star icons in badge */
+    /* Render star icons in every badge */
     renderBadgeStars(avg);
 
-    document.getElementById('qbScore').textContent = `${avgStr} / 5`;
-    document.getElementById('qbCount').textContent = `(${count.toLocaleString()} opini${count === 1 ? 'ón' : 'ones'})`;
+    scoreEls.forEach(el => el.textContent = `${avgStr} / 5`);
+    document.querySelectorAll('.qb-count').forEach(el => {
+      el.textContent = `(${count.toLocaleString()} opini${count === 1 ? 'ón' : 'ones'})`;
+    });
 
     /* Update Schema.org aggregateRating dynamically */
     const schema = document.getElementById('schema-jsonld');
@@ -185,25 +192,25 @@ async function loadBadge() {
 
   } catch (err) {
     console.warn('Badge load error:', err);
-    document.getElementById('qbScore').textContent = '—';
+    scoreEls.forEach(el => el.textContent = '—');
   }
 }
 
 function renderBadgeStars(avg) {
-  const el = document.getElementById('qbStars');
-  if (!el) return;
-  el.innerHTML = '';
-  for (let i = 1; i <= 5; i++) {
-    const filled = i <= Math.round(avg);
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    svg.classList.add('qb-star-icon');
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z');
-    path.setAttribute('fill', filled ? '#FF9500' : 'rgba(255,255,255,0.2)');
-    svg.appendChild(path);
-    el.appendChild(svg);
-  }
+  document.querySelectorAll('.qb-stars').forEach(el => {
+    el.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const filled = i <= Math.round(avg);
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 24 24');
+      svg.classList.add('qb-star-icon');
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z');
+      path.setAttribute('fill', filled ? '#FF9500' : 'rgba(255,255,255,0.2)');
+      svg.appendChild(path);
+      el.appendChild(svg);
+    }
+  });
 }
 
 /* ── Init on page load ── */

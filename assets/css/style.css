@@ -2452,12 +2452,15 @@ CONTACT PAGE SPECIFIC STYLES
   font-weight: 600;
   color: #fff;
   letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Count text */
 .qb-count {
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
 }
 
 /* Walks CTA card — stands out from hero */
@@ -2748,35 +2751,62 @@ CONTACT PAGE SPECIFIC STYLES
    Reused on index.html, 2-dias-edinburgh.html
    and walks.html to sell the Buy Me a Coffee PDF.
    ============================================ */
+/* PDF promo card — full-bleed photo + navy wash, same visual language as
+   the site's hero/section-band pattern, instead of a white card floating
+   on empty space. The cover mockup sits on top of the photo with a real
+   shadow so it reads as "resting on the destination," not a checkout
+   template. Trust signal reuses .quality-badge/.qb-* verbatim (see
+   below) — already tuned for a dark photo background, so it drops in
+   with zero changes of its own, and survey.js updates every instance of
+   it on a page, not just the hero's. */
 .pdf-promo {
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-  background: #fff;
-  border: 1px solid #e0e7ee;
+  align-items: center;
+  gap: 2.5rem;
+  overflow: hidden;
   border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 10px 32px rgba(8, 29, 60, 0.1);
+  padding: 2.5rem;
   max-width: 780px;
   margin: 2rem auto;
   text-align: left;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 20px 50px rgba(8, 29, 60, 0.35);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
 }
 
-.pdf-promo:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(8, 29, 60, 0.18);
+.pdf-promo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(8, 29, 60, 0.94) 0%,
+    rgba(8, 29, 60, 0.86) 45%,
+    rgba(8, 29, 60, 0.6) 100%
+  );
 }
 
+.pdf-promo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 60px rgba(8, 29, 60, 0.45);
+}
+
+/* Small extra reassurance line some pages add below the CTA row (e.g.
+   guide.html's "Pago 100% seguro") — separate from the star-rating
+   .quality-badge, which is the sitewide trust signal. */
 .pdf-promo-trust {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 0.4rem;
   margin: 0.75rem 0 0;
   font-size: 0.8rem;
-  color: #888;
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .pdf-promo-trust svg {
@@ -2787,8 +2817,9 @@ CONTACT PAGE SPECIFIC STYLES
 
 .pdf-promo-cover {
   position: relative;
+  z-index: 1;
   flex-shrink: 0;
-  width: 150px;
+  width: 170px;
 }
 
 .pdf-promo-cover img {
@@ -2797,25 +2828,14 @@ CONTACT PAGE SPECIFIC STYLES
   object-fit: cover;
   border-radius: 10px;
   transform: rotate(-4deg);
-  box-shadow: 0 14px 28px rgba(8, 29, 60, 0.3);
-}
-
-.pdf-promo-ribbon {
-  position: absolute;
-  top: -10px;
-  right: -14px;
-  background: var(--color-accent);
-  color: #081d3c;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  padding: 4px 10px;
-  border-radius: 6px;
-  transform: rotate(9deg);
-  box-shadow: 0 4px 10px rgba(8, 29, 60, 0.25);
+  box-shadow:
+    0 22px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 6px rgba(255, 255, 255, 0.06);
 }
 
 .pdf-promo-body {
+  position: relative;
+  z-index: 1;
   flex: 1;
   min-width: 0;
 }
@@ -2825,50 +2845,49 @@ CONTACT PAGE SPECIFIC STYLES
    silently win since this eyebrow is itself a <p>. See .survey-eyebrow
    and .stop-tag for the same pattern — this bug has bitten us three times. */
 .pdf-promo-eyebrow.pdf-promo-eyebrow {
-  display: block;
-  font-size: 0.85rem;
+  display: inline-block;
+  font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  /* Dark mustard, not the flat accent — plain accent text fails contrast
-     on the white cards this also appears on (see :root notes above). */
-  color: #8a6a14;
-  margin-bottom: 0.5rem;
-}
-
-/* On the dark glass card (guide.html), swap to the brighter flat accent —
-   the dark-mustard tone above is tuned for contrast on white, not navy. */
-.pdf-promo--glass .pdf-promo-eyebrow.pdf-promo-eyebrow {
-  color: var(--color-accent);
+  color: var(--color-accent-light);
+  margin-bottom: 0.6rem;
 }
 
 .pdf-promo-body h3 {
-  color: #081d3c;
+  color: #fff;
   font-size: clamp(1.2rem, 2.4vw, 1.5rem);
   margin-bottom: 0.75rem;
   line-height: 1.25;
 }
 
+.pdf-promo-body p:not(.pdf-promo-eyebrow) {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
 .pdf-promo-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.4rem;
 }
 
 .pdf-promo-list li {
   position: relative;
   padding-left: 1.5rem;
   font-size: 0.92rem;
-  color: #555;
+  color: rgba(255, 255, 255, 0.88);
   line-height: 1.6;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
 }
 
 .pdf-promo-list li::before {
   content: "✓";
   position: absolute;
   left: 0;
-  color: var(--color-navy);
+  color: var(--color-accent-light);
   font-weight: 800;
 }
 
@@ -2901,6 +2920,16 @@ CONTACT PAGE SPECIFIC STYLES
 .pdf-promo-cta-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pdf-promo-buy {
+  display: flex;
+  align-items: center;
   gap: 1.1rem;
   flex-wrap: wrap;
 }
@@ -2908,106 +2937,61 @@ CONTACT PAGE SPECIFIC STYLES
 .pdf-promo-price {
   font-size: 1.7rem;
   font-weight: 800;
-  color: #081d3c;
+  color: #fff;
 }
 
 .pdf-promo-price span {
   display: block;
   font-size: 0.72rem;
   font-weight: 500;
-  color: #888;
+  color: rgba(255, 255, 255, 0.65);
   letter-spacing: 0.02em;
 }
 
-/* Compact variant: single soft mention (walks.html, inline mid-page) */
+/* The live rating badge (.quality-badge/.qb-*) is built for sitting under
+   a hero subtitle (margin-top: 1rem there) — reset that here so it aligns
+   cleanly next to the buy button instead. */
+.pdf-promo-cta-row .quality-badge {
+  margin-top: 0;
+}
+
+/* Compact variant: single soft mention (walks.html, guide.html, games.html,
+   guiaedin.html — inline mid-page, one-line hook instead of the bullet
+   list) */
 .pdf-promo--compact {
-  padding: 1.1rem 1.5rem;
-  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  gap: 1.25rem;
   border-radius: 16px;
   align-items: center;
 }
 
-/* Price + button as one grouped "buy box" instead of a row that wraps —
-   the wrap was leaving the price stranded with a big gap above a
-   full-width button (.btn's own mobile rule forces width:100%). */
 .pdf-promo--compact .pdf-promo-cta-row {
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid #e8ecf0;
+  gap: 0.6rem;
+  border-top: none;
+  padding-top: 0.5rem;
 }
 
-.pdf-promo--compact .pdf-promo-cta-row .btn {
-  align-self: stretch;
+.pdf-promo--compact .pdf-promo-buy {
+  width: 100%;
+  justify-content: space-between;
 }
 
 .pdf-promo--compact .pdf-promo-cover {
-  width: 100px;
+  width: 92px;
 }
 
 .pdf-promo--compact .pdf-promo-cover img {
-  border-radius: 6px;
-  box-shadow: 0 8px 16px rgba(8, 29, 60, 0.25);
-}
-
-.pdf-promo--compact .pdf-promo-ribbon {
-  font-size: 0.62rem;
-  padding: 3px 8px;
-  top: -8px;
-  right: -10px;
+  border-radius: 8px;
+  box-shadow:
+    0 14px 24px rgba(0, 0, 0, 0.45),
+    0 0 0 4px rgba(255, 255, 255, 0.06);
 }
 
 .pdf-promo--compact .pdf-promo-body p:not(.pdf-promo-eyebrow) {
   font-size: 0.92rem;
-  color: #555;
   margin-bottom: 0.5rem;
-}
-
-/* Full-width banner variant: index.html examples grid */
-.pdf-promo--banner {
-  grid-column: 1 / -1;
-  margin: 0 auto 0.5rem;
-}
-
-/* Dark-hero variant: guide.html's hero has a navy photo background, so the
-   plain white card reads as a stark cutout. Frosted glass instead, same
-   treatment as .walks-card on that same hero. */
-.pdf-promo--glass {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1.5px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.25);
-}
-
-.pdf-promo--glass .pdf-promo-body p:not(.pdf-promo-eyebrow) {
-  color: #ccd6e8;
-}
-
-.pdf-promo--glass .pdf-promo-price {
-  color: #fff;
-}
-
-.pdf-promo--glass .pdf-promo-price span {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.pdf-promo--glass .pdf-promo-cover img {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
-}
-
-.pdf-promo--glass:hover {
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35);
-}
-
-.pdf-promo--glass .pdf-promo-trust {
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.pdf-promo--glass .pdf-promo-cta-row {
-  border-top-color: rgba(255, 255, 255, 0.15);
 }
 
 @media (max-width: 640px) {
@@ -3018,7 +3002,7 @@ CONTACT PAGE SPECIFIC STYLES
   }
 
   .pdf-promo-cover {
-    width: 120px;
+    width: 130px;
   }
 
   .pdf-promo-list {
@@ -3026,12 +3010,23 @@ CONTACT PAGE SPECIFIC STYLES
   }
 
   .pdf-promo-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pdf-promo-buy {
     justify-content: center;
   }
 
+  /* Stays stacked (inherits the base .pdf-promo column rule above) rather
+     than staying side-by-side — a live trust badge needs real width to
+     avoid clipping against the card's own overflow:hidden edge, and a
+     390px-wide row split between cover+body doesn't leave enough. */
   .pdf-promo--compact {
-    flex-direction: row;
-    text-align: left;
-    padding: 1rem 1.25rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .pdf-promo--compact .pdf-promo-cover {
+    width: 110px;
   }
 }

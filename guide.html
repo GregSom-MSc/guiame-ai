@@ -250,34 +250,50 @@
           </div>
 
           <div
-            class="pdf-promo pdf-promo--compact pdf-promo--glass"
-            style="margin: 2rem auto"
+            class="pdf-promo pdf-promo--compact"
+            style="
+              margin: 2rem auto;
+              background-image: url('assets/img/EFI_night.jpg');
+            "
           >
             <div class="pdf-promo-cover">
               <img
                 src="assets/img/BMCPDFGuide.png"
                 alt="Portada de la guía Guíame Ahí Edimburgo en PDF"
               />
-              <span class="pdf-promo-ribbon">PDF</span>
             </div>
             <div class="pdf-promo-body">
               <p class="pdf-promo-eyebrow">Mi primera guía en PDF</p>
               <p>Más rutas, sin señal y con otros tours por Escocia.</p>
               <div class="pdf-promo-cta-row">
-                <p class="pdf-promo-price">£6.97<span>pago único</span></p>
-                <a
-                  href="https://buymeacoffee.com/samuelmex/e/565709"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn btn-primary btn-accent-line"
-                  onclick="
-                    if (window.clarity) {
-                      clarity('event', 'pdf_guide_click_guide');
-                    }
-                  "
+                <div class="pdf-promo-buy">
+                  <p class="pdf-promo-price">£6.97<span>pago único</span></p>
+                  <a
+                    href="https://buymeacoffee.com/samuelmex/e/565709"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary btn-accent-line"
+                    onclick="
+                      if (window.clarity) {
+                        clarity('event', 'pdf_guide_click_guide');
+                      }
+                    "
+                  >
+                    Consigue tu guía en PDF
+                  </a>
+                </div>
+                <div
+                  class="quality-badge"
+                  aria-label="Valoración media de los viajeros"
                 >
-                  Consigue tu guía en PDF
-                </a>
+                  <span
+                    class="qb-dot"
+                    title="Actualizado en tiempo real"
+                  ></span>
+                  <span class="qb-stars" aria-hidden="true"></span>
+                  <span class="qb-score">Cargando...</span>
+                  <span class="qb-count"></span>
+                </div>
               </div>
               <p class="pdf-promo-trust">
                 <svg
