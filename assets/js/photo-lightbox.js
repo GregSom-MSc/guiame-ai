@@ -85,8 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const now = performance.now();
     const dt = Math.max(now - lastT, 8);
     const dx = e.clientX - startX;
-
-    grid.scrollLeft = startScroll - dx;
+    const SENSITIVITY = 0.62;
+    grid.scrollLeft = startScroll - dx * SENSITIVITY;
     dragDistance += Math.abs(e.clientX - lastX);
     velocity = (e.clientX - lastX) / dt; // px / ms
     lastX = e.clientX;
