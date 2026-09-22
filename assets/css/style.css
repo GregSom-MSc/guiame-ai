@@ -1843,7 +1843,6 @@ a.entry-item:focus-visible .entry-item-link {
   transition: all 0.2s ease;
 }
 
-
 /* ============================================
 CONTACT PAGE SPECIFIC STYLES
 ============================================ */
@@ -2767,7 +2766,7 @@ CONTACT PAGE SPECIFIC STYLES
   overflow: hidden;
   border-radius: 20px;
   padding: 2.5rem;
-  max-width: 780px;
+  max-width: 790px;
   margin: 2rem auto;
   text-align: left;
   background-size: cover;
@@ -3005,6 +3004,16 @@ CONTACT PAGE SPECIFIC STYLES
     width: 130px;
   }
 
+  /* .pdf-promo keeps align-items:center (from the base rule) so the cover
+     image stays centered in column mode — but that also shrink-wraps
+     .pdf-promo-body to its content's own width instead of the card's full
+     width, clipping the bullet checkmarks/text against a too-narrow box
+     and squeezing the price/button/badge row. Force it to the full width
+     explicitly rather than relying on align-items. */
+  .pdf-promo-body {
+    width: 100%;
+  }
+
   .pdf-promo-list {
     text-align: left;
   }
@@ -3025,6 +3034,24 @@ CONTACT PAGE SPECIFIC STYLES
     align-items: stretch;
     justify-content: center;
     gap: 0.85rem;
+    /* Flex items default to min-width:auto, so the badge's nowrap text
+       (5.0 / 5 (102 opiniones)) was setting a content-based floor wider
+       than the card itself, overflowing past overflow:hidden instead of
+       shrinking to fit. */
+    min-width: 0;
+  }
+
+  /* The badge's own text (qb-score/qb-count) is white-space:nowrap for its
+     usual home under the hero, where there's plenty of width. Squeezed
+     into this card on a narrow phone, that same nowrap becomes a
+     content-based min-width floor wider than the card — same overflow
+     bug as .pdf-promo-buy above, one level deeper. Let it wrap to two
+     lines here instead of pushing past the card edge. */
+  .pdf-promo-cta-row .quality-badge {
+    min-width: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
 
   /* Stays stacked (inherits the base .pdf-promo column rule above) rather
