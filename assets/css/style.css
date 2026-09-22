@@ -1176,10 +1176,16 @@ p {
   .photo-grid {
     display: flex;
     overflow-x: auto;
-    gap: 0.9rem;
+    gap: 0.2rem;
     padding: 0 0.5rem 0.6rem;
     max-width: none;
-    margin: 1.5rem auto 0;
+    /* Break out of .hero-content's own 2rem side padding (that padding
+       is sized for the heading/paragraph text column, not a carousel —
+       it was shrinking every card to ~57% of the actual screen width).
+       A negative margin here doesn't need an explicit width: a flex
+       container left at width:auto automatically grows to fill the
+       extra space a negative margin opens up. */
+    margin: 1.5rem -2rem 0;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 0.5rem;
     -webkit-overflow-scrolling: touch;

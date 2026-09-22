@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const mq = window.matchMedia("(max-width: 640px)");
   let carouselMode = mq.matches;
 
-  const MAX_ANGLE = 32;
-  const MAX_SCALE_DROP = 0.14;
-  const MAX_OPACITY_DROP = 0.35;
+  const MAX_ANGLE = 12;
+  const MAX_SCALE_DROP = 0.03;
+  const MAX_OPACITY_DROP = 0.3;
   const TAP_MOVE_THRESHOLD = 6; // px of finger travel before a gesture counts as a drag, not a tap
   const SETTLE_DEBOUNCE_MS = 140;
 
