@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const target = startScroll - dx * 0.62;
 
     // Lerp toward the target → creates the “stuck / heavy” feeling
-    grid.scrollLeft += (target - grid.scrollLeft) * 0.28; // 0.2–0.35 feels good
+    grid.scrollLeft += (target - grid.scrollLeft) * 0.23; // 0.2–0.35 feels good
 
     dragDistance += Math.abs(e.clientX - lastX);
     velocity = (e.clientX - lastX) / dt;
