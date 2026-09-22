@@ -40,7 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      items.forEach((item) => item.classList.toggle("is-current", item === closest));
+      items.forEach((item) =>
+        item.classList.toggle("is-current", item === closest),
+      );
     };
 
     const pointerDown = (event) => {
