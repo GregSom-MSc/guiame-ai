@@ -65,7 +65,8 @@ function annotatedTextToHtml(richText) {
     .map((rt) => {
       let text = escapeHtml(rt.plain_text).replace(/\n/g, "<br>\n");
       if (rt.annotations && rt.annotations.italic) text = `<em>${text}</em>`;
-      if (rt.annotations && rt.annotations.bold) text = `<strong>${text}</strong>`;
+      if (rt.annotations && rt.annotations.bold)
+        text = `<strong>${text}</strong>`;
       return text;
     })
     .join("");
@@ -142,7 +143,9 @@ function renderListEntry(block) {
   const linkSeg = linkIdx !== -1 ? richText[linkIdx] : null;
   const labelRuns = linkSeg ? richText.slice(0, linkIdx) : richText;
 
-  let labelHtml = annotatedTextToHtml(labelRuns).replace(/[:\s]+$/, "").trim();
+  let labelHtml = annotatedTextToHtml(labelRuns)
+    .replace(/[:\s]+$/, "")
+    .trim();
   if (!labelHtml) labelHtml = annotatedTextToHtml(richText).trim();
   if (!labelHtml) return null;
 
@@ -305,11 +308,11 @@ async function buildContentHtml(pageId) {
       .map((b) =>
         HEADING_TYPES.includes(b.type)
           ? `${b.type}(is_toggleable=${Boolean(b[b.type].is_toggleable)})`
-          : b.type
+          : b.type,
       )
       .join(", ");
     throw new Error(
-      `No top-level toggle-like blocks found. Top-level block types seen: [${seenTypes}]`
+      `No top-level toggle-like blocks found. Top-level block types seen: [${seenTypes}]`,
     );
   }
 
