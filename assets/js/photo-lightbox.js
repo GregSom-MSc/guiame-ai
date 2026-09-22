@@ -53,7 +53,14 @@ document.addEventListener("DOMContentLoaded", function () {
           Math.min(1, rawOffset / halfViewport),
         );
 
-        const angle = normalized * -MAX_ANGLE;
+        // Positive rotateY recedes an element's RIGHT edge, negative
+        // recedes its LEFT edge (verified empirically, not assumed) — so
+        // a card to the right of center (normalized > 0) needs a
+        // POSITIVE angle to fan its outer/right edge away, matching a
+        // real CoverFlow. The earlier inverted sign made every card fan
+        // inward instead of outward, which read as backwards while
+        // scrolling.
+        const angle = normalized * MAX_ANGLE;
         const scale = 1 - Math.abs(normalized) * MAX_SCALE_DROP;
         const opacity = 1 - Math.abs(normalized) * MAX_OPACITY_DROP;
 

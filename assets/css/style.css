@@ -1208,7 +1208,7 @@ p {
 
   .photo-grid-item {
     position: relative;
-    flex: 0 0 82%;
+    flex: 0 0 92%;
     min-width: 0;
     scroll-snap-align: center;
     border-radius: 18px;
