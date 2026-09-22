@@ -15,6 +15,83 @@ document.addEventListener("DOMContentLoaded", function () {
   const overlay = document.getElementById("photoLightbox");
   if (!grid || !overlay) return;
 
+  if (window.innerWidth <= 420) {
+    let isDragging = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let lastMoveX = 0;
+    let lastMoveTime = 0;
+    let lastVelocity = 0;
+
+    const updateCurrentCard = () => {
+      const items = [...grid.querySelectorAll(".photo-grid-item")];
+      const midpoint = grid.scrollLeft + grid.clientWidth / 2;
+
+      let closest = items[0];
+      let closestDistance = Infinity;
+
+      items.forEach((item) => {
+        const itemMid = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(midpoint - itemMid);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closest = item;
+        }
+      });
+
+      items.forEach((item) => item.classList.toggle("is-current", item === closest));
+    };
+
+    const pointerDown = (event) => {
+      isDragging = true;
+      grid.classList.add("dragging");
+      startX = event.clientX;
+      startScrollLeft = grid.scrollLeft;
+      lastMoveX = event.clientX;
+      lastMoveTime = performance.now();
+      lastVelocity = 0;
+      grid.setPointerCapture(event.pointerId);
+    };
+
+    const pointerMove = (event) => {
+      if (!isDragging) return;
+
+      const dx = event.clientX - startX;
+      const now = performance.now();
+      const dt = Math.max(now - lastMoveTime, 16);
+
+      grid.scrollLeft = startScrollLeft - dx;
+      lastVelocity = (event.clientX - lastMoveX) / dt;
+      lastMoveX = event.clientX;
+      lastMoveTime = now;
+      updateCurrentCard();
+    };
+
+    const pointerUp = (event) => {
+      if (!isDragging) return;
+
+      isDragging = false;
+      grid.classList.remove("dragging");
+      grid.releasePointerCapture?.(event.pointerId);
+
+      const momentum = Math.max(-260, Math.min(260, lastVelocity * 750));
+      if (Math.abs(momentum) > 15) {
+        grid.scrollBy({ left: momentum, behavior: "smooth" });
+      }
+
+      requestAnimationFrame(updateCurrentCard);
+    };
+
+    grid.addEventListener("pointerdown", pointerDown);
+    grid.addEventListener("pointermove", pointerMove);
+    grid.addEventListener("pointerup", pointerUp);
+    grid.addEventListener("pointerleave", pointerUp);
+    grid.addEventListener("pointercancel", pointerUp);
+    grid.addEventListener("scroll", updateCurrentCard, { passive: true });
+    requestAnimationFrame(updateCurrentCard);
+  }
+
   const OVERLAY_FADE_MS = 350; // must match .photo-lightbox's opacity transition
 
   const frame = document.getElementById("photoLightboxFrame");

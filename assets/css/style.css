@@ -1174,7 +1174,62 @@ p {
 
 @media (max-width: 420px) {
   .photo-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    gap: 0.9rem;
+    padding: 0 0.5rem 0.6rem;
+    max-width: none;
+    margin: 1.5rem auto 0;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    touch-action: pan-y;
+    cursor: grab;
+    perspective: 1200px;
+  }
+
+  .photo-grid.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+  }
+
+  .photo-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .photo-grid-item {
+    position: relative;
+    flex: 0 0 82%;
+    min-width: 0;
+    scroll-snap-align: center;
+    border-radius: 18px;
+    transform-origin: center center;
+    transform: perspective(1200px) rotateY(-9deg) scale(0.94);
+    transition:
+      transform 0.32s ease,
+      box-shadow 0.32s ease,
+      opacity 0.32s ease;
+    box-shadow: 0 12px 26px rgba(8, 29, 60, 0.2);
+    opacity: 0.84;
+    z-index: 1;
+  }
+
+  .photo-grid-item:nth-child(even) {
+    transform: perspective(1200px) rotateY(9deg) scale(0.94);
+  }
+
+  .photo-grid-item.is-current {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+    z-index: 3;
+    box-shadow: 0 18px 36px rgba(8, 29, 60, 0.28);
+  }
+
+  .photo-grid.dragging .photo-grid-item {
+    transition: none;
   }
 }
 
