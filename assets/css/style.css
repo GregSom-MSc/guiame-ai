@@ -1234,7 +1234,7 @@ p {
     display: flex;
     overflow-x: auto;
     gap: 0.2rem;
-    padding: 0 0.5rem 0.6rem;
+    padding: 0 0 0.6rem;
     max-width: none;
     /* Break out of .hero-content's own 2rem side padding (that padding
        is sized for the heading/paragraph text column, not a carousel —
@@ -1243,30 +1243,31 @@ p {
        container left at width:auto automatically grows to fill the
        extra space a negative margin opens up. */
     margin: 1.5rem -2rem 0;
+    /* Swiping, momentum and snapping are all native, like walks.html's
+       .stop-cards-grid — no touch-action override, no JS scroll. */
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: 0.5rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    scroll-behavior: smooth;
     overscroll-behavior-x: contain;
-    touch-action: pan-y;
-    cursor: grab;
     /* Shared 3D space for every card, so they all recede toward one
        common vanishing point (true CoverFlow) instead of each card
        tilting in its own isolated perspective. Cards below get their
-       rotateY/scale/opacity from JS every scroll frame — see
-       updateTilt() in photo-lightbox.js — not from a fixed CSS value,
-       so the tilt tracks the drag/scroll position continuously. */
+       rotateY/scale/opacity from JS as the scroll moves — see
+       updateTilt() in photo-lightbox.js — a visual layer only. */
     perspective: 1200px;
-  }
-
-  .photo-grid.dragging {
-    cursor: grabbing;
-    scroll-behavior: auto;
   }
 
   .photo-grid::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Spacers so the first and last card can rest exactly centered like
+     every other card: (100% - 92% card) / 2 = 4% each side, minus the gap
+     that already sits between a spacer and its card. */
+  .photo-grid::before,
+  .photo-grid::after {
+    content: "";
+    flex: 0 0 calc(4% - 0.2rem);
   }
 
   .photo-grid-item {
@@ -1275,11 +1276,12 @@ p {
     min-width: 0;
 
     scroll-snap-align: center;
+    scroll-snap-stop: always; /* one flick = one card, never skips */
     border-radius: 18px;
     transform-style: preserve-3d;
     transform-origin: center center;
     /* No transform transition here on purpose: updateTilt() already
-       writes a fresh transform every animation frame during drag/scroll,
+       writes a fresh transform every animation frame while scrolling,
        so a CSS transition on top of that just chases a moving target and
        reads as lag. Only box-shadow (a one-off toggle on is-current, not
        a per-frame value) benefits from easing. */
@@ -1305,6 +1307,7 @@ p {
   position: relative;
   aspect-ratio: 4 / 3;
   border-radius: 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(8, 29, 60, 0.15);
   cursor: zoom-in;
