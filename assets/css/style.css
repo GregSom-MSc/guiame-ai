@@ -1782,16 +1782,29 @@ p.itinerary-card-desc {
   content: "▾";
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   color: var(--color-accent-light);
-  font-size: 1rem;
+  font-size: 1.5rem;
   line-height: 1;
-  margin-bottom: 0.2rem;
   transition: transform 0.2s ease;
 }
 
+/* Open state is the slim tab — back to a bare, small chevron there. */
 .section-toggle[open] > summary::after {
   transform: rotate(180deg);
-  margin-bottom: 0;
+  width: auto;
+  height: auto;
+  border: 0;
+  background: none;
+  font-size: 1rem;
 }
 
 .section-toggle > summary:hover,

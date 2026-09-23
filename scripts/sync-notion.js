@@ -309,12 +309,13 @@ function renderSection(block, slugify, index) {
   const children = block._children || [];
   const innerHtml = renderChildren(children, slugify).join("\n\n");
   const topicCount = countTopics(children);
+  const topicLabel = `${topicCount} ${topicCount === 1 ? "tema" : "temas"}`;
 
   return `      <details class="section-toggle">
         <summary style="background-image: url(&quot;${photo}&quot;);">
           <span class="section-toggle-text">
             <span class="section-toggle-label">${escapeHtml(title)}</span>
-            <span class="section-toggle-count">${topicCount} ${topicCount === 1 ? "tema" : "temas"}</span>
+            <span class="section-toggle-count">${topicLabel}</span>
           </span>
         </summary>
         <section
@@ -323,7 +324,7 @@ function renderSection(block, slugify, index) {
         >
           <div class="section-band-content">
             <h2>${escapeHtml(title)}</h2>
-            <p>1️⃣ Elige un tema — 2️⃣ Pica para desplegar</p>
+            <p>${topicLabel} · Pica uno para desplegar</p>
           </div>
         </section>
 
