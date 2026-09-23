@@ -31,12 +31,13 @@ const PAGES = [
   },
 ];
 
-// Falls back to a default photo if a section title isn't in this map, so a
-// brand-new top-level toggle in Notion still renders instead of erroring.
-const SECTION_PHOTOS = {
-  "🧳 Prácticos para tu viaje": "assets/img/Foodsguia.jpeg",
-  "✨ Frases y curiosidades": "assets/img/Booksguia.jpeg",
-};
+// Keyed by position (1st top-level section, 2nd, ...), not by title text —
+// titles get renamed in Notion (already happened twice), which would
+// silently break a title-keyed map and contradicts this script's own
+// design goal above ("renaming... needs no code change"). Falls back to a
+// default photo for any section beyond this list, so a new top-level
+// toggle still renders instead of erroring.
+const SECTION_PHOTOS = ["assets/img/Foodsguia.jpeg", "assets/img/Booksguia.jpeg"];
 const DEFAULT_SECTION_PHOTO = "assets/img/CastleView.jpg";
 
 const START_MARKER = "<!-- NOTION:CONTENT:START";
@@ -265,9 +266,9 @@ ${innerParts.join("\n")}
           </details>`;
 }
 
-function renderSection(block, slugify) {
+function renderSection(block, slugify, index) {
   const title = plainText(getRichText(block)).trim() || "Sin título";
-  const photo = SECTION_PHOTOS[title] || DEFAULT_SECTION_PHOTO;
+  const photo = SECTION_PHOTOS[index] || DEFAULT_SECTION_PHOTO;
   const children = block._children || [];
   const innerHtml = renderChildren(children, slugify).join("\n\n");
 
@@ -311,7 +312,9 @@ async function buildContentHtml(pageId) {
   }
 
   const slugify = makeSlugger();
-  const sectionHtmlParts = sections.map((s) => renderSection(s, slugify));
+  const sectionHtmlParts = sections.map((s, i) =>
+    renderSection(s, slugify, i),
+  );
 
   return sectionHtmlParts.join("\n\n");
 }
