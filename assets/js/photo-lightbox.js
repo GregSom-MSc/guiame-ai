@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const MAX_ANGLE = 12;
   const MAX_SCALE_DROP = 0.03;
   const MAX_OPACITY_DROP = 0.3;
+  const MAX_BLUR = 3; // px, at the furthest tilt (n = ±1)
   const TAP_MOVE_THRESHOLD = 6; // px of finger travel before a gesture counts as a drag, not a tap
   const SETTLE_DEBOUNCE_MS = 140;
 
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.querySelectorAll(".photo-grid-item").forEach((item) => {
       item.style.transform = "";
       item.style.opacity = "";
+      item.style.filter = "";
       item.classList.remove("is-current");
     });
   }
@@ -73,9 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const angle = n * MAX_ANGLE;
       const scale = 1 - Math.abs(n) * MAX_SCALE_DROP;
       const opacity = 1 - Math.abs(n) * MAX_OPACITY_DROP;
+      const blur = Math.abs(n) * MAX_BLUR;
 
       item.style.transform = `rotateY(${angle}deg) scale(${scale})`;
       item.style.opacity = opacity;
+      item.style.filter = blur > 0.05 ? `blur(${blur}px)` : "";
 
       const dist = Math.abs(raw);
       if (dist < closestDist) {
