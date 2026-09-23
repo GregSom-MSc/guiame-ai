@@ -855,6 +855,30 @@ p {
   margin-top: 0.5rem;
 }
 
+/* Sits between the nav links and the copyright line. flex+gap so a
+   second icon (Instagram, planned once the account has posts) can join
+   the Spotify link later without restructuring this. */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.footer-social-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .footer p {
   color: #fff;
   margin: 0.5rem 0;
