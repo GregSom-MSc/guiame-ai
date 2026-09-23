@@ -130,6 +130,29 @@ function makeSlugger() {
   };
 }
 
+// Short tag shown on a link card in place of the raw URL, chosen by where
+// the link actually goes — not every entry is a Maps pin (museums,
+// distilleries and tours link to their own sites). Single source of truth:
+// add a domain here, not per section.
+function getLinkLabel(href) {
+  let u;
+  try {
+    u = new URL(href);
+  } catch {
+    return "Ver enlace";
+  }
+  const host = u.hostname.replace(/^www\./, "");
+  const isMapsPath = u.pathname.startsWith("/maps");
+  if (host === "maps.app.goo.gl" || host === "maps.google.com") return "Google Maps";
+  if ((host === "google.com" || host === "goo.gl") && isMapsPath) return "Google Maps";
+  if (host === "open.spotify.com") return "Spotify";
+  if (host === "instagram.com") return "Instagram";
+  if (host === "facebook.com" || host === "fb.com") return "Facebook";
+  if (host === "youtube.com" || host === "youtu.be") return "YouTube";
+  if (host === "apps.apple.com" || host === "play.google.com") return "Descargar app";
+  return "Sitio oficial";
+}
+
 // A single list item (bulleted/numbered) -> one entry card, linked if it
 // carries a hyperlink annotation. Uses the rich-text array's own index to
 // split label vs. link, rather than searching concatenated plain text, so
@@ -159,9 +182,8 @@ function renderListEntry(block) {
                 >
                   <div class="entry-item-text">
                     <strong>${labelHtml}</strong>
-                    <p>${escapeHtml(linkSeg.href)}</p>
+                    <span class="entry-item-tag">${getLinkLabel(linkSeg.href)}</span>
                   </div>
-                  <span class="entry-item-link" aria-hidden="true">↗</span>
                 </a>`;
   }
   return `                <div class="entry-item">
@@ -266,15 +288,34 @@ ${innerParts.join("\n")}
           </details>`;
 }
 
+// Number of leaf topics (accordions) under a section — the same group/leaf
+// rule renderToggleNode uses, so the tile's "N temas" matches what opens.
+function countTopics(children) {
+  return children
+    .filter(isToggleLike)
+    .reduce(
+      (sum, c) =>
+        sum +
+        (c._children && c._children.some(isToggleLike)
+          ? countTopics(c._children)
+          : 1),
+      0,
+    );
+}
+
 function renderSection(block, slugify, index) {
   const title = plainText(getRichText(block)).trim() || "Sin título";
   const photo = SECTION_PHOTOS[index] || DEFAULT_SECTION_PHOTO;
   const children = block._children || [];
   const innerHtml = renderChildren(children, slugify).join("\n\n");
+  const topicCount = countTopics(children);
 
   return `      <details class="section-toggle">
         <summary style="background-image: url(&quot;${photo}&quot;);">
-          <span class="section-toggle-label">${escapeHtml(title)}</span>
+          <span class="section-toggle-text">
+            <span class="section-toggle-label">${escapeHtml(title)}</span>
+            <span class="section-toggle-count">${topicCount} ${topicCount === 1 ? "tema" : "temas"}</span>
+          </span>
         </summary>
         <section
           class="section-band"

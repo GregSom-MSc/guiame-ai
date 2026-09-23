@@ -1696,7 +1696,7 @@ p.itinerary-card-desc {
    stacked below a leftover duplicate label. */
 .section-toggle {
   text-align: center;
-  padding: 1.6rem 0;
+  padding: 0.6rem 0;
 }
 
 .section-toggle[open] {
@@ -1707,29 +1707,32 @@ p.itinerary-card-desc {
    the whole topic-accordion list too, so a plain descendant selector here
    would also match every nested .topic-accordion summary.
 
-   Closed state is a big photo tile (each section's own photo, set inline
-   per instance — see SECTION_PHOTOS in scripts/sync-notion.js) with a
-   dark wash for legibility, same technique as .section-band's own
-   ::before overlay. Open state collapses to the original slim navy tab
-   (unchanged) — the photo lives on in the .section-band right below it
-   instead of on the now-tiny tab. */
+   Closed state is an inset 16:9 photo card (each section's own photo, set
+   inline per instance — see SECTION_PHOTOS in scripts/sync-notion.js).
+   The photo is left almost untouched: only a scrim rising from the bottom
+   edge darkens it, just enough to seat the title (bottom-left with a gold
+   accent line, same pattern as .photo-grid-caption / .stop-card-caption).
+   Open state collapses to the original slim navy tab — the photo lives on
+   in the .section-band right below it. */
 .section-toggle > summary {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
   list-style: none;
   cursor: pointer;
-  min-height: 180px;
-  padding: 1.5rem;
+  width: min(calc(100% - 2rem), 560px);
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  padding: 1.1rem 1.2rem;
   border-radius: 14px;
   background-size: cover;
   background-position: center;
   color: #fff;
-  font-weight: 700;
-  font-size: 1.3rem;
+  text-align: left;
   overflow: hidden;
+  box-shadow: 0 10px 26px rgba(8, 29, 60, 0.25);
   transition: all 0.2s ease;
 }
 
@@ -1738,18 +1741,37 @@ p.itinerary-card-desc {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(8, 29, 60, 0.78) 0%,
-    rgba(12, 43, 90, 0.78) 100%
+    to top,
+    rgba(8, 29, 60, 0.92) 0%,
+    rgba(8, 29, 60, 0.6) 32%,
+    rgba(8, 29, 60, 0) 62%
   );
 }
 
-/* Sits above the ::before overlay (which paints after in-flow inline
+/* Sits above the ::before scrim (which paints after in-flow inline
    content — same reason .section-band wraps its own text in
    .section-band-content with z-index:1). */
-.section-toggle-label {
+.section-toggle-text {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--color-accent);
+}
+
+.section-toggle-label {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+
+.section-toggle-count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .section-toggle > summary::-webkit-details-marker {
@@ -1762,11 +1784,14 @@ p.itinerary-card-desc {
   z-index: 1;
   color: var(--color-accent-light);
   font-size: 1rem;
+  line-height: 1;
+  margin-bottom: 0.2rem;
   transition: transform 0.2s ease;
 }
 
 .section-toggle[open] > summary::after {
   transform: rotate(180deg);
+  margin-bottom: 0;
 }
 
 .section-toggle > summary:hover,
@@ -1777,17 +1802,21 @@ p.itinerary-card-desc {
 }
 
 .section-toggle[open] > summary {
-  min-height: 0;
+  width: auto;
+  margin: 0;
+  aspect-ratio: auto;
+  align-items: center;
+  justify-content: center;
   gap: 0;
   padding: 0.35rem 1.2rem;
   border-radius: 8px 8px 0 0;
   background: rgba(8, 29, 60, 0.9);
-  font-size: 0;
   transform: none;
   box-shadow: none;
 }
 
-.section-toggle[open] > summary::before {
+.section-toggle[open] > summary::before,
+.section-toggle[open] > summary .section-toggle-text {
   display: none;
 }
 
@@ -1819,7 +1848,7 @@ p.itinerary-card-desc {
   margin-bottom: 0.9rem;
   overflow: hidden;
   scroll-margin-top: 90px;
-  border: 1px solid #e0e7ee;
+  border: 1px solid var(--color-navy);
 }
 
 .topic-accordion summary {
@@ -1849,9 +1878,9 @@ p.itinerary-card-desc {
 }
 
 .topic-accordion[open] summary {
-  background: #fff;
-  color: var(--color-navy);
-  border-bottom: 1px solid #e0e7ee;
+  background: var(--color-navy);
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .topic-accordion[open] summary::after {
@@ -1861,7 +1890,7 @@ p.itinerary-card-desc {
 
 .topic-accordion-body {
   padding: 1rem 1rem 1.2rem;
-  background: #fff;
+  background: var(--color-navy);
 }
 
 .entry-list {
@@ -1917,23 +1946,23 @@ p.itinerary-card-desc {
   gap: 0.9rem;
 }
 
-/* Solid navy staying solid until 85% before fading — only the last sliver
-   (reserved for the link icon) dilutes. It was 55% before, which worked
-   for a short one-line name but let long/wrapped text (a fuller
-   description, a full poem stanza) drift onto the faded, near-white part
-   of the card, where light-colored text became illegible. Entries with a
-   real destination use this class on the <a> itself (the whole card is
-   the link, not just the small icon); entries with nothing to link to
-   (a poem, a plain description) keep it on a plain <div> instead. */
+/* Blue glass card on the navy accordion body, light border like
+   .walks-card. Entries with a real destination use this class on the <a>
+   itself (the whole card is the link, not just the small icon); entries
+   with nothing to link to (a poem, a plain description) keep it on a plain
+   <div> instead. */
 .entry-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
   padding: 0.8rem 1rem;
-  border-radius: 8px;
-  background: var(--color-accent-blue);
-  transition: box-shadow 0.2s ease;
+  border-radius: 10px;
+  background: rgba(74, 155, 224, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 a.entry-item {
@@ -1942,17 +1971,24 @@ a.entry-item {
 
 a.entry-item:hover,
 a.entry-item:focus-visible {
-  box-shadow: 0 4px 14px rgba(8, 29, 60, 0.28);
+  background: rgba(74, 155, 224, 0.6);
+  border-color: rgba(255, 255, 255, 0.45);
   outline: none;
 }
 
-/* The icon reacts to hovering the whole card, not just its own small
-   box — it's decorative (aria-hidden) now that the <a> is the real
-   target, so it has no meaningful :hover of its own. */
-a.entry-item:hover .entry-item-link,
-a.entry-item:focus-visible .entry-item-link {
-  background: var(--color-accent);
-  color: #fff;
+/* Where the link goes, instead of the raw URL — text comes from
+   getLinkLabel() in scripts/sync-notion.js. */
+.entry-item-tag {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-accent-light);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .entry-item-text {
@@ -1960,7 +1996,7 @@ a.entry-item:focus-visible .entry-item-link {
 }
 
 /* Direct-child only: this is the entry's *name* label, meant to sit on
-   its own line above the URL. A plain descendant selector would also
+   its own line above the link tag. A plain descendant selector would also
    grab any inline <strong> inside .entry-item-prose (mid-sentence bold
    text from Notion), forcing it onto its own line too and orphaning
    whatever plain text came right before it. */
@@ -1988,20 +2024,6 @@ a.entry-item:focus-visible .entry-item-link {
   line-height: 1.7;
   word-break: normal;
   overflow-wrap: break-word;
-}
-
-.entry-item-link {
-  flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
 }
 
 /* ============================================
