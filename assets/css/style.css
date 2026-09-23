@@ -274,6 +274,21 @@ p {
 .hero {
   position: relative;
   min-height: 100vh;
+  /* Two stacked fixes for "third hero button cut off on first load,
+     mobile Safari":
+     1. iOS Safari's 100vh is the height as if the address bar/toolbar
+        weren't there — taller than what's actually visible before any
+        scroll. 100svh is the guaranteed-visible height with browser
+        chrome accounted for; browsers without svh support just keep
+        the vh value above.
+     2. Even with svh, .header sits ABOVE .hero in normal document flow
+        (position:sticky still takes up its own space, it doesn't
+        overlay) — so header + a full 100svh hero together overflow the
+        real viewport by exactly the header's own height (77px,
+        measured). Subtracting it here is what actually makes the two
+        together fit the first screen, not svh alone. */
+  min-height: calc(100vh - 77px);
+  min-height: calc(100svh - 77px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -467,13 +482,31 @@ p {
   .hero-icon.scrolled img {
     width: 50px;
   }
+
+  /* Even with .hero's svh fix, the full stack (logo, title, badge,
+     subtitle, 3 buttons) measured ~648px tall against a realistic
+     ~660px first-load visible height on a real phone — a ~10px margin
+     that's too close to zero to trust across devices. Trimming spacing
+     here (not font sizes, so nothing looks meaningfully smaller) buys
+     back real headroom instead of relying on a knife's-edge fit. */
+  .hero-content {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .hero-icon {
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    margin-bottom: 1.25rem;
+  }
 }
 
 /* ============================================
    5. BUTTONS
    ============================================ */
 .btn {
-  padding: 0.75rem 2rem;
+  padding: 0.95rem 2rem;
   font-size: 1rem;
   font-weight: 600;
   border-radius: 8px;
