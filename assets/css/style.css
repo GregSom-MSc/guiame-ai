@@ -1645,20 +1645,51 @@ p.itinerary-card-desc {
 
 /* Child combinator (>) throughout this block — .section-toggle now wraps
    the whole topic-accordion list too, so a plain descendant selector here
-   would also match every nested .topic-accordion summary. */
+   would also match every nested .topic-accordion summary.
+
+   Closed state is a big photo tile (each section's own photo, set inline
+   per instance — see SECTION_PHOTOS in scripts/sync-notion.js) with a
+   dark wash for legibility, same technique as .section-band's own
+   ::before overlay. Open state collapses to the original slim navy tab
+   (unchanged) — the photo lives on in the .section-band right below it
+   instead of on the now-tiny tab. */
 .section-toggle > summary {
-  display: inline-flex;
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   list-style: none;
   cursor: pointer;
-  padding: 0.75rem 1.8rem;
-  border-radius: 8px;
-  background: var(--color-navy);
+  min-height: 180px;
+  padding: 1.5rem;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
   color: #fff;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.3rem;
+  overflow: hidden;
   transition: all 0.2s ease;
+}
+
+.section-toggle > summary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 29, 60, 0.78) 0%,
+    rgba(12, 43, 90, 0.78) 100%
+  );
+}
+
+/* Sits above the ::before overlay (which paints after in-flow inline
+   content — same reason .section-band wraps its own text in
+   .section-band-content with z-index:1). */
+.section-toggle-label {
+  position: relative;
+  z-index: 1;
 }
 
 .section-toggle > summary::-webkit-details-marker {
@@ -1667,6 +1698,8 @@ p.itinerary-card-desc {
 
 .section-toggle > summary::after {
   content: "▾";
+  position: relative;
+  z-index: 1;
   color: var(--color-accent-light);
   font-size: 1rem;
   transition: transform 0.2s ease;
@@ -1678,17 +1711,24 @@ p.itinerary-card-desc {
 
 .section-toggle > summary:hover,
 .section-toggle > summary:focus-visible {
-  background: var(--color-accent);
-  color: var(--color-navy);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(8, 29, 60, 0.35);
   outline: none;
 }
 
 .section-toggle[open] > summary {
+  min-height: 0;
   gap: 0;
   padding: 0.35rem 1.2rem;
   border-radius: 8px 8px 0 0;
   background: rgba(8, 29, 60, 0.9);
   font-size: 0;
+  transform: none;
+  box-shadow: none;
+}
+
+.section-toggle[open] > summary::before {
+  display: none;
 }
 
 .section-toggle[open] > summary::after {
@@ -1698,25 +1738,13 @@ p.itinerary-card-desc {
 .section-toggle[open] > summary:hover,
 .section-toggle[open] > summary:focus-visible {
   background: var(--color-accent);
+  transform: none;
+  box-shadow: none;
 }
 
 .section-toggle[open] > summary:hover::after,
 .section-toggle[open] > summary:focus-visible::after {
   color: var(--color-navy);
-}
-
-.section-divider-photo {
-  position: relative;
-  height: 130px;
-  background-size: cover;
-  background-position: center;
-}
-
-.section-divider-photo::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(8, 29, 60, 0.8);
 }
 
 /* Each Notion toggle → a native <details>. Collapsed = a solid navy bar

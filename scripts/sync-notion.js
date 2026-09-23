@@ -34,11 +34,10 @@ const PAGES = [
 // Falls back to a default photo if a section title isn't in this map, so a
 // brand-new top-level toggle in Notion still renders instead of erroring.
 const SECTION_PHOTOS = {
-  "📋 Prácticos para tu viaje": "assets/img/victoriastreetmain.jpg",
-  "✨ Frases y curiosidades! 🖋🎵👻": "assets/img/greyfriarstombs.jpg",
+  "🧳 Prácticos para tu viaje": "assets/img/Foodsguia.jpeg",
+  "✨ Frases y curiosidades": "assets/img/Booksguia.jpeg",
 };
 const DEFAULT_SECTION_PHOTO = "assets/img/CastleView.jpg";
-const DIVIDER_PHOTO = "assets/img/caltonhillpan.jpg";
 
 const START_MARKER = "<!-- NOTION:CONTENT:START";
 const END_MARKER = "<!-- NOTION:CONTENT:END -->";
@@ -273,7 +272,9 @@ function renderSection(block, slugify) {
   const innerHtml = renderChildren(children, slugify).join("\n\n");
 
   return `      <details class="section-toggle">
-        <summary>${escapeHtml(title)}</summary>
+        <summary style="background-image: url(&quot;${photo}&quot;);">
+          <span class="section-toggle-label">${escapeHtml(title)}</span>
+        </summary>
         <section
           class="section-band"
           style="background-image: url(&quot;${photo}&quot;);"
@@ -290,13 +291,6 @@ ${innerHtml}
           </div>
         </section>
       </details>`;
-}
-
-function renderDivider() {
-  return `      <div
-        class="section-divider-photo"
-        style="background-image: url('${DIVIDER_PHOTO}')"
-      ></div>`;
 }
 
 async function buildContentHtml(pageId) {
@@ -319,13 +313,7 @@ async function buildContentHtml(pageId) {
   const slugify = makeSlugger();
   const sectionHtmlParts = sections.map((s) => renderSection(s, slugify));
 
-  const withDividers = [];
-  sectionHtmlParts.forEach((html, i) => {
-    withDividers.push(html);
-    if (i < sectionHtmlParts.length - 1) withDividers.push(renderDivider());
-  });
-
-  return withDividers.join("\n\n");
+  return sectionHtmlParts.join("\n\n");
 }
 
 function writeContentIntoFile(filePath, contentHtml) {
