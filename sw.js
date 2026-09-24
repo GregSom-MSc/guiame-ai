@@ -2,7 +2,8 @@ const CACHE_NAME = 'guiame-pwa-v1';
 
 const urlsToCache = [
   'rosslyn.html',
-  'assets/css/style.css'
+  'assets/css/style.css',
+  'assets/js/main.js'
   // Agregar aquí otras páginas luego!!
 ];
 

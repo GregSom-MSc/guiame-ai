@@ -15,19 +15,41 @@ function initMobileMenu() {
   const navToggle = document.getElementById("navToggle");
   const nav = document.querySelector(".nav");
 
-  if (!navToggle) return;
+  if (!navToggle || !nav) return;
+
+  // Full-screen catcher under the header (CSS: .nav-backdrop). A tap outside
+  // the menu lands here, closes it, and stops there — instead of also
+  // activating whatever link or card happened to be underneath.
+  const backdrop = document.createElement("div");
+  backdrop.className = "nav-backdrop";
+  document.body.appendChild(backdrop);
+
+  function setMenu(open) {
+    navToggle.classList.toggle("active", open);
+    nav.classList.toggle("active", open);
+    backdrop.classList.toggle("active", open);
+    navToggle.setAttribute("aria-expanded", String(open));
+  }
+
+  setMenu(false);
 
   navToggle.addEventListener("click", function () {
-    navToggle.classList.toggle("active");
-    nav.classList.toggle("active");
+    setMenu(!nav.classList.contains("active"));
+  });
+
+  backdrop.addEventListener("click", function () {
+    setMenu(false);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setMenu(false);
   });
 
   // Close menu when a link is clicked
   const navLinks = document.querySelectorAll(".nav-link");
   navLinks.forEach((link) => {
     link.addEventListener("click", function () {
-      navToggle.classList.remove("active");
-      nav.classList.remove("active");
+      setMenu(false);
     });
   });
 }
