@@ -2686,6 +2686,16 @@ CONTACT PAGE SPECIFIC STYLES
   transition: background 0.3s ease;
 }
 
+/* Badge between a hero title and its subtitle (index.html). The title's
+   16px bottom margin plus the badge's own 16px top margin stacked into a
+   34px gap above it, while nothing separated it from the paragraph below —
+   so it read as part of the paragraph. Only 6px at the bottom: the
+   paragraph's own line spacing adds a few more. */
+.hero-title + .quality-badge {
+  margin-top: 0;
+  margin-bottom: 0.375rem;
+}
+
 .quality-badge:hover {
   background: rgba(255, 255, 255, 0.12);
 }
