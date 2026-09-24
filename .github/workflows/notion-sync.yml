@@ -25,14 +25,17 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: npm run sync-notion
 
+      # Runs even if one page's sync failed, so the pages that did succeed
+      # still get committed (the failed run still shows red).
       - name: Commit and push if content changed
+        if: ${{ !cancelled() }}
         run: |
           git config user.name "guiame-notion-sync"
           git config user.email "actions@users.noreply.github.com"
           if git diff --quiet; then
             echo "No content changes."
           else
-            git add guiaedin.html
+            git add guiaedin.html guialondres.html
             git commit -m "Sync content from Notion"
             git push
           fi

@@ -23,21 +23,33 @@ if (!NOTION_TOKEN) {
 
 const notion = new Client({ auth: NOTION_TOKEN });
 
-// Add a new page to sync here: { notionPageId, outputFile }.
+// Add a new page to sync here: { notionPageId, outputFile, sectionPhotos }.
+// The output file must already exist with the NOTION:CONTENT markers, and
+// must also be listed in the `git add` line of
+// .github/workflows/notion-sync.yml or it syncs but never gets committed.
+//
+// sectionPhotos is keyed by position (1st top-level section, 2nd, ...), not
+// by title text — titles get renamed in Notion (already happened twice),
+// which would silently break a title-keyed map and contradicts this
+// script's own design goal above ("renaming... needs no code change").
+// Falls back to a default photo for any section beyond the list, so a new
+// top-level toggle still renders instead of erroring.
 const PAGES = [
   {
     notionPageId: "1ea6f90a-2be0-8080-941e-f3e33aeec6ea",
     outputFile: "guiaedin.html",
+    sectionPhotos: ["assets/img/Foodsguia.jpeg", "assets/img/Booksguia.jpeg"],
+  },
+  {
+    notionPageId: "3ae6f90a-2be0-8070-8698-eda82d14b98a",
+    outputFile: "guialondres.html",
+    sectionPhotos: [
+      "assets/img/LondonFood.jpg",
+      "assets/img/LondonAttractions.jpg",
+      "assets/img/LondonResources.jpg",
+    ],
   },
 ];
-
-// Keyed by position (1st top-level section, 2nd, ...), not by title text —
-// titles get renamed in Notion (already happened twice), which would
-// silently break a title-keyed map and contradicts this script's own
-// design goal above ("renaming... needs no code change"). Falls back to a
-// default photo for any section beyond this list, so a new top-level
-// toggle still renders instead of erroring.
-const SECTION_PHOTOS = ["assets/img/Foodsguia.jpeg", "assets/img/Booksguia.jpeg"];
 const DEFAULT_SECTION_PHOTO = "assets/img/CastleView.jpg";
 
 const START_MARKER = "<!-- NOTION:CONTENT:START";
@@ -303,9 +315,16 @@ function countTopics(children) {
     );
 }
 
-function renderSection(block, slugify, index) {
-  const title = plainText(getRichText(block)).trim() || "Sin título";
-  const photo = SECTION_PHOTOS[index] || DEFAULT_SECTION_PHOTO;
+// The big section tiles read cleaner without the emoji Notion titles carry
+// (sub-toggles keep theirs). Only emoji at the very edges of a title go.
+const EDGE_EMOJI =
+  /^[\p{Extended_Pictographic}️‍\s]+|[\p{Extended_Pictographic}️‍\s]+$/gu;
+
+function renderSection(block, slugify, index, photos) {
+  const title =
+    plainText(getRichText(block)).trim().replace(EDGE_EMOJI, "") ||
+    "Sin título";
+  const photo = (photos && photos[index]) || DEFAULT_SECTION_PHOTO;
   const children = block._children || [];
   const innerHtml = renderChildren(children, slugify).join("\n\n");
   const topicCount = countTopics(children);
@@ -336,7 +355,7 @@ ${innerHtml}
       </details>`;
 }
 
-async function buildContentHtml(pageId) {
+async function buildContentHtml(pageId, photos) {
   const topBlocks = await fetchChildren(pageId);
   const sections = topBlocks.filter(isToggleLike);
   if (sections.length === 0) {
@@ -355,7 +374,7 @@ async function buildContentHtml(pageId) {
 
   const slugify = makeSlugger();
   const sectionHtmlParts = sections.map((s, i) =>
-    renderSection(s, slugify, i),
+    renderSection(s, slugify, i, photos),
   );
 
   return sectionHtmlParts.join("\n\n");
@@ -385,17 +404,27 @@ function writeContentIntoFile(filePath, contentHtml) {
   fs.writeFileSync(filePath, updated, "utf8");
 }
 
+// Each page is synced on its own: a problem with one Notion page (renamed,
+// unshared, deleted) must not stop the others from updating. The process
+// still exits non-zero at the end so the workflow run is marked failed.
 async function main() {
-  for (const { notionPageId, outputFile } of PAGES) {
-    console.log(`Syncing ${outputFile} from Notion page ${notionPageId}...`);
-    const contentHtml = await buildContentHtml(notionPageId);
-    const filePath = path.join(__dirname, "..", outputFile);
-    writeContentIntoFile(filePath, contentHtml);
-    console.log(`Wrote ${outputFile}.`);
+  const failed = [];
+  for (const { notionPageId, outputFile, sectionPhotos } of PAGES) {
+    try {
+      console.log(`Syncing ${outputFile} from Notion page ${notionPageId}...`);
+      const contentHtml = await buildContentHtml(notionPageId, sectionPhotos);
+      const filePath = path.join(__dirname, "..", outputFile);
+      writeContentIntoFile(filePath, contentHtml);
+      console.log(`Wrote ${outputFile}.`);
+    } catch (err) {
+      console.error(`Sync failed for ${outputFile}: ${err.message}`);
+      failed.push(outputFile);
+    }
+  }
+  if (failed.length) {
+    console.error(`Pages that failed: ${failed.join(", ")}`);
+    process.exit(1);
   }
 }
 
-main().catch((err) => {
-  console.error("Sync failed:", err.message);
-  process.exit(1);
-});
+main();
