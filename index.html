@@ -53,6 +53,65 @@
 
     <meta itemprop="image" content="https://guiame.ai/assets/img/iconOG.png" />
 
+    <!-- Page loader: shown instantly (inline, zero network dependency —
+         no wait on style.css or any image) to cover the wait on a slow
+         connection, so the screen never looks blank/broken.
+         Two independent ways it hides, so it can never get stuck open:
+         1. Fast path (JS, in <body>): hides the instant window 'load'
+            fires — the page is actually ready.
+         2. Guaranteed fallback (pure CSS, right here, no JS involved):
+            fades out on its own after 8s regardless. Covers the case
+            where scripts are blocked entirely (NoScript, some ad/privacy
+            blockers) — without this, a blocked hide-script would leave
+            the overlay stuck forever, which is worse than the blank
+            screen this exists to prevent. -->
+    <style>
+      #page-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #081d3c;
+        transition: opacity 0.4s ease;
+        animation: page-loader-autohide 0.4s ease 8s forwards;
+      }
+      #page-loader.page-loader--hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      @keyframes page-loader-autohide {
+        to {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+      #page-loader svg {
+        width: 64px;
+        height: 64px;
+      }
+      @media (min-width: 768px) {
+        #page-loader svg {
+          width: 88px;
+          height: 88px;
+        }
+      }
+      #page-loader .page-loader-glow {
+        filter: blur(4px);
+      }
+      #page-loader .page-loader-needle {
+        transform-origin: 32px 32px;
+        animation: page-loader-spin 2s linear infinite;
+        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35));
+      }
+      @keyframes page-loader-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="icon" type="image/x-icon" href="assets/img/icon.ico" />
 
@@ -123,6 +182,66 @@
   </head>
 
   <body>
+    <div id="page-loader" aria-hidden="true">
+      <svg viewBox="0 0 64 64" role="img" aria-label="Cargando">
+        <defs>
+          <linearGradient id="page-loader-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f4d976"></stop>
+            <stop offset="50%" stop-color="#c9a227"></stop>
+            <stop offset="100%" stop-color="#8a6c1a"></stop>
+          </linearGradient>
+        </defs>
+
+        <circle
+          class="page-loader-glow"
+          cx="32"
+          cy="32"
+          r="29"
+          fill="none"
+          stroke="#c9a227"
+          stroke-width="4"
+          opacity="0.22"
+        ></circle>
+
+        <circle
+          cx="32"
+          cy="32"
+          r="27"
+          fill="none"
+          stroke="url(#page-loader-ring)"
+          stroke-width="2.5"
+        ></circle>
+
+        <g stroke="#c9a227" stroke-width="1.5" stroke-linecap="round">
+          <line x1="32" y1="3" x2="32" y2="7"></line>
+          <line x1="32" y1="3" x2="32" y2="7" transform="rotate(90 32 32)"></line>
+          <line x1="32" y1="3" x2="32" y2="7" transform="rotate(180 32 32)"></line>
+          <line x1="32" y1="3" x2="32" y2="7" transform="rotate(270 32 32)"></line>
+        </g>
+
+        <g class="page-loader-needle">
+          <polygon points="32,6 38,32 26,32" fill="#9a1f2b"></polygon>
+          <polygon points="32,50 38,32 26,32" fill="#f3ead2"></polygon>
+          <circle cx="32" cy="32" r="2.5" fill="#2b2b2b"></circle>
+        </g>
+      </svg>
+    </div>
+    <script>
+      (function () {
+        function hidePageLoader() {
+          var loader = document.getElementById("page-loader");
+          if (!loader) return;
+          loader.classList.add("page-loader--hidden");
+          setTimeout(function () {
+            var el = document.getElementById("page-loader");
+            if (el) el.remove();
+          }, 450);
+        }
+        window.addEventListener("load", hidePageLoader);
+        setTimeout(hidePageLoader, 8000);
+      })();
+    </script>
+
     <!-- Header / Navigation -->
     <header class="header">
       <div class="header-container">
